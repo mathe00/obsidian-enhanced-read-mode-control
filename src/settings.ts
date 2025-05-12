@@ -84,7 +84,65 @@ export class ReadModeControlSettingTab extends PluginSettingTab {
 					}),
 			);
 
-		// --- Debug Logging --- //
+        // --- Behavior Settings ---
+        containerEl.createEl('h3', { text: 'Behavior' });
+        new Setting(containerEl)
+            // Renamed for clarity
+            .setName('Force Edit Mode on Unmanaged Notes')
+            .setDesc(
+                createFragment((frag) => {
+                    frag.appendText('Choose how the plugin handles notes NOT listed in the settings above.');
+                    frag.createEl('br');
+                    frag.createEl('strong', { text: 'Problem:' });
+                    frag.appendText(' When navigating from a plugin-controlled note (read-only) to a normal note ');
+                    frag.createEl('strong', { text: 'in the same tab'});
+                    frag.appendText(', Obsidian might leave the normal note incorrectly stuck in read-only mode.');
+                    frag.createEl('br');
+                    frag.createEl('br');
+                    frag.createEl('strong', { text: 'Option 1: DISABLED (Default)'});
+                    frag.createEl('br');
+                    frag.appendText(' • ');
+                    frag.createEl('strong', { text: 'Action:'});
+                    frag.appendText(' Plugin NEVER forces edit mode on normal notes.');
+                    frag.createEl('br');
+                    frag.appendText(' • ');
+                    frag.createEl('strong', { text: 'Benefit:'});
+                    frag.appendText(' Fully respects manual changes. If you set a normal note to read-only, it stays that way.');
+                    frag.createEl('br');
+                    frag.appendText(' • ');
+                    frag.createEl('strong', { text: 'Drawback:'});
+                    frag.appendText(' The "stuck in read-only" bug in the same tab remains. You must manually switch back to edit mode in that specific case.');
+                    frag.createEl('br');
+                    frag.createEl('br');
+                    frag.createEl('strong', { text: 'Option 2: ENABLED'});
+                    frag.createEl('br');
+                    frag.appendText(' • ');
+                    frag.createEl('strong', { text: 'Action:'});
+                    frag.appendText(' Plugin forces ANY normal note found in read-only mode back into edit mode upon opening.');
+                    frag.createEl('br');
+                    frag.appendText(' • ');
+                    frag.createEl('strong', { text: 'Benefit:'});
+                    frag.appendText(' Fixes the "stuck in read-only" bug for same-tab navigation.');
+                    frag.createEl('br');
+                    frag.appendText(' • ');
+                    frag.createEl('strong', { text: 'Drawback:'});
+                    frag.appendText(' Overrides manual choices. If you set a normal note to read-only, this plugin WILL force it back to edit mode when you reopen it.');
+                })
+            )
+            .addToggle((toggle: ToggleComponent) => {
+                toggle
+                    .setValue(this.plugin.settings.forceSourceOnUnmanaged)
+                    .onChange(async (value) => {
+                        this.plugin.settings.forceSourceOnUnmanaged = value;
+                        await this.plugin.saveSettings();
+                        this.plugin.logDebug(
+                            `Force source on unmanaged setting: ${value ? 'enabled' : 'disabled'}.`,
+                        );
+                    });
+            });
+
+
+		// --- Debug Logging ---
 		containerEl.createEl('h3', { text: 'Debugging' });
 		new Setting(containerEl)
 			.setName('Enable Debug Logging')
@@ -97,9 +155,11 @@ export class ReadModeControlSettingTab extends PluginSettingTab {
 					.onChange(async (value) => {
 						this.plugin.settings.debugLoggingEnabled = value;
 						await this.plugin.saveSettings();
-						this.plugin.logDebug(
-							`Debug logging ${value ? 'enabled' : 'disabled'}.`,
-						);
+						if (value) {
+                            this.plugin.logDebug(
+                                `Debug logging enabled.`,
+                            );
+                        }
 					});
 			});
 	}

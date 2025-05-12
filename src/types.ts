@@ -20,6 +20,8 @@ export interface ReadModeControlSettings {
 	strictReadOnlyFolders: string[];
 	/** Whether to enable detailed debug logging in the console. */
 	debugLoggingEnabled: boolean;
+	/** Whether to force 'source' mode on unmanaged notes found in 'preview' mode (fixes same-tab issue but overrides manual state). */
+	forceSourceOnUnmanaged: boolean;
 }
 
 /**
@@ -30,4 +32,5 @@ export const DEFAULT_SETTINGS: ReadModeControlSettings = {
 	strictReadOnlyFiles: [],
 	strictReadOnlyFolders: [],
 	debugLoggingEnabled: false,
+	forceSourceOnUnmanaged: false, // Default to respecting manual state (Option A)
 };
