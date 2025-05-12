@@ -1,7 +1,7 @@
 // src/settings.ts
 
-import { App, PluginSettingTab, Setting } from 'obsidian';
-import EnhancedReadModeControlPlugin from './main'; // Adjust path if needed
+import { App, PluginSettingTab, Setting, ToggleComponent } from 'obsidian';
+import EnhancedReadModeControlPlugin from './main';
 
 /**
  * Creates the settings tab for the Enhanced Read Mode Control plugin.
@@ -76,13 +76,31 @@ export class ReadModeControlSettingTab extends PluginSettingTab {
 						this.plugin.settings.strictReadOnlyFolders.join('\n'),
 					)
 					.onChange(async (value) => {
-						// Basic normalization: remove leading/trailing slashes for consistency
 						this.plugin.settings.strictReadOnlyFolders = value
 							.split('\n')
-							.map((p) => p.trim().replace(/^\/|\/$/g, '')) // Remove leading/trailing slashes
+							.map((p) => p.trim().replace(/^\/|\/$/g, ''))
 							.filter((p) => p.length > 0);
 						await this.plugin.saveSettings();
 					}),
 			);
+
+		// --- Debug Logging --- //
+		containerEl.createEl('h3', { text: 'Debugging' });
+		new Setting(containerEl)
+			.setName('Enable Debug Logging')
+			.setDesc(
+				'Show detailed logs in the developer console. Requires Obsidian restart or plugin reload to take full effect.',
+			)
+			.addToggle((toggle: ToggleComponent) => {
+				toggle
+					.setValue(this.plugin.settings.debugLoggingEnabled)
+					.onChange(async (value) => {
+						this.plugin.settings.debugLoggingEnabled = value;
+						await this.plugin.saveSettings();
+						this.plugin.logDebug(
+							`Debug logging ${value ? 'enabled' : 'disabled'}.`,
+						);
+					});
+			});
 	}
 }

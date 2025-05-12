@@ -18,6 +18,8 @@ export interface ReadModeControlSettings {
 	strictReadOnlyFiles: string[];
 	/** List of folder paths where all notes within should open in 'strict' read-only mode. */
 	strictReadOnlyFolders: string[];
+	/** Whether to enable detailed debug logging in the console. */
+	debugLoggingEnabled: boolean;
 }
 
 /**
@@ -27,4 +29,5 @@ export const DEFAULT_SETTINGS: ReadModeControlSettings = {
 	defaultReadOnlyFiles: [],
 	strictReadOnlyFiles: [],
 	strictReadOnlyFolders: [],
+	debugLoggingEnabled: false,
 };
