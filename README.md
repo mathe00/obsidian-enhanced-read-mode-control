@@ -111,11 +111,21 @@ It provides reliable "open in read mode" behavior for the notes you specify.
 <a id="roadmap"></a>
 ## 🚀 Future Features (Roadmap)
 
-*   **UI Improvements:** Potentially add buttons in the settings tab to pick files/folders instead of typing paths.
-*   **More Granular Controls:** Explore options like temporary overrides or per-window settings.
-*   **Visual Indicators:** Maybe add a subtle icon or status bar indicator when a note is actively being forced into read mode.
-*   **Internationalization (i18n):** Translate plugin settings and command names into other languages.
-*   **Performance Optimizations:** Continuously review performance, especially with very large vaults or lists.
+*   **✨ UI Enhancements:**
+    *   **Path Autocompletion:** Implement autocompletion for file and folder paths in the settings tab to simplify configuration and reduce typos.
+    *   **Visual File/Folder Picker:** Potentially add buttons in the settings tab to browse and select files/folders directly from the vault structure.
+*   **🌍 Advanced Internationalization (i18n):**
+    *   Translate all plugin settings UI text (labels, descriptions, button text) and command names into **30+ languages** to improve accessibility for a global user base.
+*   **⚙️ More Granular Path & Folder Controls:**
+    *   **Regex Support:** Allow the use of regular expressions for defining file and folder paths, offering more flexible matching capabilities.
+    *   **Recursive Folder Option:** Add an explicit option for folder rules to specify whether to include only the immediate contents of a folder or to apply the rule recursively to all subfolders (currently, folder rules are always recursive; this would add a non-recursive option).
+*   **👁️ Visual Feedback:**
+    *   Consider adding a subtle icon in the editor's gutter or status bar to visually indicate when a note is actively being managed by this plugin (e.g., different icons for "default" vs "strict" modes).
+*   **⚡ Performance Optimizations:**
+    *   Continuously review and optimize performance, especially for users with very large vaults or extensive lists of configured paths.
+*   **➕ Additional Control Options:**
+    *   Explore options like temporary "override" commands to quickly disable read-mode enforcement for the current session or a specific note without changing settings.
+    *   Investigate per-window or per-tab settings for more contextual control.
 
 <a id="installation"></a>
 ## 🛠️ Installation
