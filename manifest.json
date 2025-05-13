@@ -1,7 +1,7 @@
 {
 	"id": "enhanced-read-mode-control",
 	"name": "Enhanced Read Mode Control",
-	"version": "0.1.0",
+	"version": "1.0.0",
 	"minAppVersion": "1.0.0", 
 	"description": "✨ Take full control of note view modes! Force specific notes or entire folders into read-only mode (default or strict) via settings or commands. 🔒👓",
 	"author": "mathe00", 
