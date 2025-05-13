@@ -113,16 +113,14 @@ It provides reliable "open in read mode" behavior for the notes you specify.
 <a id="roadmap"></a>
 ## 🚀 Future Features (Roadmap)
 
-*   **✨ UI Enhancements:**
-    *   **Path Autocompletion:** Implement autocompletion for file and folder paths in the settings tab to simplify configuration and reduce typos.
-    *   **Visual File/Folder Picker:** Potentially add buttons in the settings tab to browse and select files/folders directly from the vault structure.
 *   **🌍 Advanced Internationalization (i18n):**
     *   Translate all plugin settings UI text (labels, descriptions, button text) and command names into **30+ languages** to improve accessibility for a global user base.
 *   **⚙️ More Granular Path & Folder Controls:**
-    *   **Regex Support:** Allow the use of regular expressions for defining file and folder paths, offering more flexible matching capabilities.
+    *   **(Beta - In Progress) Regex Support:** Allow the use of regular expressions for defining file and folder paths, offering more flexible matching capabilities.
     *   **Recursive Folder Option:** Add an explicit option for folder rules to specify whether to include only the immediate contents of a folder or to apply the rule recursively to all subfolders (currently, folder rules are always recursive; this would add a non-recursive option).
 *   **👁️ Visual Feedback:**
     *   Consider adding a subtle icon in the editor's gutter or status bar to visually indicate when a note is actively being managed by this plugin (e.g., different icons for "default" vs "strict" modes).
+    *   **(Beta - In Progress) Action Notifications:** Optionally display a brief notification when the plugin actively changes a note's view mode upon opening.
 *   **⚡ Performance Optimizations:**
     *   Continuously review and optimize performance, especially for users with very large vaults or extensive lists of configured paths.
 *   **➕ Additional Control Options:**
