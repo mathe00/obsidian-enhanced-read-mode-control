@@ -1,2 +1,57 @@
 /* styles.css */
-/* No specific styles needed for now, but keep the file */
+
+.setting-item-control input.is-invalid {
+    border-color: var(--text-error) !important;
+}
+
+.ermc-path-input-setting .setting-item-info {
+    width: 100%; /* Allow input to take more space */
+}
+
+/* For our custom path list items, hide the default description area */
+.setting-item.ermc-path-list-item .setting-item-description {
+    display: none !important;
+}
+
+/* Ensure the name (our path) is visible and styled */
+.setting-item.ermc-path-list-item .setting-item-name {
+    flex-grow: 1;
+    word-break: break-all;
+    color: var(--text-normal);
+    font-size: var(--font-ui-small);
+    display: block !important;
+    min-height: 1.2em;
+    line-height: 1.2em; /* Helps with vertical alignment */
+    padding-top: 0.5em;    /* Increased padding for better vertical centering */
+    padding-bottom: 0.5em; /* Increased padding for better vertical centering */
+    padding-left: 8px;     /* Added padding to de-stick from the left */
+    visibility: visible !important;
+    opacity: 1 !important;
+}
+
+.ermc-empty-list-message {
+    margin-top: 0.5em;
+    margin-bottom: 1em;
+    font-style: italic;
+    color: var(--text-muted);
+}
+
+/* Hover effect for the entire setting item (row) */
+.setting-item.ermc-path-list-item:hover {
+    background-color: var(--background-modifier-hover);
+}
+
+/* Styling for the trash button in the list */
+.setting-item.ermc-path-list-item .setting-item-control button {
+    color: var(--icon-color); /* Default icon color */
+    transition: color 0.1s ease-in-out; /* Smooth transition for color change */
+}
+
+.setting-item.ermc-path-list-item .setting-item-control button:hover {
+    color: var(--text-error); /* Red color on hover */
+}
+
+.setting-item.ermc-path-list-item .setting-item-control button:active {
+    color: var(--text-error-hover); /* Slightly different red on active/click */
+    background-color: var(--background-modifier-error-hover); /* Optional: subtle background on click */
+}
