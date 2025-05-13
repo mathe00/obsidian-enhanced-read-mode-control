@@ -19,6 +19,10 @@ const LOG_PREFIX = '[ERMC]';
 
 export default class EnhancedReadModeControlPlugin extends Plugin {
 	settings: ReadModeControlSettings;
+    // Cache for compiled regexes to avoid recompiling on every check
+    private compiledStrictRegexes: RegExp[] = [];
+    private compiledDefaultRegexes: RegExp[] = [];
+
 
 	/**
 	 * Logs messages to the console only if debugLoggingEnabled is true.
@@ -30,8 +34,43 @@ export default class EnhancedReadModeControlPlugin extends Plugin {
 		}
 	}
 
+    /**
+     * Compiles regex strings from settings into RegExp objects.
+     * Handles errors during compilation.
+     */
+    private compileRegexes(): void {
+        this.compiledStrictRegexes = [];
+        this.compiledDefaultRegexes = [];
+
+        if (this.settings.enableRegexMatching) {
+            this.settings.strictReadOnlyRegex.forEach(pattern => {
+                try {
+                    this.compiledStrictRegexes.push(new RegExp(pattern));
+                } catch (e) {
+                    this.logDebug(`Error compiling strict regex pattern "${pattern}":`, e);
+                    new Notice(`Enhanced Read Mode: Invalid strict regex pattern: ${pattern}`);
+                }
+            });
+
+            this.settings.defaultReadOnlyRegex.forEach(pattern => {
+                try {
+                    this.compiledDefaultRegexes.push(new RegExp(pattern));
+                } catch (e) {
+                    this.logDebug(`Error compiling default regex pattern "${pattern}":`, e);
+                    new Notice(`Enhanced Read Mode: Invalid default regex pattern: ${pattern}`);
+                }
+            });
+        }
+        this.logDebug('Regexes compiled:', {
+            strict: this.compiledStrictRegexes.length,
+            default: this.compiledDefaultRegexes.length
+        });
+    }
+
+
 	async onload() {
-		await this.loadSettings();
+		await this.loadSettings(); // Load settings first
+        this.compileRegexes();      // Then compile regexes based on loaded settings
 		this.logDebug('--- EnhancedReadModeControlPlugin onload START ---');
 
 		this.addSettingTab(new ReadModeControlSettingTab(this.app, this));
@@ -70,37 +109,67 @@ export default class EnhancedReadModeControlPlugin extends Plugin {
 	async loadSettings() {
 		const loadedData = await this.loadData();
 		this.settings = Object.assign({}, DEFAULT_SETTINGS, loadedData);
-		// Log after settings are loaded
+        // Regexes will be compiled after settings are loaded (e.g., in onload or after saveSettings)
 		this.logDebug('Settings loaded:', JSON.stringify(this.settings));
 	}
 
 	async saveSettings() {
 		await this.saveData(this.settings);
+        this.compileRegexes(); // Re-compile regexes whenever settings are saved
 		this.logDebug('Settings saved:', JSON.stringify(this.settings));
 		this.handleLayoutChange();
 	}
 
 	getForcedModeForPath(filePath: string | undefined): ReadOnlyMode {
 		if (!filePath) return null;
-		const normalizedFilePath = filePath.replace(/^\/|\/$/g, '');
+		const normalizedFilePath = filePath.replace(/^\/|\/$/g, ''); // Keep for folder matching
+
+		// Priority:
+        // 1. Strict Folders (Exact Match)
+        // 2. Strict Files (Exact Match)
+        // 3. Strict Regex (If enabled)
+        // 4. Default Files (Exact Match)
+        // 5. Default Regex (If enabled)
+
+		// 1. Strict Folders
 		for (const folderPath of this.settings.strictReadOnlyFolders) {
 			if (
 				normalizedFilePath.startsWith(folderPath + '/') ||
 				normalizedFilePath === folderPath
 			) {
-                // Minimal logging unless debugging getForcedModeForPath itself
-                // this.logDebug(`getForcedModeForPath: Path '${filePath}' matched strict folder '${folderPath}'. Returning 'strict'.`);
 				return 'strict';
 			}
 		}
+		// 2. Strict Files (Exact)
 		if (this.settings.strictReadOnlyFiles.includes(filePath)) {
-            // this.logDebug(`getForcedModeForPath: Path '${filePath}' matched strict file list. Returning 'strict'.`);
 			return 'strict';
 		}
+
+        // 3. Strict Regex
+        if (this.settings.enableRegexMatching) {
+            for (const regex of this.compiledStrictRegexes) {
+                if (regex.test(filePath)) { // Test original filePath for regex
+                    this.logDebug(`Path '${filePath}' matched strict regex '${regex.source}'. Returning 'strict'.`);
+                    return 'strict';
+                }
+            }
+        }
+
+		// 4. Default Files (Exact)
 		if (this.settings.defaultReadOnlyFiles.includes(filePath)) {
-            // this.logDebug(`getForcedModeForPath: Path '${filePath}' matched default file list. Returning 'default'.`);
 			return 'default';
 		}
+
+        // 5. Default Regex
+        if (this.settings.enableRegexMatching) {
+            for (const regex of this.compiledDefaultRegexes) {
+                if (regex.test(filePath)) { // Test original filePath for regex
+                    this.logDebug(`Path '${filePath}' matched default regex '${regex.source}'. Returning 'default'.`);
+                    return 'default';
+                }
+            }
+        }
+
 		return null;
 	}
 
@@ -115,7 +184,6 @@ export default class EnhancedReadModeControlPlugin extends Plugin {
 		let viewProcessedCount = 0;
 
 		this.app.workspace.iterateRootLeaves((leaf) => {
-			// Continue processing even if one view was found, to handle multiple instances
 			if (leaf.view instanceof MarkdownView && leaf.view.file === file) {
 				const currentView = leaf.view;
 				this.logDebug(`handleFileOpen: Found matching view for '${file.path}'. Processing.`);
@@ -128,32 +196,26 @@ export default class EnhancedReadModeControlPlugin extends Plugin {
 				this.logDebug(`handleFileOpen: Current view mode for '${file.path}' is '${state.mode}'.`);
 
 				if (requiredMode === 'strict' || requiredMode === 'default') {
-					// Apply plugin rules: force preview if needed
-					if (!currentModeIsPreview) { // Only change if currently source
+					if (!currentModeIsPreview) {
 						this.logDebug(`handleFileOpen: Setting state to PREVIEW for '${file.path}' (Required: ${requiredMode}).`);
 						currentView.setState({ ...state, mode: 'preview' }, { history: false });
 					} else {
 						this.logDebug(`handleFileOpen: Already in PREVIEW for '${file.path}'. No state change needed.`);
 					}
-				} else { // requiredMode is null
+				} else {
 					this.logDebug(`handleFileOpen: Mode is NULL for '${file.path}'. Checking behavior setting.`);
-					// --- CONDITIONAL SAME-TAB FIX ---
-					// Check the setting before forcing source mode
 					if (this.settings.forceSourceOnUnmanaged && currentModeIsPreview) {
 						this.logDebug(`handleFileOpen: Forcing state to SOURCE for '${file.path}' because required mode is NULL, current is PREVIEW, and setting is enabled.`);
 						currentView.setState({ ...state, mode: 'source' }, { history: false });
 					} else {
-						// If setting is disabled OR view is already source, do nothing.
 						this.logDebug(`handleFileOpen: Mode is NULL for '${file.path}'. No interference needed (Setting disabled or already source).`);
 					}
-					// --- END CONDITIONAL SAME-TAB FIX ---
 				}
 				viewProcessedCount++;
 			}
-			return true; // Continue iteration
+			return true;
 		});
 
-		// Fallback logic
 		if (viewProcessedCount === 0) {
 			this.logDebug(`handleFileOpen: Could not find any matching MarkdownView for '${file.path}' immediately. Using fallback.`);
 			this.app.workspace.onLayoutReady(() => {
@@ -170,7 +232,7 @@ export default class EnhancedReadModeControlPlugin extends Plugin {
                             this.logDebug(`handleFileOpen (fallback): Setting state to PREVIEW for '${file.path}' (Required: ${requiredMode}).`);
                             fallbackView.setState({ ...state, mode: 'preview' }, { history: false });
                         }
-					} else { // requiredMode is null
+					} else {
                         if (this.settings.forceSourceOnUnmanaged && currentModeIsPreview) {
                             this.logDebug(`handleFileOpen (fallback): Forcing state to SOURCE for '${file.path}' because required mode is NULL, current is PREVIEW, and setting is enabled.`);
                             fallbackView.setState({ ...state, mode: 'source' }, { history: false });
@@ -189,10 +251,8 @@ export default class EnhancedReadModeControlPlugin extends Plugin {
 
 	/**
 	 * Handles the 'layout-change' event. Enforces 'strict' and 'default' modes.
-	 * Note: Enforcing 'default' here makes it hard to manually switch to source.
 	 */
 	private handleLayoutChange = (): void => {
-		// this.logDebug("handleLayoutChange triggered");
 		const leaves = this.app.workspace.getLeavesOfType('markdown');
 		leaves.forEach((leaf) => {
 			if (leaf.view instanceof MarkdownView) {
@@ -215,15 +275,10 @@ export default class EnhancedReadModeControlPlugin extends Plugin {
 						view.setState({ ...state, mode: 'preview' }, { history: false });
 					}
 				}
-				// If requiredMode is null, do nothing.
 			}
 		});
 	};
 
-	/**
-	 * Applies the correct mode to the currently active markdown view,
-	 * typically called after a toggle command.
-	 */
 	private applyModeToActiveLeafAfterToggle(): void {
 		const activeLeaf = this.app.workspace.getActiveViewOfType(MarkdownView);
 		if (activeLeaf) {
@@ -238,16 +293,22 @@ export default class EnhancedReadModeControlPlugin extends Plugin {
 			const currentModeIsPreview = state.mode === 'preview';
 
 			if (requiredMode === 'strict' || requiredMode === 'default') {
-				if (!currentModeIsPreview) { // If source, switch to preview
+				if (!currentModeIsPreview) {
 					this.logDebug(`applyModeToActiveLeafAfterToggle: Setting state to PREVIEW for '${filePath}'.`);
 					view.setState({ ...state, mode: 'preview' }, { history: false });
 				}
-			} else { // requiredMode is null (toggled OFF)
-				// If toggled OFF, ensure it goes back to source IF it's currently preview
-				if (currentModeIsPreview) {
-					this.logDebug(`applyModeToActiveLeafAfterToggle: Setting state to SOURCE for '${filePath}' as mode is now NULL.`);
+			} else {
+				if (this.settings.forceSourceOnUnmanaged && currentModeIsPreview) {
+                    // Only force source if the setting is enabled, consistent with handleFileOpen
+					this.logDebug(`applyModeToActiveLeafAfterToggle: Setting state to SOURCE for '${filePath}' as mode is now NULL and forceSourceOnUnmanaged is true.`);
 					view.setState({ ...state, mode: 'source' }, { history: false });
-				}
+                } else if (!this.settings.forceSourceOnUnmanaged && currentModeIsPreview) {
+                    // If setting is disabled, and we just toggled OFF a rule,
+                    // it's reasonable to revert to source if it was preview.
+                    // This specific case might be an exception to "don't touch unmanaged".
+                    this.logDebug(`applyModeToActiveLeafAfterToggle: Setting state to SOURCE for '${filePath}' as mode is now NULL (toggled off).`);
+					view.setState({ ...state, mode: 'source' }, { history: false });
+                }
 			}
 		}
 	}
@@ -280,15 +341,16 @@ export default class EnhancedReadModeControlPlugin extends Plugin {
 		this.logDebug(`toggleFileInList: Toggling path '${filePath}' for target mode '${targetMode}'.`);
 
 		let message = '';
-		// Create a deep copy to avoid modifying the original settings object directly
-        // before loadData confirms the current state. This helps prevent race conditions.
 		const currentSettings = await this.loadData() || DEFAULT_SETTINGS;
         const updatedSettings = {
             defaultReadOnlyFiles: [...currentSettings.defaultReadOnlyFiles],
             strictReadOnlyFiles: [...currentSettings.strictReadOnlyFiles],
             strictReadOnlyFolders: [...currentSettings.strictReadOnlyFolders],
+            defaultReadOnlyRegex: [...currentSettings.defaultReadOnlyRegex], // Include regex lists
+            strictReadOnlyRegex: [...currentSettings.strictReadOnlyRegex],   // Include regex lists
+            enableRegexMatching: currentSettings.enableRegexMatching,
             debugLoggingEnabled: currentSettings.debugLoggingEnabled,
-            forceSourceOnUnmanaged: currentSettings.forceSourceOnUnmanaged, // Include the new setting
+            forceSourceOnUnmanaged: currentSettings.forceSourceOnUnmanaged,
         };
 
 
@@ -303,14 +365,13 @@ export default class EnhancedReadModeControlPlugin extends Plugin {
 				if (strictIndex > -1) {
 					updatedSettings.strictReadOnlyFiles.splice(strictIndex, 1);
 				}
-				// Ensure no duplicates before pushing
 				if (!updatedSettings.defaultReadOnlyFiles.includes(filePath)) {
 					updatedSettings.defaultReadOnlyFiles.push(filePath);
 				}
 				message = `Added '${fileName}' to default read-only list.`;
 				if (strictIndex > -1) message += ` (Removed from strict list)`;
 			}
-		} else { // targetMode === 'strict'
+		} else {
 			if (strictIndex > -1) {
 				updatedSettings.strictReadOnlyFiles.splice(strictIndex, 1);
 				message = `Removed '${fileName}' from strict read-only list.`;
@@ -318,7 +379,6 @@ export default class EnhancedReadModeControlPlugin extends Plugin {
 				if (defaultIndex > -1) {
 					updatedSettings.defaultReadOnlyFiles.splice(defaultIndex, 1);
 				}
-				// Ensure no duplicates before pushing
 				if (!updatedSettings.strictReadOnlyFiles.includes(filePath)) {
 					updatedSettings.strictReadOnlyFiles.push(filePath);
 				}
@@ -327,10 +387,9 @@ export default class EnhancedReadModeControlPlugin extends Plugin {
 			}
 		}
 
-        // Assign the calculated settings back to the plugin instance
         this.settings = updatedSettings;
-		await this.saveSettings(); // saveSettings calls handleLayoutChange
-		this.applyModeToActiveLeafAfterToggle(); // Apply mode immediately
+		await this.saveSettings();
+		this.applyModeToActiveLeafAfterToggle();
 		new Notice(message, 3000);
 	}
 }

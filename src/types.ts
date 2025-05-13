@@ -22,6 +22,12 @@ export interface ReadModeControlSettings {
 	debugLoggingEnabled: boolean;
 	/** Whether to force 'source' mode on unmanaged notes found in 'preview' mode (fixes same-tab issue but overrides manual state). */
 	forceSourceOnUnmanaged: boolean;
+    /** Whether to enable regex matching for read-only rules. BETA feature. */
+    enableRegexMatching: boolean;
+    /** List of regex patterns for 'default' read-only mode. */
+    defaultReadOnlyRegex: string[];
+    /** List of regex patterns for 'strict' read-only mode. */
+    strictReadOnlyRegex: string[];
 }
 
 /**
@@ -32,5 +38,8 @@ export const DEFAULT_SETTINGS: ReadModeControlSettings = {
 	strictReadOnlyFiles: [],
 	strictReadOnlyFolders: [],
 	debugLoggingEnabled: false,
-	forceSourceOnUnmanaged: false, // Default to respecting manual state (Option A)
+	forceSourceOnUnmanaged: false,
+    enableRegexMatching: false, // Default to false as it's a BETA feature
+    defaultReadOnlyRegex: [],
+    strictReadOnlyRegex: [],
 };

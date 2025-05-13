@@ -16,25 +16,25 @@ export class ReadModeControlSettingTab extends PluginSettingTab {
 	}
 
     /**
-     * Helper function to create a UI for managing a list of paths (files or folders).
+     * Helper function to create a UI for managing a list of paths or regex patterns.
      * @param containerEl The HTML element to append the settings to.
      * @param title The title for this settings section.
      * @param description A description for this settings section.
      * @param placeholder Placeholder text for the input field.
-     * @param currentPaths The current array of paths from plugin settings.
-     * @param suggestClass The suggester class to use (FileSuggest or FolderSuggest).
-     * @param saveCallback A function to call when the list of paths needs to be saved.
-     * @param itemType 'file' or 'folder' for validation messages.
+     * @param currentItems The current array of items (paths or regex strings) from plugin settings.
+     * @param saveCallback A function to call when the list of items needs to be saved.
+     * @param itemType 'file', 'folder', or 'regex' for validation/display purposes.
+     * @param SuggestClass Optional: The suggester class to use (FileSuggest or FolderSuggest).
      */
-    private createPathListManagementUI(
+    private createListManagementUI(
         containerEl: HTMLElement,
         title: string,
         description: string,
         placeholder: string,
-        currentPaths: string[],
-        SuggestClass: typeof FileSuggest | typeof FolderSuggest,
-        saveCallback: (newPaths: string[]) => Promise<void>,
-        itemType: 'file' | 'folder'
+        currentItems: string[],
+        saveCallback: (newItems: string[]) => Promise<void>,
+        itemType: 'file' | 'folder' | 'regex',
+        SuggestClass?: typeof FileSuggest | typeof FolderSuggest,
     ): void {
         new Setting(containerEl).setName(title).setDesc(description);
 
@@ -44,13 +44,24 @@ export class ReadModeControlSettingTab extends PluginSettingTab {
         inputSetting.addText((text: TextComponent) => {
             textInput = text;
             text.setPlaceholder(placeholder);
-            new SuggestClass(this.app, text.inputEl);
+            if (SuggestClass) {
+                new SuggestClass(this.app, text.inputEl); // Attach suggester if provided
+            }
 
             text.inputEl.addEventListener('blur', () => {
-                const pathValue = text.inputEl.value.trim();
-                if (pathValue) {
-                    const abstractFile = this.app.vault.getAbstractFileByPath(normalizePath(pathValue));
-                    const isValid = itemType === 'file' ? (abstractFile instanceof TFile) : (abstractFile instanceof TFolder);
+                const value = text.inputEl.value.trim();
+                if (value) {
+                    let isValid = true;
+                    if (itemType === 'file' || itemType === 'folder') {
+                        const abstractFile = this.app.vault.getAbstractFileByPath(normalizePath(value));
+                        isValid = itemType === 'file' ? (abstractFile instanceof TFile) : (abstractFile instanceof TFolder);
+                    } else if (itemType === 'regex') {
+                        try {
+                            new RegExp(value); // Try to compile regex
+                        } catch (e) {
+                            isValid = false;
+                        }
+                    }
                     if (!isValid) {
                         text.inputEl.classList.add('is-invalid');
                     } else {
@@ -63,59 +74,79 @@ export class ReadModeControlSettingTab extends PluginSettingTab {
         });
 
         inputSetting.addButton((button: ButtonComponent) => {
-            button.setButtonText('Add Path').setIcon('plus').onClick(async () => {
-                const newPath = normalizePath(textInput.inputEl.value.trim());
-                if (!newPath) return;
+            button.setButtonText(itemType === 'regex' ? 'Add Regex' : 'Add Path').setIcon('plus').onClick(async () => {
+                const newItem = textInput.inputEl.value.trim();
+                if (!newItem) return;
 
-                const abstractFile = this.app.vault.getAbstractFileByPath(newPath);
-                const isValid = itemType === 'file' ? (abstractFile instanceof TFile) : (abstractFile instanceof TFolder);
+                let isValid = true;
+                if (itemType === 'file' || itemType === 'folder') {
+                    const normalizedNewItem = normalizePath(newItem);
+                    const abstractFile = this.app.vault.getAbstractFileByPath(normalizedNewItem);
+                    isValid = itemType === 'file' ? (abstractFile instanceof TFile) : (abstractFile instanceof TFolder);
+                    if (isValid && !currentItems.includes(normalizedNewItem)) {
+                        currentItems.push(normalizedNewItem);
+                    } else if (!isValid) {
+                         this.plugin.logDebug(`Attempted to add invalid ${itemType} path: ${newItem}`);
+                    } else {
+                        this.plugin.logDebug(`Path already exists: ${normalizedNewItem}`);
+                        isValid = false; // Prevent adding duplicates as "invalid" for UI feedback
+                    }
+                } else if (itemType === 'regex') {
+                    try {
+                        new RegExp(newItem); // Validate regex
+                        if (!currentItems.includes(newItem)) {
+                            currentItems.push(newItem);
+                        } else {
+                             this.plugin.logDebug(`Regex already exists: ${newItem}`);
+                             isValid = false; // Prevent adding duplicates
+                        }
+                    } catch (e) {
+                        isValid = false;
+                        this.plugin.logDebug(`Attempted to add invalid regex: ${newItem}`);
+                    }
+                }
+
 
                 if (!isValid) {
                     textInput.inputEl.classList.add('is-invalid');
-                    this.plugin.logDebug(`Attempted to add invalid ${itemType} path: ${newPath}`);
                     return;
                 }
                 textInput.inputEl.classList.remove('is-invalid');
 
-                if (!currentPaths.includes(newPath)) {
-                    currentPaths.push(newPath);
-                    await saveCallback(currentPaths);
-                    this.plugin.logDebug(`Added ${itemType} path: ${newPath}`);
-                    this.redisplayPaths(pathListContainer, currentPaths, saveCallback, itemType);
-                    textInput.setValue('');
-                } else {
-                    this.plugin.logDebug(`Path already exists: ${newPath}`);
-                }
+                await saveCallback(currentItems);
+                this.plugin.logDebug(`Added ${itemType}: ${newItem}`);
+                this.redisplayList(pathListContainer, currentItems, saveCallback, itemType);
+                textInput.setValue('');
             });
         });
 
         const pathListContainer = containerEl.createDiv('ermc-path-list-container');
-        this.redisplayPaths(pathListContainer, currentPaths, saveCallback, itemType);
+        this.redisplayList(pathListContainer, currentItems, saveCallback, itemType);
     }
 
     /**
-     * Helper to render the list of added paths with delete buttons.
+     * Helper to render the list of added items with delete buttons.
      */
-    private redisplayPaths(
+    private redisplayList(
         containerEl: HTMLElement,
-        paths: string[],
-        saveCallback: (newPaths: string[]) => Promise<void>,
-        itemType: 'file' | 'folder'
+        items: string[],
+        saveCallback: (newItems: string[]) => Promise<void>,
+        itemType: 'file' | 'folder' | 'regex'
     ): void {
         containerEl.empty();
-        if (paths.length === 0) {
-            containerEl.createEl('p', { text: `No ${itemType}s added yet.`, cls: 'setting-item-description ermc-empty-list-message' });
+        if (items.length === 0) {
+            containerEl.createEl('p', { text: `No ${itemType === 'regex' ? 'regex patterns' : itemType + 's'} added yet.`, cls: 'setting-item-description ermc-empty-list-message' });
         }
-        paths.forEach((path, index) => {
+        items.forEach((item, index) => {
             new Setting(containerEl)
-                .setName(path) // Display the path directly
+                .setName(item)
                 .setClass('ermc-path-list-item')
                 .addButton((button) =>
-                    button.setIcon('trash').setTooltip(`Remove ${path}`).onClick(async () => {
-                        paths.splice(index, 1);
-                        await saveCallback(paths);
-                        this.plugin.logDebug(`Removed ${itemType} path: ${path}`);
-                        this.redisplayPaths(containerEl, paths, saveCallback, itemType);
+                    button.setIcon('trash').setTooltip(`Remove ${item}`).onClick(async () => {
+                        items.splice(index, 1);
+                        await saveCallback(items);
+                        this.plugin.logDebug(`Removed ${itemType}: ${item}`);
+                        this.redisplayList(containerEl, items, saveCallback, itemType);
                     }),
                 );
         });
@@ -130,50 +161,95 @@ export class ReadModeControlSettingTab extends PluginSettingTab {
 			text: 'Enhanced Read Mode Control Settings',
 		});
 
-        // --- Default Read-Only Files ---
-        this.createPathListManagementUI(
+        // --- Exact Path Matching ---
+        containerEl.createEl('h3', { text: 'Exact Path Matching' });
+        this.createListManagementUI(
             containerEl,
-            'Default Read-Only Files',
-            'Files listed here will open in read-only mode by default, but can be switched to edit mode.',
+            'Default Read-Only Files (Exact Paths)',
+            'Files listed here will open in read-only mode by default. Uses exact path matching.',
             'Enter file path (e.g., Notes/MyFile.md)',
             this.plugin.settings.defaultReadOnlyFiles,
-            FileSuggest,
             async (newPaths) => {
                 this.plugin.settings.defaultReadOnlyFiles = newPaths;
                 await this.plugin.saveSettings();
             },
-            'file'
+            'file',
+            FileSuggest
         );
 
-        // --- Strict Read-Only Files ---
-        this.createPathListManagementUI(
+        this.createListManagementUI(
             containerEl,
-            'Strict Read-Only Files',
-            'Files listed here will be forced into read-only mode and cannot be switched to edit mode.',
+            'Strict Read-Only Files (Exact Paths)',
+            'Files listed here will be forced into read-only mode. Uses exact path matching.',
             'Enter file path (e.g., Templates/Protected.md)',
             this.plugin.settings.strictReadOnlyFiles,
-            FileSuggest,
             async (newPaths) => {
                 this.plugin.settings.strictReadOnlyFiles = newPaths;
                 await this.plugin.saveSettings();
             },
-            'file'
+            'file',
+            FileSuggest
         );
 
-        // --- Strict Read-Only Folders ---
-        this.createPathListManagementUI(
+        this.createListManagementUI(
             containerEl,
-            'Strict Read-Only Folders',
-            'All notes within these folders (and their subfolders) will be forced into strict read-only mode.',
+            'Strict Read-Only Folders (Exact Paths)',
+            'All notes within these folders (and subfolders) will be forced into strict read-only mode. Uses exact path matching.',
             'Enter folder path (e.g., Archive/2023)',
             this.plugin.settings.strictReadOnlyFolders,
-            FolderSuggest,
             async (newPaths) => {
                 this.plugin.settings.strictReadOnlyFolders = newPaths.map(p => normalizePath(p.replace(/^\/|\/$/g, '')));
                 await this.plugin.saveSettings();
             },
-            'folder'
+            'folder',
+            FolderSuggest
         );
+
+        // --- Regex Path Matching (BETA) ---
+        containerEl.createEl('h3', { text: 'Regex Path Matching (BETA)' });
+        new Setting(containerEl)
+            .setName('Enable Regex Matching (BETA)')
+            .setDesc(createFragment((frag) => {
+                frag.appendText('Enable matching file paths against regular expressions. This is a BETA feature. ');
+                frag.createEl('strong', {text: 'Use with caution: '});
+                frag.appendText('invalid regex patterns can cause errors or unexpected behavior. Regex matching is checked AFTER exact folder/file matches.');
+            }))
+            .addToggle((toggle) => toggle
+                .setValue(this.plugin.settings.enableRegexMatching)
+                .onChange(async (value) => {
+                    this.plugin.settings.enableRegexMatching = value;
+                    await this.plugin.saveSettings();
+                    this.display(); // Re-render to show/hide regex sections
+                })
+            );
+
+        if (this.plugin.settings.enableRegexMatching) {
+            this.createListManagementUI(
+                containerEl,
+                'Default Read-Only (Regex Patterns)',
+                'File paths matching any regex pattern here will open in default read-only mode. One JavaScript regex pattern per line (without slashes).',
+                'Enter regex pattern (e.g., ^Journal/\\d{4}-\\d{2}-\\d{2}\\.md$)',
+                this.plugin.settings.defaultReadOnlyRegex,
+                async (newRegexes) => {
+                    this.plugin.settings.defaultReadOnlyRegex = newRegexes;
+                    await this.plugin.saveSettings();
+                },
+                'regex' // No suggester for regex
+            );
+
+            this.createListManagementUI(
+                containerEl,
+                'Strict Read-Only (Regex Patterns)',
+                'File paths matching any regex pattern here will be forced into strict read-only mode. One JavaScript regex pattern per line (without slashes).',
+                'Enter regex pattern (e.g., ^Templates/.*)',
+                this.plugin.settings.strictReadOnlyRegex,
+                async (newRegexes) => {
+                    this.plugin.settings.strictReadOnlyRegex = newRegexes;
+                    await this.plugin.saveSettings();
+                },
+                'regex' // No suggester for regex
+            );
+        }
 
 
         // --- Behavior Settings ---
