@@ -17,9 +17,9 @@ Tired of Obsidian forgetting your preferred view mode? Need to protect certain n
 
 *   **What is this?** An Obsidian plugin to force specific notes or folders into read-only mode.
 *   **Why?** Provides explicit and persistent control over view modes, independent of Obsidian's native behavior. Protect notes from accidental edits.
-*   **How?** Configure lists of files/folders in the plugin settings. Choose between "Default Read-Only" (opens in preview, can switch to edit) or "Strict Read-Only" (forced preview, cannot switch to edit). Folder rules apply strict mode to all notes within. A setting lets you choose how to handle potential view mode issues when navigating in the same tab.
-*   **Cool Features:** Separate lists for default/strict files, strict folder rules, commands to quickly toggle a note's status, debug logging option, configurable same-tab behavior.
-*   **Basically:** Define rules, control view modes reliably.
+*   **How?** Configure lists of files/folders (exact paths or Regex BETA) in the plugin settings. Choose between "Default Read-Only" or "Strict Read-Only". Folder rules apply strict mode.
+*   **Cool Features:** Exact path & Regex (BETA) matching, default/strict file lists, strict folder rules, toggle commands, configurable same-tab behavior, optional notifications (BETA), debug logging.
+*   **Basically:** Define rules (simple or advanced), control view modes reliably.
 
 ---
 
@@ -58,13 +58,15 @@ Whether you want to gently nudge certain notes to open in read mode first ("Defa
 <a id="key-features"></a>
 ### Key Features:
 
-*   **📝 Default Read-Only Files:** Specify files that should *open* in read mode (`preview`). You can still manually switch them to edit mode (`source`).
-*   **🔒 Strict Read-Only Files:** Specify files that are *forced* into read mode. Any attempt to switch to edit mode will be immediately reverted. Ideal for protecting templates, published articles, or critical notes.
-*   **📁 Strict Read-Only Folders:** Define entire folders (and their subfolders) where *all* notes within will be forced into strict read-only mode. Perfect for archives, shared resources, or sections you don't want to modify.
-*   **↔️ Toggle Commands:** Quickly add or remove the *currently active note* to/from the "Default Read-Only" or "Strict Read-Only" list using commands from the Obsidian command palette (assign your own hotkeys!).
-*   **⚙️ Configurable Behavior:** Choose how the plugin handles notes *not* explicitly listed in its settings, especially regarding a same-tab navigation quirk (see Configuration).
+*   **📝 Default Read-Only Files/Regex (BETA):** Specify files (by exact path or Regex pattern) that should *open* in read mode (`preview`). You can still manually switch them to edit mode (`source`), though this might be reverted by frequent checks.
+*   **🔒 Strict Read-Only Files/Regex (BETA):** Specify files (by exact path or Regex pattern) that are *forced* into read mode. Any attempt to switch to edit mode will be immediately reverted.
+*   **📁 Strict Read-Only Folders:** Define entire folders (and their subfolders) where *all* notes within will be forced into strict read-only mode (uses exact path matching).
+*   **↔️ Toggle Commands:** Quickly add or remove the *currently active note* to/from the "Default Read-Only" or "Strict Read-Only" *exact path* lists using commands.
+*   **⚙️ Configurable Behavior:** Choose how the plugin handles notes *not* explicitly listed in its settings, especially regarding a same-tab navigation quirk.
+*   **🔔 Optional Notifications (BETA):** Get a brief notification when the plugin actively changes a note's view mode.
 *   **🐞 Debug Logging:** An optional setting to enable detailed console logs for troubleshooting.
 *   **✅ Reliable State Management:** Ensures consistent view mode application based on your rules and chosen behavior.
+*   **✨ Improved Settings UI:** Manage exact path lists with autocompletion and an interactive add/remove interface.
 
 <a id="why-this-plugin"></a>
 ## Why this plugin? 🤔
@@ -116,16 +118,16 @@ It provides reliable "open in read mode" behavior for the notes you specify.
 *   **🌍 Advanced Internationalization (i18n):**
     *   Translate all plugin settings UI text (labels, descriptions, button text) and command names into **30+ languages** to improve accessibility for a global user base.
 *   **⚙️ More Granular Path & Folder Controls:**
-    *   **(Beta - In Progress) Regex Support:** Allow the use of regular expressions for defining file and folder paths, offering more flexible matching capabilities.
     *   **Recursive Folder Option:** Add an explicit option for folder rules to specify whether to include only the immediate contents of a folder or to apply the rule recursively to all subfolders (currently, folder rules are always recursive; this would add a non-recursive option).
 *   **👁️ Visual Feedback:**
     *   Consider adding a subtle icon in the editor's gutter or status bar to visually indicate when a note is actively being managed by this plugin (e.g., different icons for "default" vs "strict" modes).
-    *   **(Beta - In Progress) Action Notifications:** Optionally display a brief notification when the plugin actively changes a note's view mode upon opening.
 *   **⚡ Performance Optimizations:**
     *   Continuously review and optimize performance, especially for users with very large vaults or extensive lists of configured paths.
 *   **➕ Additional Control Options:**
     *   Explore options like temporary "override" commands to quickly disable read-mode enforcement for the current session or a specific note without changing settings.
     *   Investigate per-window or per-tab settings for more contextual control.
+*   **✨ UI Enhancements for Settings:**
+    *   Further refine the settings UI, potentially adding a visual file/folder picker if feasible.
 
 <a id="installation"></a>
 ## 🛠️ Installation
@@ -166,24 +168,35 @@ Once available:
 
 Configure the plugin via **Settings** > **Community Plugins** > **Enhanced Read Mode Control** (click the gear icon).
 
-You will find the following options:
+You will find the following options grouped by functionality:
 
-1.  **Default Read-Only Files:**
-    *   Enter the full vault path for each file you want to open in "Default" read mode (one path per line).
-    *   Example: `Reference/My Important Cheatsheet.md`
-    *   These files open in `preview`. Switching to `source` might be temporary due to the `layout-change` event potentially reverting it (see "Handling Same-Tab Navigation Issues" below).
+**1. Exact Path Matching:**
 
-2.  **Strict Read-Only Files:**
-    *   Enter the full vault path for each file you want to force into "Strict" read mode (one path per line).
-    *   Example: `Templates/My Main Template.md`
-    *   These files are locked into `preview`.
+*   **Default Read-Only Files (Exact Paths):**
+    *   Files listed here (using their full vault path) will open in "Default" read mode.
+    *   Uses an interactive list with path autocompletion.
+*   **Strict Read-Only Files (Exact Paths):**
+    *   Files listed here (full vault path) will be forced into "Strict" read mode.
+    *   Uses an interactive list with path autocompletion.
+*   **Strict Read-Only Folders (Exact Paths):**
+    *   All notes within these folders (full vault path, no leading/trailing slashes) will be forced into "Strict" read mode.
+    *   Uses an interactive list with path autocompletion.
 
-3.  **Strict Read-Only Folders:**
-    *   Enter the vault path for each folder where *all* notes inside (including subfolders) should be forced into "Strict" read mode (one path per line).
-    *   Example: `Archive/2023` or `Published Articles`
-    *   Do **not** include leading or trailing slashes (`/`).
+**2. Regex Path Matching (BETA):**
 
-4.  **(Behavior) Force Edit Mode on Unmanaged Notes:**
+*   **Enable Regex Matching (BETA):**
+    *   A toggle to enable/disable matching file paths against regular expressions.
+    *   **Caution:** Invalid regex patterns can cause errors. Regex matching is checked *after* exact folder/file matches.
+*   **Default Read-Only (Regex Patterns):**
+    *   (Visible if Regex Matching is enabled) File paths matching any JavaScript regex pattern here will open in "Default" read mode. One pattern per line (without leading/trailing slashes `/`).
+    *   Example: `^Journal/\d{4}-\d{2}-\d{2}\.md$`
+*   **Strict Read-Only (Regex Patterns):**
+    *   (Visible if Regex Matching is enabled) File paths matching any JavaScript regex pattern here will be forced into "Strict" read mode. One pattern per line.
+    *   Example: `^Templates/.*`
+
+**3. Behavior:**
+
+*   **Force Edit Mode on Unmanaged Notes:**
     *   This setting addresses an Obsidian behavior quirk. **Problem:** When navigating from a plugin-controlled note (read-only) to a normal note **in the same tab**, the normal note might incorrectly stay in read-only mode.
     *   **Option 1: DISABLED (Default):**
         *   **Action:** Plugin NEVER forces edit mode on normal notes.
@@ -195,8 +208,12 @@ You will find the following options:
         *   **Drawback:** Overrides manual choices. If you set a normal note to read-only, this plugin WILL force it back to edit mode when you reopen it.
     *   Choose the behavior that best suits your workflow.
 
-5.  **(Debugging) Enable Debug Logging:**
-    *   Toggle this on to see detailed messages from the plugin in the developer console (access via `Ctrl+Shift+I` or `Cmd+Option+I`). Useful for troubleshooting. Requires a reload/restart to take full effect.
+**4. Feedback & Debugging:**
+
+*   **Notify on Mode Change (BETA):**
+    *   Show a brief notification when the plugin actively changes a note's view mode upon opening.
+*   **Enable Debug Logging:**
+    *   Toggle this on to see detailed messages from the plugin in the developer console. Useful for troubleshooting. Requires a reload/restart to take full effect.
 
 <a id="understanding-modes"></a>
 ### Understanding the Modes
@@ -318,3 +335,5 @@ This plugin is released under the [MIT License](LICENSE).
 **Q: Can I use wildcards or regex in the paths?**
 **A:** Currently, no. The plugin uses exact path matching for files and `startsWith` matching for folders. Regex support is on the roadmap.
 
+**Q: How does Regex matching work?**
+**A:** When enabled, the plugin will test note paths against your defined regex patterns. Strict regex rules are checked before default regex rules. This is a BETA feature, so use valid JavaScript regex syntax. Exact path matches (folders and files) always take precedence over regex matches.
