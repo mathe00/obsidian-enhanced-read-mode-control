@@ -217,7 +217,7 @@ You will find the following options grouped by functionality:
 
 **0. Plugin Language:**
 
-    *   Choose your preferred language for the plugin interface. "Automatic" will attempt to match Obsidian's current language setting. A reload/restart may be needed for all changes to apply.
+*   Choose your preferred language for the plugin interface. "Automatic" will attempt to match Obsidian's current language setting. A reload/restart may be needed for all changes to apply.
 
 **1. Exact Path Matching:**
 
