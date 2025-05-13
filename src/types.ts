@@ -28,6 +28,8 @@ export interface ReadModeControlSettings {
     defaultReadOnlyRegex: string[];
     /** List of regex patterns for 'strict' read-only mode. */
     strictReadOnlyRegex: string[];
+    /** Whether to show a notification when the plugin changes a note's view mode. BETA feature. */
+    notifyOnModeChange: boolean;
 }
 
 /**
@@ -39,7 +41,8 @@ export const DEFAULT_SETTINGS: ReadModeControlSettings = {
 	strictReadOnlyFolders: [],
 	debugLoggingEnabled: false,
 	forceSourceOnUnmanaged: false,
-    enableRegexMatching: false, // Default to false as it's a BETA feature
+    enableRegexMatching: false,
     defaultReadOnlyRegex: [],
     strictReadOnlyRegex: [],
+    notifyOnModeChange: false, // Default to false
 };

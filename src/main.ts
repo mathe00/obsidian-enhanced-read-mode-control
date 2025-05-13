@@ -19,7 +19,6 @@ const LOG_PREFIX = '[ERMC]';
 
 export default class EnhancedReadModeControlPlugin extends Plugin {
 	settings: ReadModeControlSettings;
-    // Cache for compiled regexes to avoid recompiling on every check
     private compiledStrictRegexes: RegExp[] = [];
     private compiledDefaultRegexes: RegExp[] = [];
 
@@ -28,16 +27,21 @@ export default class EnhancedReadModeControlPlugin extends Plugin {
 	 * Logs messages to the console only if debugLoggingEnabled is true.
 	 */
 	logDebug(message: string, ...optionalParams: unknown[]): void {
-		// Check settings directly in case it's called before full load
 		if (this.settings?.debugLoggingEnabled) {
 			console.log(`${LOG_PREFIX} ${message}`, ...optionalParams);
 		}
 	}
 
     /**
-     * Compiles regex strings from settings into RegExp objects.
-     * Handles errors during compilation.
+     * Shows a notification if the setting is enabled.
      */
+    private showModeChangeNotice(fileName: string | undefined, appliedMode: 'Default Read-Only' | 'Strict Read-Only' | 'Edit Mode'): void {
+        if (this.settings.notifyOnModeChange && fileName) {
+            const shortName = fileName.split('/').pop();
+            new Notice(`'${shortName}' set to ${appliedMode}.`, 2000); // 2 second notice
+        }
+    }
+
     private compileRegexes(): void {
         this.compiledStrictRegexes = [];
         this.compiledDefaultRegexes = [];
@@ -69,8 +73,8 @@ export default class EnhancedReadModeControlPlugin extends Plugin {
 
 
 	async onload() {
-		await this.loadSettings(); // Load settings first
-        this.compileRegexes();      // Then compile regexes based on loaded settings
+		await this.loadSettings();
+        this.compileRegexes();
 		this.logDebug('--- EnhancedReadModeControlPlugin onload START ---');
 
 		this.addSettingTab(new ReadModeControlSettingTab(this.app, this));
@@ -109,29 +113,20 @@ export default class EnhancedReadModeControlPlugin extends Plugin {
 	async loadSettings() {
 		const loadedData = await this.loadData();
 		this.settings = Object.assign({}, DEFAULT_SETTINGS, loadedData);
-        // Regexes will be compiled after settings are loaded (e.g., in onload or after saveSettings)
 		this.logDebug('Settings loaded:', JSON.stringify(this.settings));
 	}
 
 	async saveSettings() {
 		await this.saveData(this.settings);
-        this.compileRegexes(); // Re-compile regexes whenever settings are saved
+        this.compileRegexes();
 		this.logDebug('Settings saved:', JSON.stringify(this.settings));
 		this.handleLayoutChange();
 	}
 
 	getForcedModeForPath(filePath: string | undefined): ReadOnlyMode {
 		if (!filePath) return null;
-		const normalizedFilePath = filePath.replace(/^\/|\/$/g, ''); // Keep for folder matching
+		const normalizedFilePath = filePath.replace(/^\/|\/$/g, '');
 
-		// Priority:
-        // 1. Strict Folders (Exact Match)
-        // 2. Strict Files (Exact Match)
-        // 3. Strict Regex (If enabled)
-        // 4. Default Files (Exact Match)
-        // 5. Default Regex (If enabled)
-
-		// 1. Strict Folders
 		for (const folderPath of this.settings.strictReadOnlyFolders) {
 			if (
 				normalizedFilePath.startsWith(folderPath + '/') ||
@@ -140,30 +135,26 @@ export default class EnhancedReadModeControlPlugin extends Plugin {
 				return 'strict';
 			}
 		}
-		// 2. Strict Files (Exact)
 		if (this.settings.strictReadOnlyFiles.includes(filePath)) {
 			return 'strict';
 		}
 
-        // 3. Strict Regex
         if (this.settings.enableRegexMatching) {
             for (const regex of this.compiledStrictRegexes) {
-                if (regex.test(filePath)) { // Test original filePath for regex
+                if (regex.test(filePath)) {
                     this.logDebug(`Path '${filePath}' matched strict regex '${regex.source}'. Returning 'strict'.`);
                     return 'strict';
                 }
             }
         }
 
-		// 4. Default Files (Exact)
 		if (this.settings.defaultReadOnlyFiles.includes(filePath)) {
 			return 'default';
 		}
 
-        // 5. Default Regex
         if (this.settings.enableRegexMatching) {
             for (const regex of this.compiledDefaultRegexes) {
-                if (regex.test(filePath)) { // Test original filePath for regex
+                if (regex.test(filePath)) {
                     this.logDebug(`Path '${filePath}' matched default regex '${regex.source}'. Returning 'default'.`);
                     return 'default';
                 }
@@ -199,6 +190,7 @@ export default class EnhancedReadModeControlPlugin extends Plugin {
 					if (!currentModeIsPreview) {
 						this.logDebug(`handleFileOpen: Setting state to PREVIEW for '${file.path}' (Required: ${requiredMode}).`);
 						currentView.setState({ ...state, mode: 'preview' }, { history: false });
+                        this.showModeChangeNotice(file.path, requiredMode === 'strict' ? 'Strict Read-Only' : 'Default Read-Only');
 					} else {
 						this.logDebug(`handleFileOpen: Already in PREVIEW for '${file.path}'. No state change needed.`);
 					}
@@ -207,6 +199,7 @@ export default class EnhancedReadModeControlPlugin extends Plugin {
 					if (this.settings.forceSourceOnUnmanaged && currentModeIsPreview) {
 						this.logDebug(`handleFileOpen: Forcing state to SOURCE for '${file.path}' because required mode is NULL, current is PREVIEW, and setting is enabled.`);
 						currentView.setState({ ...state, mode: 'source' }, { history: false });
+                        this.showModeChangeNotice(file.path, 'Edit Mode');
 					} else {
 						this.logDebug(`handleFileOpen: Mode is NULL for '${file.path}'. No interference needed (Setting disabled or already source).`);
 					}
@@ -231,11 +224,13 @@ export default class EnhancedReadModeControlPlugin extends Plugin {
 						if (!currentModeIsPreview) {
                             this.logDebug(`handleFileOpen (fallback): Setting state to PREVIEW for '${file.path}' (Required: ${requiredMode}).`);
                             fallbackView.setState({ ...state, mode: 'preview' }, { history: false });
+                            this.showModeChangeNotice(file.path, requiredMode === 'strict' ? 'Strict Read-Only' : 'Default Read-Only');
                         }
 					} else {
                         if (this.settings.forceSourceOnUnmanaged && currentModeIsPreview) {
                             this.logDebug(`handleFileOpen (fallback): Forcing state to SOURCE for '${file.path}' because required mode is NULL, current is PREVIEW, and setting is enabled.`);
                             fallbackView.setState({ ...state, mode: 'source' }, { history: false });
+                            this.showModeChangeNotice(file.path, 'Edit Mode');
                         } else {
                              this.logDebug(`handleFileOpen (fallback): Mode is NULL for '${file.path}'. No interference needed.`);
                         }
@@ -261,18 +256,19 @@ export default class EnhancedReadModeControlPlugin extends Plugin {
 				if (!filePath) return;
 
 				const requiredMode = this.getForcedModeForPath(filePath);
+                const state = view.getState(); // Get state once
 
 				if (requiredMode === 'strict') {
-					const state = view.getState();
 					if (state.mode === 'source') {
 						this.logDebug(`handleLayoutChange: Enforcing STRICT mode (preview) for '${filePath}'.`);
 						view.setState({ ...state, mode: 'preview' }, { history: false });
+                        this.showModeChangeNotice(filePath, 'Strict Read-Only');
 					}
 				} else if (requiredMode === 'default') {
-					const state = view.getState();
 					if (state.mode === 'source') {
 						this.logDebug(`handleLayoutChange: Enforcing DEFAULT mode (preview) for '${filePath}'.`);
 						view.setState({ ...state, mode: 'preview' }, { history: false });
+                        this.showModeChangeNotice(filePath, 'Default Read-Only');
 					}
 				}
 			}
@@ -296,18 +292,17 @@ export default class EnhancedReadModeControlPlugin extends Plugin {
 				if (!currentModeIsPreview) {
 					this.logDebug(`applyModeToActiveLeafAfterToggle: Setting state to PREVIEW for '${filePath}'.`);
 					view.setState({ ...state, mode: 'preview' }, { history: false });
+                    this.showModeChangeNotice(filePath, requiredMode === 'strict' ? 'Strict Read-Only' : 'Default Read-Only');
 				}
 			} else {
 				if (this.settings.forceSourceOnUnmanaged && currentModeIsPreview) {
-                    // Only force source if the setting is enabled, consistent with handleFileOpen
 					this.logDebug(`applyModeToActiveLeafAfterToggle: Setting state to SOURCE for '${filePath}' as mode is now NULL and forceSourceOnUnmanaged is true.`);
 					view.setState({ ...state, mode: 'source' }, { history: false });
+                    this.showModeChangeNotice(filePath, 'Edit Mode');
                 } else if (!this.settings.forceSourceOnUnmanaged && currentModeIsPreview) {
-                    // If setting is disabled, and we just toggled OFF a rule,
-                    // it's reasonable to revert to source if it was preview.
-                    // This specific case might be an exception to "don't touch unmanaged".
                     this.logDebug(`applyModeToActiveLeafAfterToggle: Setting state to SOURCE for '${filePath}' as mode is now NULL (toggled off).`);
 					view.setState({ ...state, mode: 'source' }, { history: false });
+                    this.showModeChangeNotice(filePath, 'Edit Mode');
                 }
 			}
 		}
@@ -346,11 +341,12 @@ export default class EnhancedReadModeControlPlugin extends Plugin {
             defaultReadOnlyFiles: [...currentSettings.defaultReadOnlyFiles],
             strictReadOnlyFiles: [...currentSettings.strictReadOnlyFiles],
             strictReadOnlyFolders: [...currentSettings.strictReadOnlyFolders],
-            defaultReadOnlyRegex: [...currentSettings.defaultReadOnlyRegex], // Include regex lists
-            strictReadOnlyRegex: [...currentSettings.strictReadOnlyRegex],   // Include regex lists
+            defaultReadOnlyRegex: [...currentSettings.defaultReadOnlyRegex],
+            strictReadOnlyRegex: [...currentSettings.strictReadOnlyRegex],
             enableRegexMatching: currentSettings.enableRegexMatching,
             debugLoggingEnabled: currentSettings.debugLoggingEnabled,
             forceSourceOnUnmanaged: currentSettings.forceSourceOnUnmanaged,
+            notifyOnModeChange: currentSettings.notifyOnModeChange, // Include new setting
         };
 
 

@@ -1,6 +1,6 @@
 // src/settings.ts
 
-import { App, PluginSettingTab, Setting, ToggleComponent, ButtonComponent, TextComponent, TFolder, TFile, normalizePath } from 'obsidian';
+import { App, PluginSettingTab, Setting, ToggleComponent, ButtonComponent, TextComponent, TFolder, TFile, normalizePath, Notice } from 'obsidian';
 import EnhancedReadModeControlPlugin from './main';
 import { FileSuggest, FolderSuggest } from './suggesters';
 
@@ -45,7 +45,7 @@ export class ReadModeControlSettingTab extends PluginSettingTab {
             textInput = text;
             text.setPlaceholder(placeholder);
             if (SuggestClass) {
-                new SuggestClass(this.app, text.inputEl); // Attach suggester if provided
+                new SuggestClass(this.app, text.inputEl);
             }
 
             text.inputEl.addEventListener('blur', () => {
@@ -57,7 +57,7 @@ export class ReadModeControlSettingTab extends PluginSettingTab {
                         isValid = itemType === 'file' ? (abstractFile instanceof TFile) : (abstractFile instanceof TFolder);
                     } else if (itemType === 'regex') {
                         try {
-                            new RegExp(value); // Try to compile regex
+                            new RegExp(value);
                         } catch (e) {
                             isValid = false;
                         }
@@ -89,16 +89,16 @@ export class ReadModeControlSettingTab extends PluginSettingTab {
                          this.plugin.logDebug(`Attempted to add invalid ${itemType} path: ${newItem}`);
                     } else {
                         this.plugin.logDebug(`Path already exists: ${normalizedNewItem}`);
-                        isValid = false; // Prevent adding duplicates as "invalid" for UI feedback
+                        isValid = false;
                     }
                 } else if (itemType === 'regex') {
                     try {
-                        new RegExp(newItem); // Validate regex
+                        new RegExp(newItem);
                         if (!currentItems.includes(newItem)) {
                             currentItems.push(newItem);
                         } else {
                              this.plugin.logDebug(`Regex already exists: ${newItem}`);
-                             isValid = false; // Prevent adding duplicates
+                             isValid = false;
                         }
                     } catch (e) {
                         isValid = false;
@@ -219,7 +219,7 @@ export class ReadModeControlSettingTab extends PluginSettingTab {
                 .onChange(async (value) => {
                     this.plugin.settings.enableRegexMatching = value;
                     await this.plugin.saveSettings();
-                    this.display(); // Re-render to show/hide regex sections
+                    this.display();
                 })
             );
 
@@ -234,7 +234,7 @@ export class ReadModeControlSettingTab extends PluginSettingTab {
                     this.plugin.settings.defaultReadOnlyRegex = newRegexes;
                     await this.plugin.saveSettings();
                 },
-                'regex' // No suggester for regex
+                'regex'
             );
 
             this.createListManagementUI(
@@ -247,7 +247,7 @@ export class ReadModeControlSettingTab extends PluginSettingTab {
                     this.plugin.settings.strictReadOnlyRegex = newRegexes;
                     await this.plugin.saveSettings();
                 },
-                'regex' // No suggester for regex
+                'regex'
             );
         }
 
@@ -309,8 +309,25 @@ export class ReadModeControlSettingTab extends PluginSettingTab {
             });
 
 
-		// --- Debug Logging ---
-		containerEl.createEl('h3', { text: 'Debugging' });
+		// --- Debugging & Notifications ---
+		containerEl.createEl('h3', { text: 'Feedback & Debugging' });
+        new Setting(containerEl)
+            .setName('Notify on Mode Change (BETA)')
+            .setDesc('Show a brief notification when the plugin actively changes a note\'s view mode upon opening. This is a BETA feature.')
+            .addToggle((toggle) => toggle
+                .setValue(this.plugin.settings.notifyOnModeChange)
+                .onChange(async (value) => {
+                    this.plugin.settings.notifyOnModeChange = value;
+                    await this.plugin.saveSettings();
+                    if (value) {
+                        this.plugin.logDebug('Mode change notifications enabled.');
+                        new Notice('Mode change notifications enabled.');
+                    } else {
+                        this.plugin.logDebug('Mode change notifications disabled.');
+                    }
+                })
+            );
+
 		new Setting(containerEl)
 			.setName('Enable Debug Logging')
 			.setDesc(
