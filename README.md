@@ -386,3 +386,16 @@ This plugin is released under the [MIT License](LICENSE).
 
 **Q: How does Regex matching work?**
 **A:** When enabled, the plugin will test note paths against your defined regex patterns. Strict regex rules are checked before default regex rules. This is a BETA feature, so use valid JavaScript regex syntax. Exact path matches (folders and files) always take precedence over regex matches.
+
+<a id="other-plugins"></a>
+## ⭐ Check Out My Other Obsidian Plugins!
+
+If you find **Enhanced Read Mode Control** useful, you might also be interested in some of my other projects designed to enhance your Obsidian experience:
+
+*   **[🐍 Obsidian Python Bridge](https://github.com/mathe00/obsidian-plugin-python-bridge)**:
+    *   **Develop Obsidian plugins in Python!** This groundbreaking plugin allows you to write Python scripts that can interact deeply with your Obsidian vault – manage notes, display UI elements like modals and settings, react to events, and much more. If you prefer Python over JavaScript/TypeScript for your automation and plugin development needs, this bridge is for you. It's packed with features, including cross-platform support, script-specific UI settings, event listening, and a comprehensive Python client library.
+
+*   **[📊 Obsidian Interactive Progress Bar Plugin](https://github.com/mathe00/obsidian-progress-bar-plugin)**:
+    *   **Track your goals visually and interactively!** Add customizable progress bars directly into your Obsidian notes. Perfect for tracking habits (like daily water intake 💧), project milestones, reading goals 📚, workout progress 💪, and more. Update progress with a simple click, reset with a right-click, and customize colors, size, and legends to fit your dashboards.
+
+Feel free to explore them on GitHub, and as always, feedback and contributions are welcome!
