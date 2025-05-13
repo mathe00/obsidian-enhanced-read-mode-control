@@ -30,6 +30,8 @@ export interface ReadModeControlSettings {
     strictReadOnlyRegex: string[];
     /** Whether to show a notification when the plugin changes a note's view mode. BETA feature. */
     notifyOnModeChange: boolean;
+    /** Selected language for the plugin interface. 'auto' means follow Obsidian's language. */
+    pluginLanguage: string;
 }
 
 /**
@@ -44,5 +46,6 @@ export const DEFAULT_SETTINGS: ReadModeControlSettings = {
     enableRegexMatching: false,
     defaultReadOnlyRegex: [],
     strictReadOnlyRegex: [],
-    notifyOnModeChange: false, // Default to false
+    notifyOnModeChange: false,
+    pluginLanguage: 'auto', // Default to automatic language detection
 };

@@ -3,6 +3,7 @@
 import { App, PluginSettingTab, Setting, ToggleComponent, ButtonComponent, TextComponent, TFolder, TFile, normalizePath, Notice } from 'obsidian';
 import EnhancedReadModeControlPlugin from './main';
 import { FileSuggest, FolderSuggest } from './suggesters';
+import { t, getAvailableLanguages, loadTranslations } from './lang/translations';
 
 /**
  * Creates the settings tab for the Enhanced Read Mode Control plugin.
@@ -153,21 +154,48 @@ export class ReadModeControlSettingTab extends PluginSettingTab {
     }
 
 
-	display(): void {
+display(): void {
 		const { containerEl } = this;
 		containerEl.empty();
 
 		containerEl.createEl('h2', {
-			text: 'Enhanced Read Mode Control Settings',
+			text: t('SETTINGS_TAB_MAIN_TITLE'),
 		});
 
+        // Language Setting (Add this near the top)
+        new Setting(containerEl)
+            .setName(t('SETTINGS_PLUGIN_LANGUAGE_TITLE'))
+            .setDesc(t('SETTINGS_PLUGIN_LANGUAGE_DESC'))
+            .addDropdown(dropdown => {
+                const languages = getAvailableLanguages();
+                // Add 'auto' first, then sorted specific languages
+                dropdown.addOption('auto', languages['auto'] || 'Automatic (Match Obsidian)');
+                Object.keys(languages)
+                    .filter(code => code !== 'auto')
+                    .sort((a, b) => languages[a].localeCompare(languages[b])) // Sort by display name
+                    .forEach(code => {
+                        dropdown.addOption(code, languages[code]);
+                    });
+
+                dropdown
+                    .setValue(this.plugin.settings.pluginLanguage)
+                    .onChange(async (value) => {
+                        this.plugin.settings.pluginLanguage = value;
+                        // We need to save settings, then reload translations, then redraw the UI
+                        await this.plugin.saveSettings(); // This calls loadTranslations in main.ts
+                        // To ensure the settings tab itself redraws with the new language immediately:
+                        this.display();
+                    });
+            });
+
+
         // --- Exact Path Matching ---
-        containerEl.createEl('h3', { text: 'Exact Path Matching' });
+        containerEl.createEl('h3', { text: t('SETTINGS_SECTION_EXACT_PATHS') });
         this.createListManagementUI(
             containerEl,
-            'Default Read-Only Files (Exact Paths)',
-            'Files listed here will open in read-only mode by default. Uses exact path matching.',
-            'Enter file path (e.g., Notes/MyFile.md)',
+            t('SETTINGS_DEFAULT_FILES_EXACT_TITLE'),
+            t('SETTINGS_DEFAULT_FILES_EXACT_DESC'), 
+            t('SETTINGS_DEFAULT_FILES_EXACT_PLACEHOLDER'),
             this.plugin.settings.defaultReadOnlyFiles,
             async (newPaths) => {
                 this.plugin.settings.defaultReadOnlyFiles = newPaths;
@@ -179,9 +207,9 @@ export class ReadModeControlSettingTab extends PluginSettingTab {
 
         this.createListManagementUI(
             containerEl,
-            'Strict Read-Only Files (Exact Paths)',
-            'Files listed here will be forced into read-only mode. Uses exact path matching.',
-            'Enter file path (e.g., Templates/Protected.md)',
+            t('SETTINGS_STRICT_FILES_EXACT_TITLE'),
+            t('SETTINGS_STRICT_FILES_EXACT_DESC'), 
+            t('SETTINGS_STRICT_FILES_EXACT_PLACEHOLDER'),
             this.plugin.settings.strictReadOnlyFiles,
             async (newPaths) => {
                 this.plugin.settings.strictReadOnlyFiles = newPaths;
@@ -193,9 +221,9 @@ export class ReadModeControlSettingTab extends PluginSettingTab {
 
         this.createListManagementUI(
             containerEl,
-            'Strict Read-Only Folders (Exact Paths)',
-            'All notes within these folders (and subfolders) will be forced into strict read-only mode. Uses exact path matching.',
-            'Enter folder path (e.g., Archive/2023)',
+            t('SETTINGS_STRICT_FOLDERS_EXACT_TITLE'),
+            t('SETTINGS_STRICT_FOLDERS_EXACT_DESC'), 
+            t('SETTINGS_STRICT_FOLDERS_EXACT_PLACEHOLDER'),
             this.plugin.settings.strictReadOnlyFolders,
             async (newPaths) => {
                 this.plugin.settings.strictReadOnlyFolders = newPaths.map(p => normalizePath(p.replace(/^\/|\/$/g, '')));
@@ -206,13 +234,13 @@ export class ReadModeControlSettingTab extends PluginSettingTab {
         );
 
         // --- Regex Path Matching (BETA) ---
-        containerEl.createEl('h3', { text: 'Regex Path Matching (BETA)' });
+        containerEl.createEl('h3', { text: t('SETTINGS_SECTION_REGEX_BETA') });
         new Setting(containerEl)
-            .setName('Enable Regex Matching (BETA)')
+            .setName(t('SETTINGS_ENABLE_REGEX_TITLE'))
             .setDesc(createFragment((frag) => {
-                frag.appendText('Enable matching file paths against regular expressions. This is a BETA feature. ');
-                frag.createEl('strong', {text: 'Use with caution: '});
-                frag.appendText('invalid regex patterns can cause errors or unexpected behavior. Regex matching is checked AFTER exact folder/file matches.');
+                frag.appendText(t('SETTINGS_ENABLE_REGEX_DESC_PART1'));
+                frag.createEl('strong', {text: t('SETTINGS_ENABLE_REGEX_DESC_PART2')});
+                frag.appendText(t('SETTINGS_ENABLE_REGEX_DESC_PART3'));
             }))
             .addToggle((toggle) => toggle
                 .setValue(this.plugin.settings.enableRegexMatching)
@@ -226,9 +254,9 @@ export class ReadModeControlSettingTab extends PluginSettingTab {
         if (this.plugin.settings.enableRegexMatching) {
             this.createListManagementUI(
                 containerEl,
-                'Default Read-Only (Regex Patterns)',
-                'File paths matching any regex pattern here will open in default read-only mode. One JavaScript regex pattern per line (without slashes).',
-                'Enter regex pattern (e.g., ^Journal/\\d{4}-\\d{2}-\\d{2}\\.md$)',
+                t('SETTINGS_DEFAULT_REGEX_TITLE'),
+                t('SETTINGS_DEFAULT_REGEX_DESC'), 
+                t('SETTINGS_DEFAULT_REGEX_PLACEHOLDER'),
                 this.plugin.settings.defaultReadOnlyRegex,
                 async (newRegexes) => {
                     this.plugin.settings.defaultReadOnlyRegex = newRegexes;
@@ -239,9 +267,9 @@ export class ReadModeControlSettingTab extends PluginSettingTab {
 
             this.createListManagementUI(
                 containerEl,
-                'Strict Read-Only (Regex Patterns)',
-                'File paths matching any regex pattern here will be forced into strict read-only mode. One JavaScript regex pattern per line (without slashes).',
-                'Enter regex pattern (e.g., ^Templates/.*)',
+                t('SETTINGS_STRICT_REGEX_TITLE'),
+                t('SETTINGS_STRICT_REGEX_DESC'), 
+                t('SETTINGS_STRICT_REGEX_PLACEHOLDER'),
                 this.plugin.settings.strictReadOnlyRegex,
                 async (newRegexes) => {
                     this.plugin.settings.strictReadOnlyRegex = newRegexes;
@@ -253,47 +281,46 @@ export class ReadModeControlSettingTab extends PluginSettingTab {
 
 
         // --- Behavior Settings ---
-        containerEl.createEl('h3', { text: 'Behavior' });
+        containerEl.createEl('h3', { text: t('SETTINGS_SECTION_BEHAVIOR') });
         new Setting(containerEl)
-            .setName('Force Edit Mode on Unmanaged Notes')
+            .setName(t('SETTINGS_FORCE_EDIT_UNMANAGED_TITLE'))
             .setDesc(
                 createFragment((frag) => {
-                    frag.appendText('Choose how the plugin handles notes NOT listed in the settings above.');
+                    frag.appendText(t('SETTINGS_FORCE_EDIT_UNMANAGED_DESC_INTRO'));
                     frag.createEl('br');
-                    frag.createEl('strong', { text: 'Problem:' });
-                    frag.appendText(' When navigating from a plugin-controlled note (read-only) to a normal note ');
-                    frag.createEl('strong', { text: 'in the same tab'});
-                    frag.appendText(', Obsidian might leave the normal note incorrectly stuck in read-only mode.');
+                    frag.createEl('strong', { text: t('SETTINGS_FORCE_EDIT_UNMANAGED_DESC_PROBLEM_LABEL')});
+                    frag.appendText(t('SETTINGS_FORCE_EDIT_UNMANAGED_DESC_PROBLEM_TEXT'));
+                    frag.createEl('strong', { text: t('SETTINGS_FORCE_EDIT_UNMANAGED_DESC_PROBLEM_TEXT_SAME_TAB')});
+                    frag.appendText(t('SETTINGS_FORCE_EDIT_UNMANAGED_DESC_PROBLEM_TEXT_END'));
                     frag.createEl('br');
                     frag.createEl('br');
-                    frag.createEl('strong', { text: 'Option 1: DISABLED (Default)'});
-                    frag.createEl('br');
-                    frag.appendText(' • ');
-                    frag.createEl('strong', { text: 'Action:'});
-                    frag.appendText(' Plugin NEVER forces edit mode on normal notes.');
+                    frag.createEl('strong', { text: t('SETTINGS_FORCE_EDIT_UNMANAGED_DESC_OPTION1_LABEL')});
                     frag.createEl('br');
                     frag.appendText(' • ');
-                    frag.createEl('strong', { text: 'Benefit:'});
-                    frag.appendText(' Fully respects manual changes. If you set a normal note to read-only, it stays that way.');
+                    frag.createEl('strong', { text: t('SETTINGS_FORCE_EDIT_UNMANAGED_DESC_OPTION1_ACTION_LABEL')});
+                    frag.appendText(t('SETTINGS_FORCE_EDIT_UNMANAGED_DESC_OPTION1_ACTION_TEXT'));
                     frag.createEl('br');
                     frag.appendText(' • ');
-                    frag.createEl('strong', { text: 'Drawback:'});
-                    frag.appendText(' The "stuck in read-only" bug in the same tab remains. You must manually switch back to edit mode in that specific case.');
-                    frag.createEl('br');
-                    frag.createEl('br');
-                    frag.createEl('strong', { text: 'Option 2: ENABLED'});
+                    frag.createEl('strong', { text: t('SETTINGS_FORCE_EDIT_UNMANAGED_DESC_OPTION1_BENEFIT_LABEL')});
+                    frag.appendText(t('SETTINGS_FORCE_EDIT_UNMANAGED_DESC_OPTION1_BENEFIT_TEXT'));
                     frag.createEl('br');
                     frag.appendText(' • ');
-                    frag.createEl('strong', { text: 'Action:'});
-                    frag.appendText(' Plugin forces ANY normal note found in read-only mode back into edit mode upon opening.');
+                    frag.createEl('strong', { text: t('SETTINGS_FORCE_EDIT_UNMANAGED_DESC_OPTION1_DRAWBACK_LABEL')});
+                    frag.appendText(t('SETTINGS_FORCE_EDIT_UNMANAGED_DESC_OPTION1_DRAWBACK_TEXT'));
+                    frag.createEl('br');
+                    frag.createEl('br');
+                    frag.createEl('strong', { text: t('SETTINGS_FORCE_EDIT_UNMANAGED_DESC_OPTION2_LABEL')});
+                    frag.appendText(' • ');
+                    frag.createEl('strong', { text: t('SETTINGS_FORCE_EDIT_UNMANAGED_DESC_OPTION2_ACTION_LABEL')});
+                    frag.appendText(t('SETTINGS_FORCE_EDIT_UNMANAGED_DESC_OPTION2_ACTION_TEXT'));
                     frag.createEl('br');
                     frag.appendText(' • ');
-                    frag.createEl('strong', { text: 'Benefit:'});
-                    frag.appendText(' Fixes the "stuck in read-only" bug for same-tab navigation.');
+                    frag.createEl('strong', { text: t('SETTINGS_FORCE_EDIT_UNMANAGED_DESC_OPTION2_BENEFIT_LABEL')});
+                    frag.appendText(t('SETTINGS_FORCE_EDIT_UNMANAGED_DESC_OPTION2_BENEFIT_TEXT'));
                     frag.createEl('br');
                     frag.appendText(' • ');
-                    frag.createEl('strong', { text: 'Drawback:'});
-                    frag.appendText(' Overrides manual choices. If you set a normal note to read-only, this plugin WILL force it back to edit mode when you reopen it.');
+                    frag.createEl('strong', { text: t('SETTINGS_FORCE_EDIT_UNMANAGED_DESC_OPTION2_DRAWBACK_LABEL')});
+                    frag.appendText(t('SETTINGS_FORCE_EDIT_UNMANAGED_DESC_OPTION2_DRAWBACK_TEXT'));
                 })
             )
             .addToggle((toggle: ToggleComponent) => {
@@ -309,11 +336,11 @@ export class ReadModeControlSettingTab extends PluginSettingTab {
             });
 
 
-		// --- Debugging & Notifications ---
-		containerEl.createEl('h3', { text: 'Feedback & Debugging' });
+		// --- Feedback & Debugging ---
+		containerEl.createEl('h3', { text: t('SETTINGS_SECTION_FEEDBACK_DEBUG') });
         new Setting(containerEl)
-            .setName('Notify on Mode Change (BETA)')
-            .setDesc('Show a brief notification when the plugin actively changes a note\'s view mode upon opening. This is a BETA feature.')
+            .setName(t('SETTINGS_NOTIFY_ON_MODE_CHANGE_TITLE'))
+            .setDesc(t('SETTINGS_NOTIFY_ON_MODE_CHANGE_DESC'))
             .addToggle((toggle) => toggle
                 .setValue(this.plugin.settings.notifyOnModeChange)
                 .onChange(async (value) => {
@@ -321,7 +348,7 @@ export class ReadModeControlSettingTab extends PluginSettingTab {
                     await this.plugin.saveSettings();
                     if (value) {
                         this.plugin.logDebug('Mode change notifications enabled.');
-                        new Notice('Mode change notifications enabled.');
+                        new Notice(t('NOTICE_NOTIFICATIONS_ENABLED'));
                     } else {
                         this.plugin.logDebug('Mode change notifications disabled.');
                     }
@@ -329,10 +356,8 @@ export class ReadModeControlSettingTab extends PluginSettingTab {
             );
 
 		new Setting(containerEl)
-			.setName('Enable Debug Logging')
-			.setDesc(
-				'Show detailed logs in the developer console. Requires Obsidian restart or plugin reload to take full effect.',
-			)
+			.setName(t('SETTINGS_ENABLE_DEBUG_LOGGING_TITLE'))
+			.setDesc(t('SETTINGS_ENABLE_DEBUG_LOGGING_DESC'))
 			.addToggle((toggle: ToggleComponent) => {
 				toggle
 					.setValue(this.plugin.settings.debugLoggingEnabled)
