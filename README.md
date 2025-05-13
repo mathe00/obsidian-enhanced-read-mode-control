@@ -17,8 +17,8 @@ Tired of Obsidian forgetting your preferred view mode? Need to protect certain n
 
 *   **What is this?** An Obsidian plugin to force specific notes or folders into read-only mode.
 *   **Why?** Provides explicit and persistent control over view modes, independent of Obsidian's native behavior. Protect notes from accidental edits.
-*   **How?** Configure lists of files/folders in the plugin settings. Choose between "Default Read-Only" (opens in preview, can switch to edit) or "Strict Read-Only" (forced preview, cannot switch to edit). Folder rules apply strict mode to all notes within.
-*   **Cool Features:** Separate lists for default/strict files, strict folder rules, commands to quickly toggle a note's status, debug logging option.
+*   **How?** Configure lists of files/folders in the plugin settings. Choose between "Default Read-Only" (opens in preview, can switch to edit) or "Strict Read-Only" (forced preview, cannot switch to edit). Folder rules apply strict mode to all notes within. A setting lets you choose how to handle potential view mode issues when navigating in the same tab.
+*   **Cool Features:** Separate lists for default/strict files, strict folder rules, commands to quickly toggle a note's status, debug logging option, configurable same-tab behavior.
 *   **Basically:** Define rules, control view modes reliably.
 
 ---
@@ -38,6 +38,7 @@ Tired of Obsidian forgetting your preferred view mode? Need to protect certain n
 -   [⚙️ Configuration](#configuration)
     -   [Settings Tab](#settings-tab)
     -   [Understanding the Modes](#understanding-modes)
+    -   [Handling Same-Tab Navigation Issues (Important!)](#same-tab-handling)
 -   [⌨️ Commands](#commands)
 -   [💖 Support the Project](#support-the-project)
 -   [⭐ Show Your Support](#support-star)
@@ -52,7 +53,7 @@ Tired of Obsidian forgetting your preferred view mode? Need to protect certain n
 
 💻 **Enhanced Read Mode Control** provides robust control over the view mode (reading or editing) of your notes in Obsidian. While Obsidian attempts to remember the last mode for each note, this plugin allows you to define explicit, persistent rules, ensuring specific notes or entire sections of your vault behave exactly as you intend regarding their editability, regardless of Obsidian's native functionality.
 
-Whether you want to gently nudge certain notes to open in read mode first ("Default Read-Only") or completely lock down others to prevent any accidental changes ("Strict Read-Only"), this plugin offers the flexibility you need. Folder-level rules make it easy to manage large sets of notes, like archives or published content.
+Whether you want to gently nudge certain notes to open in read mode first ("Default Read-Only") or completely lock down others to prevent any accidental changes ("Strict Read-Only"), this plugin offers the flexibility you need. Folder-level rules make it easy to manage large sets of notes, like archives or published content. It also includes an option to address a specific Obsidian behavior when navigating between notes in the same tab.
 
 <a id="key-features"></a>
 ### Key Features:
@@ -61,9 +62,9 @@ Whether you want to gently nudge certain notes to open in read mode first ("Defa
 *   **🔒 Strict Read-Only Files:** Specify files that are *forced* into read mode. Any attempt to switch to edit mode will be immediately reverted. Ideal for protecting templates, published articles, or critical notes.
 *   **📁 Strict Read-Only Folders:** Define entire folders (and their subfolders) where *all* notes within will be forced into strict read-only mode. Perfect for archives, shared resources, or sections you don't want to modify.
 *   **↔️ Toggle Commands:** Quickly add or remove the *currently active note* to/from the "Default Read-Only" or "Strict Read-Only" list using commands from the Obsidian command palette (assign your own hotkeys!).
-*   **⚙️ Simple Configuration:** Manage your file and folder lists easily through the plugin's settings tab.
+*   **⚙️ Configurable Behavior:** Choose how the plugin handles notes *not* explicitly listed in its settings, especially regarding a same-tab navigation quirk (see Configuration).
 *   **🐞 Debug Logging:** An optional setting to enable detailed console logs for troubleshooting.
-*   **✅ Reliable State Management:** Ensures consistent view mode application, fixing issues like mode persistence when navigating within the same tab.
+*   **✅ Reliable State Management:** Ensures consistent view mode application based on your rules and chosen behavior.
 
 <a id="why-this-plugin"></a>
 ## Why this plugin? 🤔
@@ -74,6 +75,7 @@ Obsidian's built-in mechanism for remembering view modes can sometimes be unpred
 2.  **Enhanced Protection:** Go beyond simple mode memory with "Strict" mode to actively prevent accidental edits on critical notes like templates or finalized documents.
 3.  **Bulk Configuration:** Easily manage the view mode for entire folders (like archives or published content) with folder-based rules.
 4.  **Workflow Integration:** Use commands to quickly toggle a note's read-only status, integrating view mode control directly into your workflow.
+5.  **Address Quirks:** Provides options to handle specific Obsidian behaviors, like view mode persistence during same-tab navigation.
 
 **Enhanced Read Mode Control** gives you the power to define and enforce your desired view mode behavior reliably.
 
@@ -99,7 +101,7 @@ The **Folder Rules** make applying strict mode incredibly efficient – just spe
 The **Default Read-Only** mode offers a gentler approach. Notes in this list will:
 
 *   Open in read mode (`preview`) when first loaded in a tab.
-*   Allow you to manually switch to edit mode (`source`) if needed.
+*   Allow you to manually switch to edit mode (`source`) if needed (though this might be reverted by the `layout-change` event depending on timing).
 
 This is useful for:
 *   **Reference Notes:** Quickly view information without accidentally typing.
@@ -171,7 +173,7 @@ You will find the following options:
 1.  **Default Read-Only Files:**
     *   Enter the full vault path for each file you want to open in "Default" read mode (one path per line).
     *   Example: `Reference/My Important Cheatsheet.md`
-    *   These files open in `preview` but can be switched to `source`.
+    *   These files open in `preview`. Switching to `source` might be temporary due to the `layout-change` event potentially reverting it (see "Handling Same-Tab Navigation Issues" below).
 
 2.  **Strict Read-Only Files:**
     *   Enter the full vault path for each file you want to force into "Strict" read mode (one path per line).
@@ -183,16 +185,38 @@ You will find the following options:
     *   Example: `Archive/2023` or `Published Articles`
     *   Do **not** include leading or trailing slashes (`/`).
 
-4.  **Enable Debug Logging:**
+4.  **(Behavior) Force Edit Mode on Unmanaged Notes:**
+    *   This setting addresses an Obsidian behavior quirk. **Problem:** When navigating from a plugin-controlled note (read-only) to a normal note **in the same tab**, the normal note might incorrectly stay in read-only mode.
+    *   **Option 1: DISABLED (Default):**
+        *   **Action:** Plugin NEVER forces edit mode on normal notes.
+        *   **Benefit:** Fully respects manual changes. If you set a normal note to read-only, it stays that way.
+        *   **Drawback:** The "stuck in read-only" bug in the same tab remains. You must manually switch back to edit mode in that specific case.
+    *   **Option 2: ENABLED:**
+        *   **Action:** Plugin forces ANY normal note found in read-only mode back into edit mode upon opening.
+        *   **Benefit:** Fixes the "stuck in read-only" bug for same-tab navigation.
+        *   **Drawback:** Overrides manual choices. If you set a normal note to read-only, this plugin WILL force it back to edit mode when you reopen it.
+    *   Choose the behavior that best suits your workflow.
+
+5.  **(Debugging) Enable Debug Logging:**
     *   Toggle this on to see detailed messages from the plugin in the developer console (access via `Ctrl+Shift+I` or `Cmd+Option+I`). Useful for troubleshooting. Requires a reload/restart to take full effect.
 
 <a id="understanding-modes"></a>
 ### Understanding the Modes
 
-*   **Default Read-Only:** Opens in `preview`. You **can** switch to `source` manually. Good for notes you mostly read but occasionally edit.
+*   **Default Read-Only:** Opens in `preview`. You **can** try to switch to `source` manually, but the plugin might switch it back due to frequent checks (especially via `layout-change`). Consider this mode primarily for notes you rarely edit.
 *   **Strict Read-Only:** Opens in `preview`. You **cannot** switch to `source` (plugin forces it back). Good for protecting notes from any edits.
 *   **Folder Rules:** Always apply **Strict Read-Only** mode to all notes within the specified folder and its subfolders.
 *   **Priority:** Folder rules override file rules. If a file is in a strict folder, it will be strict, even if it's also listed in the "Default" file list. Strict file rules override default file rules.
+
+<a id="same-tab-handling"></a>
+### Handling Same-Tab Navigation Issues (Important!)
+
+As explained in the "**Force Edit Mode on Unmanaged Notes**" setting, there's a trade-off:
+
+*   If you **disable** the setting (default), the plugin fully respects notes you manually set to read-only, but you might encounter the visual glitch where a normal note stays in read mode after navigating from a controlled note in the same tab.
+*   If you **enable** the setting, the visual glitch is fixed, but the plugin will override any manual read-only state you set on normal notes.
+
+Choose the option that causes less friction for your specific usage pattern.
 
 <a id="commands"></a>
 ## ⌨️ Commands
@@ -272,18 +296,27 @@ This plugin is released under the [MIT License](LICENSE).
 ## 🤔 FAQ (Frequently Asked Questions)
 
 **Q: Why use this plugin if Obsidian already tries to remember the view mode?**
-**A:** This plugin isn't just about remembering the mode; it's about **explicit control**. Obsidian's memory can sometimes be inconsistent due to various factors (sync, quick switching, other plugins). This plugin allows you to define *unbreakable rules* for specific notes or folders. Furthermore, it offers features beyond simple memory, like the "Strict" mode to actively prevent edits and folder-level rules for bulk management, ensuring your notes behave exactly as you intend, regardless of Obsidian's native behavior or potential future changes to it.
+**A:** This plugin isn't just about remembering the mode; it's about **explicit control**. Obsidian's memory can sometimes be inconsistent. This plugin allows you to define *unbreakable rules* for specific notes or folders. It also offers features beyond simple memory, like the "Strict" mode to actively prevent edits, folder-level rules, and configurable handling of Obsidian's same-tab navigation behavior.
 
 **Q: What's the difference between "Default" and "Strict" read-only?**
 **A:**
-*   **Default:** Opens in read mode, but you *can* switch to edit mode manually.
+*   **Default:** Opens in read mode. Switching to edit mode manually *might* work temporarily, but the plugin often switches it back quickly due to its checks. Best for notes you very rarely edit.
 *   **Strict:** Opens in read mode, and you *cannot* switch to edit mode (the plugin prevents it).
+
+**Q: Why can't I easily switch a "Default Read-Only" note to edit mode?**
+**A:** To ensure notes consistently open in read mode (fixing multi-tab and initial state issues), the plugin frequently checks and enforces the 'preview' state for 'default' notes, especially on `layout-change`. This makes manually switching to 'source' mode difficult as it often gets reverted quickly. If you need to edit these notes frequently, consider not adding them to the 'default' list or using the 'strict' list only for truly protected notes.
+
+**Q: What is the "Force Edit Mode on Unmanaged Notes" setting for?**
+**A:** It addresses a specific issue: when navigating from a read-only note (controlled by this plugin) to a normal note *in the same tab*, the normal note might get stuck in read mode.
+*   **Disabling** this setting (default) respects any manual read-only state you set on normal notes, but the same-tab issue might occur (requiring a manual switch back to edit).
+*   **Enabling** this setting fixes the same-tab issue but will override any manual read-only state you set on normal notes, forcing them back to edit mode when opened. Choose the option that best fits your workflow.
 
 **Q: How do folder rules interact with file rules?**
 **A:** Folder rules take precedence. If a note is inside a "Strict Read-Only Folder", it will always be strict, regardless of whether it's listed in the "Default" or "Strict" file lists. If a note is listed in both "Default" and "Strict" file lists (and not in a strict folder), the "Strict" rule wins.
 
 **Q: Will this slow down Obsidian?**
-**A:** The plugin is designed to be lightweight. It primarily acts when files are opened or settings change. The `layout-change` listener for strict mode enforcement is optimized to only act when necessary. Performance impact should be minimal, but if you have thousands of rules or a very large vault, keep an eye on performance and report any issues. The debug logging option can be disabled for normal use.
+**A:** The plugin is designed to be lightweight. Performance impact should be minimal. The `layout-change` listener is the most active part; if you experience slowdowns with extremely large vaults or many rules, consider disabling debug logging first. Report any significant performance issues.
 
 **Q: Can I use wildcards or regex in the paths?**
-**A:** Currently, no. The plugin uses exact path matching for files and `startsWith` matching for folders. Wildcard/regex support could be considered for future versions if there's demand.
+**A:** Currently, no. The plugin uses exact path matching for files and `startsWith` matching for folders. Regex support is on the roadmap.
+
