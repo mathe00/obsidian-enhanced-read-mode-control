@@ -64,6 +64,7 @@ Whether you want to gently nudge certain notes to open in read mode first ("Defa
 *   **↔️ Toggle Commands:** Quickly add or remove the *currently active note* to/from the "Default Read-Only" or "Strict Read-Only" *exact path* lists using commands.
 *   **⚙️ Configurable Behavior:** Choose how the plugin handles notes *not* explicitly listed in its settings, especially regarding a same-tab navigation quirk.
 *   **🔔 Optional Notifications (BETA):** Get a brief notification when the plugin actively changes a note's view mode.
+*   **🌍 Multi-Language Support:** Plugin interface available in over 30 languages, with automatic detection or manual selection.
 *   **🐞 Debug Logging:** An optional setting to enable detailed console logs for troubleshooting.
 *   **✅ Reliable State Management:** Ensures consistent view mode application based on your rules and chosen behavior.
 *   **✨ Improved Settings UI:** Manage exact path lists with autocompletion and an interactive add/remove interface.
@@ -80,6 +81,52 @@ Obsidian's built-in mechanism for remembering view modes can sometimes be unpred
 5.  **Address Quirks:** Provides options to handle specific Obsidian behaviors, like view mode persistence during same-tab navigation.
 
 **Enhanced Read Mode Control** gives you the power to define and enforce your desired view mode behavior reliably.
+
+<a id="internationalization"></a>
+## 🌍 Internationalization
+
+This plugin aims to be accessible globally! The user interface (settings, commands, notices) is available in multiple languages.
+
+*   **Automatic Detection:** By default, the plugin will try to match Obsidian's configured language.
+*   **Manual Override:** You can select your preferred language for the plugin directly in the settings tab, regardless of Obsidian's language setting.
+*   **Supported Languages (+30):**
+    *   🇬🇧/🇺🇸 English (en)
+    *   🇫🇷 French (fr)
+    *   🇪🇸 Spanish (es)
+    *   🇩🇪 German (de)
+    *   🇨🇳 Chinese - Simplified (zh)
+    *   🇸🇦 Arabic (ar)
+    *   🇧🇷/🇵🇹 Portuguese (pt)
+    *   🇷🇺 Russian (ru)
+    *   🇯🇵 Japanese (ja)
+    *   🇮🇳 Hindi (hi)
+    *   🇰🇷 Korean (ko)
+    *   🇮🇹 Italian (it)
+    *   🇹🇷 Turkish (tr)
+    *   🇮🇩 Indonesian (id)
+    *   🇵🇱 Polish (pl)
+    *   🇮🇳 Bengali (bn)
+    *   🇵🇰/🇮🇳 Urdu (ur)
+    *   🇻🇳 Vietnamese (vi)
+    *   🇹🇭 Thai (th)
+    *   🇵🇭 Filipino (fil)
+    *   🇮🇷/🇦🇫/🇹🇯 Persian (Farsi) (fa)
+    *   🇲🇾/🇧🇳/🇸🇬 Malay (ms)
+    *   🇳🇱/🇧🇪 Dutch (nl)
+    *   🇺🇦 Ukrainian (uk)
+    *   🇬🇷 Greek (el)
+    *   🇸🇪 Swedish (sv)
+    *   🇫🇮 Finnish (fi)
+    *   🇭🇺 Hungarian (hu)
+    *   🇷🇴 Romanian (ro)
+    *   🇨🇿 Czech (cs)
+    *   🌍 Swahili (sw)
+    *   🌍 Hausa (ha)
+    *   🇳🇬 Yoruba (yo)
+    *   🇳🇬 Igbo (ig)
+    *   🇹🇼/🇭🇰 Chinese - Traditional (zht)
+
+*(If your language is missing or you find a translation error, please feel free to open an issue or submit a pull request! Note on Right-to-Left (RTL) languages like Arabic, Persian, Urdu: While translations are provided, the overall layout of plugin settings and notifications within Obsidian might not be perfectly optimized for RTL display due to the underlying UI framework. We welcome feedback and contributions to improve RTL support.)*
 
 <a id="strict-mode-feature"></a>
 ### Feature Highlight: Strict Mode & Folder Rules 🛡️
@@ -115,8 +162,6 @@ It provides reliable "open in read mode" behavior for the notes you specify.
 <a id="roadmap"></a>
 ## 🚀 Future Features (Roadmap)
 
-*   **🌍 Advanced Internationalization (i18n):**
-    *   Translate all plugin settings UI text (labels, descriptions, button text) and command names into **30+ languages** to improve accessibility for a global user base.
 *   **⚙️ More Granular Path & Folder Controls:**
     *   **Recursive Folder Option:** Add an explicit option for folder rules to specify whether to include only the immediate contents of a folder or to apply the rule recursively to all subfolders (currently, folder rules are always recursive; this would add a non-recursive option).
 *   **👁️ Visual Feedback:**
@@ -169,6 +214,10 @@ Once available:
 Configure the plugin via **Settings** > **Community Plugins** > **Enhanced Read Mode Control** (click the gear icon).
 
 You will find the following options grouped by functionality:
+
+**0. Plugin Language:**
+
+    *   Choose your preferred language for the plugin interface. "Automatic" will attempt to match Obsidian's current language setting. A reload/restart may be needed for all changes to apply.
 
 **1. Exact Path Matching:**
 
