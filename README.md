@@ -59,6 +59,7 @@ Whether you want to gently nudge certain notes to open in read mode first ("Defa
 ### Key Features:
 
 *   **📝 Default Read-Only Files/Regex (BETA):** Specify files (by exact path or Regex pattern) that should *open* in read mode (`preview`). You can still manually switch them to edit mode (`source`), though this might be reverted by frequent checks.
+*   **📁 Default Read-Only Folders (NEW):** Define entire folders (and their subfolders) where *all* notes within will *open* in read mode (`preview`) by default (uses exact path matching). You can still manually switch them to edit mode.
 *   **🔒 Strict Read-Only Files/Regex (BETA):** Specify files (by exact path or Regex pattern) that are *forced* into read mode. Any attempt to switch to edit mode will be immediately reverted.
 *   **📁 Strict Read-Only Folders:** Define entire folders (and their subfolders) where *all* notes within will be forced into strict read-only mode (uses exact path matching).
 *   **↔️ Toggle Commands:** Quickly add or remove the *currently active note* to/from the "Default Read-Only" or "Strict Read-Only" *exact path* lists using commands.
@@ -224,6 +225,9 @@ You will find the following options grouped by functionality:
 *   **Default Read-Only Files (Exact Paths):**
     *   Files listed here (using their full vault path) will open in "Default" read mode.
     *   Uses an interactive list with path autocompletion.
+*   **Default Read-Only Folders (Exact Paths) (NEW):**
+    *   All notes within these folders (full vault path, no leading/trailing slashes) will open in "Default" read mode.
+    *   Uses an interactive list with path autocompletion.
 *   **Strict Read-Only Files (Exact Paths):**
     *   Files listed here (full vault path) will be forced into "Strict" read mode.
     *   Uses an interactive list with path autocompletion.
@@ -269,8 +273,17 @@ You will find the following options grouped by functionality:
 
 *   **Default Read-Only:** Opens in `preview`. You **can** try to switch to `source` manually, but the plugin might switch it back due to frequent checks (especially via `layout-change`). Consider this mode primarily for notes you rarely edit.
 *   **Strict Read-Only:** Opens in `preview`. You **cannot** switch to `source` (plugin forces it back). Good for protecting notes from any edits.
-*   **Folder Rules:** Always apply **Strict Read-Only** mode to all notes within the specified folder and its subfolders.
-*   **Priority:** Folder rules override file rules. If a file is in a strict folder, it will be strict, even if it's also listed in the "Default" file list. Strict file rules override default file rules.
+*   **Folder Rules:**
+    *   **Strict Read-Only Folders:** Always apply **Strict Read-Only** mode to all notes within the specified folder and its subfolders.
+    *   **Default Read-Only Folders (NEW):** Apply **Default Read-Only** mode to all notes within the specified folder and its subfolders. Notes will open in `preview`, but can be manually switched to `source`.
+*   **Priority:**
+    1.  **Strict Read-Only Folders** take precedence over all other rules.
+    2.  **Strict Read-Only Files** (exact path or regex) take precedence over default rules.
+    3.  **Default Read-Only Folders** apply if no strict rules match.
+    4.  **Default Read-Only Files** (exact path or regex) apply if no stricter folder or file rules match.
+    *   Essentially: Strict Folder > Strict File/Regex > Default Folder > Default File/Regex.
+    *   If a file is in a strict folder, it will be strict, even if it's also listed in a "Default" file or folder list.
+    *   If a file is in a default folder, it will be default, unless a specific strict file rule applies to it.
 
 <a id="same-tab-handling"></a>
 ### Handling Same-Tab Navigation Issues (Important!)
@@ -376,7 +389,13 @@ This plugin is released under the [MIT License](LICENSE).
 *   **Enabling** this setting fixes the same-tab issue but will override any manual read-only state you set on normal notes, forcing them back to edit mode when opened. Choose the option that best fits your workflow.
 
 **Q: How do folder rules interact with file rules?**
-**A:** Folder rules take precedence. If a note is inside a "Strict Read-Only Folder", it will always be strict, regardless of whether it's listed in the "Default" or "Strict" file lists. If a note is listed in both "Default" and "Strict" file lists (and not in a strict folder), the "Strict" rule wins.
+**A:** Priority is as follows:
+1.  **Strict Read-Only Folders:** These rules are paramount. If a note is inside a "Strict Read-Only Folder", it will *always* be strict, regardless of any other file or folder settings.
+2.  **Strict Read-Only Files (Exact Path or Regex):** If a note matches a strict file rule, it will be strict, overriding any default folder or default file rules.
+3.  **Default Read-Only Folders:** If a note is inside a "Default Read-Only Folder" and not covered by any stricter rule, it will open in default read-only mode.
+4.  **Default Read-Only Files (Exact Path or Regex):** If a note matches a default file rule and is not covered by any stricter rule or default folder rule, it will open in default read-only mode.
+
+In short: Strict Folder > Strict File/Regex > Default Folder > Default File/Regex.
 
 **Q: Will this slow down Obsidian?**
 **A:** The plugin is designed to be lightweight. Performance impact should be minimal. The `layout-change` listener is the most active part; if you experience slowdowns with extremely large vaults or many rules, consider disabling debug logging first. Report any significant performance issues.
