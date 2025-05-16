@@ -17,6 +17,9 @@ export default {
     SETTINGS_DEFAULT_FILES_EXACT_TITLE: '默认只读文件 (精确路径)',
     SETTINGS_DEFAULT_FILES_EXACT_DESC: '此处列出的文件将默认以只读模式打开。使用精确路径匹配。',
     SETTINGS_DEFAULT_FILES_EXACT_PLACEHOLDER: '输入文件路径 (例如：笔记/我的文件.md)',
+	SETTINGS_DEFAULT_FOLDERS_EXACT_TITLE: "默认只读文件夹（精确路径）",
+	SETTINGS_DEFAULT_FOLDERS_EXACT_DESC: "这些文件夹（及其子文件夹）中的所有笔记都将以默认只读模式打开。使用精确路径匹配。",
+	SETTINGS_DEFAULT_FOLDERS_EXACT_PLACEHOLDER: "输入文件夹路径（例如：Projects/Active）",
 
     SETTINGS_STRICT_FILES_EXACT_TITLE: '严格只读文件 (精确路径)',
     SETTINGS_STRICT_FILES_EXACT_DESC: '此处列出的文件将被强制进入只读模式。使用精确路径匹配。',

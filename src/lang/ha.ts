@@ -17,6 +17,9 @@ export default {
     SETTINGS_DEFAULT_FILES_EXACT_TITLE: 'Fayilolin Karatu Kadai na Asali (Daidaitattun Hanyoyi)',
     SETTINGS_DEFAULT_FILES_EXACT_DESC: 'Fayilolin da aka jera a nan za su buɗe a yanayin karatu kaɗai ta asali. Yana amfani da daidaitaccen matsayin hanyar.',
     SETTINGS_DEFAULT_FILES_EXACT_PLACEHOLDER: 'Shigar da hanyar fayil (misali: Notes/MyFile.md)',
+	SETTINGS_DEFAULT_FOLDERS_EXACT_TITLE: "Manyan fayiloli na Karatu-Kadai na Asali (Tabbatattun Hanyoyi)",
+	SETTINGS_DEFAULT_FOLDERS_EXACT_DESC: "Duk rubutattun bayanai a cikin waɗannan manyan fayiloli (da ƙananan fayiloli) za su buɗe a yanayin karatu-kadai na asali. Yana amfani da daidaitaccen hanyar daidaitawa.",
+	SETTINGS_DEFAULT_FOLDERS_EXACT_PLACEHOLDER: "Shigar da hanyar babban fayil (misali, Projects/Active)",
 
     SETTINGS_STRICT_FILES_EXACT_TITLE: 'Fayilolin Karatu Kadai Masu Tsauri (Daidaitattun Hanyoyi)',
     SETTINGS_STRICT_FILES_EXACT_DESC: 'Fayilolin da aka jera a nan za a tilasta su zuwa yanayin karatu kaɗai. Yana amfani da daidaitaccen matsayin hanyar.',

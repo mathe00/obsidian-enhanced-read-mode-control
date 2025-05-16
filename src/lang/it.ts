@@ -17,6 +17,9 @@ export default {
     SETTINGS_DEFAULT_FILES_EXACT_TITLE: 'File Sola Lettura Predefiniti (Percorsi Esatti)',
     SETTINGS_DEFAULT_FILES_EXACT_DESC: 'I file elencati qui si apriranno in modalità sola lettura per impostazione predefinita. Utilizza la corrispondenza esatta del percorso.',
     SETTINGS_DEFAULT_FILES_EXACT_PLACEHOLDER: 'Inserisci percorso file (es. Note/MioFile.md)',
+	SETTINGS_DEFAULT_FOLDERS_EXACT_TITLE: "Cartelle di Sola Lettura Predefinite (Percorsi Esatti)",
+	SETTINGS_DEFAULT_FOLDERS_EXACT_DESC: "Tutte le note all'interno di queste cartelle (e sottocartelle) si apriranno in modalità di sola lettura predefinita. Utilizza la corrispondenza esatta del percorso.",
+	SETTINGS_DEFAULT_FOLDERS_EXACT_PLACEHOLDER: "Inserisci il percorso della cartella (es. Progetti/Attivi)",
 
     SETTINGS_STRICT_FILES_EXACT_TITLE: 'File Sola Lettura Rigorosi (Percorsi Esatti)',
     SETTINGS_STRICT_FILES_EXACT_DESC: 'I file elencati qui saranno forzati in modalità sola lettura. Utilizza la corrispondenza esatta del percorso.',

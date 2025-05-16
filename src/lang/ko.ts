@@ -17,6 +17,9 @@ export default {
     SETTINGS_DEFAULT_FILES_EXACT_TITLE: '기본 읽기 전용 파일 (정확한 경로)',
     SETTINGS_DEFAULT_FILES_EXACT_DESC: '여기에 나열된 파일은 기본적으로 읽기 전용 모드로 열립니다. 정확한 경로 일치를 사용합니다.',
     SETTINGS_DEFAULT_FILES_EXACT_PLACEHOLDER: '파일 경로 입력 (예: Notes/MyFile.md)',
+	SETTINGS_DEFAULT_FOLDERS_EXACT_TITLE: "기본 읽기 전용 폴더 (정확한 경로)",
+	SETTINGS_DEFAULT_FOLDERS_EXACT_DESC: "이 폴더 (및 하위 폴더) 내의 모든 노트는 기본 읽기 전용 모드로 열립니다. 정확한 경로 일치를 사용합니다.",
+	SETTINGS_DEFAULT_FOLDERS_EXACT_PLACEHOLDER: "폴더 경로 입력 (예: Projects/Active)",
 
     SETTINGS_STRICT_FILES_EXACT_TITLE: '엄격한 읽기 전용 파일 (정확한 경로)',
     SETTINGS_STRICT_FILES_EXACT_DESC: '여기에 나열된 파일은 읽기 전용 모드로 강제됩니다. 정확한 경로 일치를 사용합니다.',

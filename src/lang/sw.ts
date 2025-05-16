@@ -17,6 +17,9 @@ export default {
     SETTINGS_DEFAULT_FILES_EXACT_TITLE: 'Faili Chaguomsingi za Kusoma Pekee (Njia Sahihi)',
     SETTINGS_DEFAULT_FILES_EXACT_DESC: 'Faili zilizoorodheshwa hapa zitafunguliwa katika hali ya kusoma pekee kwa chaguo-msingi. Hutumia ulinganishaji sahihi wa njia.',
     SETTINGS_DEFAULT_FILES_EXACT_PLACEHOLDER: 'Weka njia ya faili (k.m., Notes/FailiYangu.md)',
+	SETTINGS_DEFAULT_FOLDERS_EXACT_TITLE: "Folda Chaguomsingi za Kusoma Pekee (Njia Kamili)",
+	SETTINGS_DEFAULT_FOLDERS_EXACT_DESC: "Madokezo yote ndani ya folda hizi (na folda ndogo) yatafunguliwa katika hali chaguomsingi ya kusoma pekee. Hutumia ulinganishaji kamili wa njia.",
+	SETTINGS_DEFAULT_FOLDERS_EXACT_PLACEHOLDER: "Weka njia ya folda (k.m., Projects/Active)",
 
     SETTINGS_STRICT_FILES_EXACT_TITLE: 'Faili Kali za Kusoma Pekee (Njia Sahihi)',
     SETTINGS_STRICT_FILES_EXACT_DESC: 'Faili zilizoorodheshwa hapa zitalazimishwa kuwa katika hali ya kusoma pekee. Hutumia ulinganishaji sahihi wa njia.',

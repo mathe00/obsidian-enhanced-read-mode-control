@@ -17,6 +17,9 @@ export default {
     SETTINGS_DEFAULT_FILES_EXACT_TITLE: 'Varsayılan Salt Okunur Dosyalar (Tam Yollar)',
     SETTINGS_DEFAULT_FILES_EXACT_DESC: 'Burada listelenen dosyalar varsayılan olarak salt okunur modda açılır. Tam yol eşleşmesini kullanır.',
     SETTINGS_DEFAULT_FILES_EXACT_PLACEHOLDER: 'Dosya yolunu girin (örn: Notlar/Dosyam.md)',
+	SETTINGS_DEFAULT_FOLDERS_EXACT_TITLE: "Varsayılan Salt Okunur Klasörler (Tam Yollar)",
+	SETTINGS_DEFAULT_FOLDERS_EXACT_DESC: "Bu klasörlerdeki (ve alt klasörlerdeki) tüm notlar varsayılan salt okunur modda açılacaktır. Tam yol eşleştirmesi kullanır.",
+	SETTINGS_DEFAULT_FOLDERS_EXACT_PLACEHOLDER: "Klasör yolunu girin (örn. Projeler/Aktif)",
 
     SETTINGS_STRICT_FILES_EXACT_TITLE: 'Katı Salt Okunur Dosyalar (Tam Yollar)',
     SETTINGS_STRICT_FILES_EXACT_DESC: 'Burada listelenen dosyalar salt okunur moda zorlanır. Tam yol eşleşmesini kullanır.',

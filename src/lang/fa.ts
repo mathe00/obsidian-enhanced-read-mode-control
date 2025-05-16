@@ -17,6 +17,9 @@ export default {
     SETTINGS_DEFAULT_FILES_EXACT_TITLE: 'فایل‌های فقط خواندنی پیش‌فرض (مسیرهای دقیق)',
     SETTINGS_DEFAULT_FILES_EXACT_DESC: 'فایل‌های لیست شده در اینجا به طور پیش‌فرض در حالت فقط خواندنی باز می‌شوند. از تطابق دقیق مسیر استفاده می‌کند.',
     SETTINGS_DEFAULT_FILES_EXACT_PLACEHOLDER: 'مسیر فایل را وارد کنید (مثال: Notes/MyFile.md)',
+	SETTINGS_DEFAULT_FOLDERS_EXACT_TITLE: "پوشه های فقط خواندنی پیش فرض (مسیرهای دقیق)",
+	SETTINGS_DEFAULT_FOLDERS_EXACT_DESC: "تمام یادداشت های داخل این پوشه ها (و زیرپوشه ها) در حالت فقط خواندنی پیش فرض باز می شوند. از تطبیق دقیق مسیر استفاده می کند.",
+	SETTINGS_DEFAULT_FOLDERS_EXACT_PLACEHOLDER: "مسیر پوشه را وارد کنید (مثلاً Projects/Active)",
 
     SETTINGS_STRICT_FILES_EXACT_TITLE: 'فایل‌های فقط خواندنی سختگیرانه (مسیرهای دقیق)',
     SETTINGS_STRICT_FILES_EXACT_DESC: 'فایل‌های لیست شده در اینجا مجبور به حالت فقط خواندنی می‌شوند. از تطابق دقیق مسیر استفاده می‌کند.',

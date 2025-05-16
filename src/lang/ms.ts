@@ -17,6 +17,9 @@ export default {
     SETTINGS_DEFAULT_FILES_EXACT_TITLE: 'Fail Baca Sahaja Lalai (Laluan Tepat)',
     SETTINGS_DEFAULT_FILES_EXACT_DESC: 'Fail yang disenaraikan di sini akan dibuka dalam mod baca sahaja secara lalai. Menggunakan padanan laluan tepat.',
     SETTINGS_DEFAULT_FILES_EXACT_PLACEHOLDER: 'Masukkan laluan fail (cth: Notes/MyFile.md)',
+	SETTINGS_DEFAULT_FOLDERS_EXACT_TITLE: "Folder Baca Sahaja Lalai (Laluan Tepat)",
+	SETTINGS_DEFAULT_FOLDERS_EXACT_DESC: "Semua nota dalam folder ini (dan subfolder) akan dibuka dalam mod baca sahaja lalai. Menggunakan padanan laluan yang tepat.",
+	SETTINGS_DEFAULT_FOLDERS_EXACT_PLACEHOLDER: "Masukkan laluan folder (cth., Projects/Active)",
 
     SETTINGS_STRICT_FILES_EXACT_TITLE: 'Fail Baca Sahaja Ketat (Laluan Tepat)',
     SETTINGS_STRICT_FILES_EXACT_DESC: 'Fail yang disenaraikan di sini akan dipaksa ke mod baca sahaja. Menggunakan padanan laluan tepat.',

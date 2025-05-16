@@ -17,6 +17,9 @@ export default {
     SETTINGS_DEFAULT_FILES_EXACT_TITLE: 'Arquivos Somente Leitura Padrão (Caminhos Exatos)',
     SETTINGS_DEFAULT_FILES_EXACT_DESC: 'Os arquivos listados aqui serão abertos no modo somente leitura por padrão. Usa correspondência exata de caminho.',
     SETTINGS_DEFAULT_FILES_EXACT_PLACEHOLDER: 'Digite o caminho do arquivo (ex: Notas/MeuArquivo.md)',
+	SETTINGS_DEFAULT_FOLDERS_EXACT_TITLE: "Pastas Somente Leitura Padrão (Caminhos Exatos)",
+	SETTINGS_DEFAULT_FOLDERS_EXACT_DESC: "Todas as notas dentro destas pastas (e subpastas) serão abertas no modo somente leitura padrão. Usa correspondência exata de caminho.",
+	SETTINGS_DEFAULT_FOLDERS_EXACT_PLACEHOLDER: "Digite o caminho da pasta (ex: Projetos/Ativos)",
 
     SETTINGS_STRICT_FILES_EXACT_TITLE: 'Arquivos Somente Leitura Estrito (Caminhos Exatos)',
     SETTINGS_STRICT_FILES_EXACT_DESC: 'Os arquivos listados aqui serão forçados para o modo somente leitura. Usa correspondência exata de caminho.',

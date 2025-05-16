@@ -17,6 +17,9 @@ export default {
     SETTINGS_DEFAULT_FILES_EXACT_TITLE: 'Domyślne Pliki Tylko do Odczytu (Dokładne Ścieżki)',
     SETTINGS_DEFAULT_FILES_EXACT_DESC: 'Pliki wymienione tutaj będą domyślnie otwierane w trybie tylko do odczytu. Używa dokładnego dopasowania ścieżki.',
     SETTINGS_DEFAULT_FILES_EXACT_PLACEHOLDER: 'Wprowadź ścieżkę pliku (np. Notatki/MójPlik.md)',
+	SETTINGS_DEFAULT_FOLDERS_EXACT_TITLE: "Domyślne Foldery Tylko do Odczytu (Dokładne Ścieżki)",
+	SETTINGS_DEFAULT_FOLDERS_EXACT_DESC: "Wszystkie notatki w tych folderach (i podfolderach) będą otwierane w domyślnym trybie tylko do odczytu. Używa dokładnego dopasowania ścieżki.",
+	SETTINGS_DEFAULT_FOLDERS_EXACT_PLACEHOLDER: "Wprowadź ścieżkę folderu (np. Projekty/Aktywne)",
 
     SETTINGS_STRICT_FILES_EXACT_TITLE: 'Ścisłe Pliki Tylko do Odczytu (Dokładne Ścieżki)',
     SETTINGS_STRICT_FILES_EXACT_DESC: 'Pliki wymienione tutaj będą wymuszane w tryb tylko do odczytu. Używa dokładnego dopasowania ścieżki.',

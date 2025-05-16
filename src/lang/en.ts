@@ -16,6 +16,9 @@ export default {
     SETTINGS_DEFAULT_FILES_EXACT_TITLE: 'Default Read-Only Files (Exact Paths)',
     SETTINGS_DEFAULT_FILES_EXACT_DESC: 'Files listed here will open in read-only mode by default. Uses exact path matching.',
     SETTINGS_DEFAULT_FILES_EXACT_PLACEHOLDER: 'Enter file path (e.g., Notes/MyFile.md)',
+    SETTINGS_DEFAULT_FOLDERS_EXACT_TITLE: 'Default Read-Only Folders (Exact Paths)',
+    SETTINGS_DEFAULT_FOLDERS_EXACT_DESC: 'All notes within these folders (and subfolders) will open in default read-only mode. Uses exact path matching.',
+    SETTINGS_DEFAULT_FOLDERS_EXACT_PLACEHOLDER: 'Enter folder path (e.g., Projects/Active)',
 
     SETTINGS_STRICT_FILES_EXACT_TITLE: 'Strict Read-Only Files (Exact Paths)',
     SETTINGS_STRICT_FILES_EXACT_DESC: 'Files listed here will be forced into read-only mode. Uses exact path matching.',

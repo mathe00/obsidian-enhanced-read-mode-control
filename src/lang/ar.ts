@@ -17,6 +17,9 @@ export default {
     SETTINGS_DEFAULT_FILES_EXACT_TITLE: 'ملفات للقراءة فقط افتراضيًا (مسارات دقيقة)',
     SETTINGS_DEFAULT_FILES_EXACT_DESC: 'الملفات المدرجة هنا ستُفتح في وضع القراءة فقط افتراضيًا. يستخدم مطابقة المسار الدقيق.',
     SETTINGS_DEFAULT_FILES_EXACT_PLACEHOLDER: 'أدخل مسار الملف (مثال: ملاحظات/ملفي.md)',
+	SETTINGS_DEFAULT_FOLDERS_EXACT_TITLE: "مجلدات القراءة فقط الافتراضية (مسارات دقيقة)",
+	SETTINGS_DEFAULT_FOLDERS_EXACT_DESC: "سيتم فتح جميع الملاحظات داخل هذه المجلدات (والمجلدات الفرعية) في وضع القراءة فقط الافتراضي. يستخدم مطابقة المسار الدقيق.",
+	SETTINGS_DEFAULT_FOLDERS_EXACT_PLACEHOLDER: "أدخل مسار المجلد (مثال: Projects/Active)",
 
     SETTINGS_STRICT_FILES_EXACT_TITLE: 'ملفات للقراءة فقط بشكل صارم (مسارات دقيقة)',
     SETTINGS_STRICT_FILES_EXACT_DESC: 'الملفات المدرجة هنا سيتم فرض وضع القراءة فقط عليها. يستخدم مطابقة المسار الدقيق.',

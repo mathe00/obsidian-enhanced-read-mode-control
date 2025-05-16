@@ -17,6 +17,9 @@ export default {
     SETTINGS_DEFAULT_FILES_EXACT_TITLE: 'Tệp Chỉ Đọc Mặc định (Đường dẫn Chính xác)',
     SETTINGS_DEFAULT_FILES_EXACT_DESC: 'Các tệp được liệt kê ở đây sẽ mở ở chế độ chỉ đọc theo mặc định. Sử dụng đối sánh đường dẫn chính xác.',
     SETTINGS_DEFAULT_FILES_EXACT_PLACEHOLDER: 'Nhập đường dẫn tệp (ví dụ: Notes/MyFile.md)',
+	SETTINGS_DEFAULT_FOLDERS_EXACT_TITLE: "Thư mục Chỉ Đọc Mặc định (Đường dẫn Chính xác)",
+	SETTINGS_DEFAULT_FOLDERS_EXACT_DESC: "Tất cả ghi chú trong các thư mục này (và thư mục con) sẽ mở ở chế độ chỉ đọc mặc định. Sử dụng khớp đường dẫn chính xác.",
+	SETTINGS_DEFAULT_FOLDERS_EXACT_PLACEHOLDER: "Nhập đường dẫn thư mục (ví dụ: Projects/Active)",
 
     SETTINGS_STRICT_FILES_EXACT_TITLE: 'Tệp Chỉ Đọc Nghiêm ngặt (Đường dẫn Chính xác)',
     SETTINGS_STRICT_FILES_EXACT_DESC: 'Các tệp được liệt kê ở đây sẽ bị buộc vào chế độ chỉ đọc. Sử dụng đối sánh đường dẫn chính xác.',

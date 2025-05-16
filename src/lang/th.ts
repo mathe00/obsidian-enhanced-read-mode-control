@@ -17,6 +17,9 @@ export default {
     SETTINGS_DEFAULT_FILES_EXACT_TITLE: 'ไฟล์อ่านอย่างเดียวเริ่มต้น (เส้นทางที่แน่นอน)',
     SETTINGS_DEFAULT_FILES_EXACT_DESC: 'ไฟล์ที่ระบุในที่นี้จะเปิดในโหมดอ่านอย่างเดียวโดยค่าเริ่มต้น ใช้การจับคู่เส้นทางที่แน่นอน',
     SETTINGS_DEFAULT_FILES_EXACT_PLACEHOLDER: 'ป้อนเส้นทางไฟล์ (เช่น Notes/MyFile.md)',
+	SETTINGS_DEFAULT_FOLDERS_EXACT_TITLE: "โฟลเดอร์อ่านอย่างเดียวเริ่มต้น (เส้นทางที่แน่นอน)",
+	SETTINGS_DEFAULT_FOLDERS_EXACT_DESC: "โน้ตทั้งหมดภายในโฟลเดอร์เหล่านี้ (และโฟลเดอร์ย่อย) จะเปิดในโหมดอ่านอย่างเดียวเริ่มต้น ใช้การจับคู่เส้นทางที่แน่นอน",
+	SETTINGS_DEFAULT_FOLDERS_EXACT_PLACEHOLDER: "ป้อนเส้นทางโฟลเดอร์ (เช่น Projects/Active)",
 
     SETTINGS_STRICT_FILES_EXACT_TITLE: 'ไฟล์อ่านอย่างเดียวแบบเข้มงวด (เส้นทางที่แน่นอน)',
     SETTINGS_STRICT_FILES_EXACT_DESC: 'ไฟล์ที่ระบุในที่นี้จะถูกบังคับให้อยู่ในโหมดอ่านอย่างเดียว ใช้การจับคู่เส้นทางที่แน่นอน',

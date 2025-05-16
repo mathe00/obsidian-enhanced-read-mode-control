@@ -17,6 +17,9 @@ export default {
     SETTINGS_DEFAULT_FILES_EXACT_TITLE: 'Archivos de Solo Lectura por Defecto (Rutas Exactas)',
     SETTINGS_DEFAULT_FILES_EXACT_DESC: 'Los archivos listados aquí se abrirán en modo de solo lectura por defecto. Usa coincidencia exacta de ruta.',
     SETTINGS_DEFAULT_FILES_EXACT_PLACEHOLDER: 'Ingrese la ruta del archivo (ej: Notas/MiArchivo.md)',
+    SETTINGS_DEFAULT_FOLDERS_EXACT_TITLE: 'Carpetas de Solo Lectura por Defecto (Rutas Exactas)',
+    SETTINGS_DEFAULT_FOLDERS_EXACT_DESC: 'Todas las notas en estas carpetas (y subcarpetas) se abrirán en modo de solo lectura por defecto. Usa coincidencia exacta de ruta.',
+    SETTINGS_DEFAULT_FOLDERS_EXACT_PLACEHOLDER: 'Ingrese la ruta de la carpeta (ej: Proyectos/Activos)',
 
     SETTINGS_STRICT_FILES_EXACT_TITLE: 'Archivos de Solo Lectura Estricta (Rutas Exactas)',
     SETTINGS_STRICT_FILES_EXACT_DESC: 'Los archivos listados aquí se forzarán a modo de solo lectura. Usa coincidencia exacta de ruta.',

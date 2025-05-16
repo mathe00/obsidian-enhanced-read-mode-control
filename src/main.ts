@@ -101,7 +101,7 @@ export default class EnhancedReadModeControlPlugin extends Plugin {
 
 		this.app.workspace.onLayoutReady(() => {
 			this.logDebug('Initial layout ready. Applying modes.');
-			this.handleLayoutChange();
+			this.handleLayoutChange(); // Ensures strict mode is applied on startup for already open files
 		});
 
 		this.logDebug('--- EnhancedReadModeControlPlugin onload END ---');
@@ -124,25 +124,31 @@ export default class EnhancedReadModeControlPlugin extends Plugin {
         await loadTranslations(this); // Reload translations if language setting changed
         this.compileRegexes();
 		this.logDebug('Settings saved:', JSON.stringify(this.settings));
-		this.handleLayoutChange();
+		this.handleLayoutChange(); // Re-evaluate strict modes for all open leaves
 	}
 
 	getForcedModeForPath(filePath: string | undefined): ReadOnlyMode {
 		if (!filePath) return null;
 		const normalizedFilePath = filePath.replace(/^\/|\/$/g, '');
 
+        // Priority 1: Strict Read-Only Folders
 		for (const folderPath of this.settings.strictReadOnlyFolders) {
 			if (
 				normalizedFilePath.startsWith(folderPath + '/') ||
 				normalizedFilePath === folderPath
 			) {
+                this.logDebug(`Path '${filePath}' matched strict folder '${folderPath}'. Returning 'strict'.`);
 				return 'strict';
 			}
 		}
+
+        // Priority 2: Strict Read-Only Files
 		if (this.settings.strictReadOnlyFiles.includes(filePath)) {
+            this.logDebug(`Path '${filePath}' matched strict file. Returning 'strict'.`);
 			return 'strict';
 		}
 
+        // Priority 3: Strict Read-Only Regex
         if (this.settings.enableRegexMatching) {
             for (const regex of this.compiledStrictRegexes) {
                 if (regex.test(filePath)) {
@@ -152,10 +158,24 @@ export default class EnhancedReadModeControlPlugin extends Plugin {
             }
         }
 
+        // Priority 4: Default Read-Only Folders
+        for (const folderPath of this.settings.defaultReadOnlyFolders) {
+            if (
+                normalizedFilePath.startsWith(folderPath + '/') ||
+                normalizedFilePath === folderPath
+            ) {
+                this.logDebug(`Path '${filePath}' matched default folder '${folderPath}'. Returning 'default'.`);
+                return 'default';
+            }
+        }
+
+        // Priority 5: Default Read-Only Files
 		if (this.settings.defaultReadOnlyFiles.includes(filePath)) {
+            this.logDebug(`Path '${filePath}' matched default file. Returning 'default'.`);
 			return 'default';
 		}
 
+        // Priority 6: Default Read-Only Regex
         if (this.settings.enableRegexMatching) {
             for (const regex of this.compiledDefaultRegexes) {
                 if (regex.test(filePath)) {
@@ -194,7 +214,7 @@ export default class EnhancedReadModeControlPlugin extends Plugin {
 					} else {
 						this.logDebug(`handleFileOpen: Already in PREVIEW for '${file.path}'. No state change needed.`);
 					}
-				} else {
+				} else { // requiredMode is null
 					this.logDebug(`handleFileOpen: Mode is NULL for '${file.path}'. Checking behavior setting.`);
 					if (this.settings.forceSourceOnUnmanaged && currentModeIsPreview) {
 						this.logDebug(`handleFileOpen: Forcing state to SOURCE for '${file.path}' because required mode is NULL, current is PREVIEW, and setting is enabled.`);
@@ -206,37 +226,38 @@ export default class EnhancedReadModeControlPlugin extends Plugin {
 				}
 				viewProcessedCount++;
 			}
-			return true;
+			return true; // Continue iterating
 		});
 
 		if (viewProcessedCount === 0) {
-			this.logDebug(`handleFileOpen: Could not find any matching MarkdownView for '${file.path}' immediately. Using fallback.`);
-			this.app.workspace.onLayoutReady(() => {
-				const activeLeaf = this.app.workspace.getActiveViewOfType(MarkdownView);
-				if (activeLeaf && activeLeaf.file === file) {
+			this.logDebug(`handleFileOpen: Could not find any matching MarkdownView for '${file.path}' immediately. Using fallback for active leaf.`);
+			// Fallback: if no specific view was found (e.g., file opened in new tab not yet fully registered),
+            // try to apply to the active leaf if it matches.
+			this.app.workspace.onLayoutReady(() => { // Ensure layout is ready before checking active leaf
+				const activeView = this.app.workspace.getActiveViewOfType(MarkdownView);
+				if (activeView && activeView.file === file) {
 					this.logDebug(`handleFileOpen (onLayoutReady fallback): Active leaf matches file '${file.path}'. Re-evaluating.`);
-					const fallbackView = activeLeaf;
 					const requiredMode = this.getForcedModeForPath(file.path);
-					const state = fallbackView.getState();
+					const state = activeView.getState();
 					const currentModeIsPreview = state.mode === 'preview';
 
 					if (requiredMode === 'strict' || requiredMode === 'default') {
 						if (!currentModeIsPreview) {
                             this.logDebug(`handleFileOpen (fallback): Setting state to PREVIEW for '${file.path}' (Required: ${requiredMode}).`);
-                            fallbackView.setState({ ...state, mode: 'preview' }, { history: false });
+                            activeView.setState({ ...state, mode: 'preview' }, { history: false });
                             this.showModeChangeNotice(file.path, requiredMode === 'strict' ? 'NOTICE_MODE_STRICT' : 'NOTICE_MODE_DEFAULT');
                         }
-					} else {
+					} else { // requiredMode is null
                         if (this.settings.forceSourceOnUnmanaged && currentModeIsPreview) {
                             this.logDebug(`handleFileOpen (fallback): Forcing state to SOURCE for '${file.path}' because required mode is NULL, current is PREVIEW, and setting is enabled.`);
-                            fallbackView.setState({ ...state, mode: 'source' }, { history: false });
+                            activeView.setState({ ...state, mode: 'source' }, { history: false });
                             this.showModeChangeNotice(file.path, 'NOTICE_MODE_EDIT');
                         } else {
                              this.logDebug(`handleFileOpen (fallback): Mode is NULL for '${file.path}'. No interference needed.`);
                         }
 					}
 				} else {
-                    this.logDebug(`handleFileOpen (onLayoutReady fallback): Active leaf still doesn't match '${file?.path}'.`);
+                    this.logDebug(`handleFileOpen (onLayoutReady fallback): Active leaf still doesn't match '${file?.path}'. No action taken by fallback.`);
                 }
 			});
 		} else {
@@ -245,6 +266,7 @@ export default class EnhancedReadModeControlPlugin extends Plugin {
 	};
 
 	private handleLayoutChange = (): void => {
+        this.logDebug('handleLayoutChange: Event triggered.');
 		const leaves = this.app.workspace.getLeavesOfType('markdown');
 		leaves.forEach((leaf) => {
 			if (leaf.view instanceof MarkdownView) {
@@ -261,13 +283,11 @@ export default class EnhancedReadModeControlPlugin extends Plugin {
 						view.setState({ ...state, mode: 'preview' }, { history: false });
                         this.showModeChangeNotice(filePath, 'NOTICE_MODE_STRICT');
 					}
-				} else if (requiredMode === 'default') {
-					if (state.mode === 'source') {
-						this.logDebug(`handleLayoutChange: Enforcing DEFAULT mode (preview) for '${filePath}'.`);
-						view.setState({ ...state, mode: 'preview' }, { history: false });
-                        this.showModeChangeNotice(filePath, 'NOTICE_MODE_DEFAULT');
-					}
 				}
+                // For 'default' mode, we no longer force it back to 'preview' on layout-change.
+                // 'handleFileOpen' sets the initial 'default' state.
+                // If the user manually switches to 'source', they should stay in 'source'.
+                // 'forceSourceOnUnmanaged' is handled by 'file-open' for unmanaged notes.
 			}
 		});
 	};
@@ -291,13 +311,12 @@ export default class EnhancedReadModeControlPlugin extends Plugin {
 					view.setState({ ...state, mode: 'preview' }, { history: false });
                     this.showModeChangeNotice(filePath, requiredMode === 'strict' ? 'NOTICE_MODE_STRICT' : 'NOTICE_MODE_DEFAULT');
 				}
-			} else {
-				if (this.settings.forceSourceOnUnmanaged && currentModeIsPreview) {
-					this.logDebug(`applyModeToActiveLeafAfterToggle: Setting state to SOURCE for '${filePath}' as mode is now NULL and forceSourceOnUnmanaged is true.`);
-					view.setState({ ...state, mode: 'source' }, { history: false });
-                    this.showModeChangeNotice(filePath, 'NOTICE_MODE_EDIT');
-                } else if (!this.settings.forceSourceOnUnmanaged && currentModeIsPreview) {
-                    this.logDebug(`applyModeToActiveLeafAfterToggle: Setting state to SOURCE for '${filePath}' as mode is now NULL (toggled off).`);
+			} else { // requiredMode is null
+				// If the mode is now 'null' (meaning it was toggled off from a default/strict list)
+                // we should switch it to 'source' mode, regardless of 'forceSourceOnUnmanaged',
+                // as the user explicitly removed the read-only rule.
+				if (currentModeIsPreview) {
+					this.logDebug(`applyModeToActiveLeafAfterToggle: Setting state to SOURCE for '${filePath}' as mode is now NULL (toggled off).`);
 					view.setState({ ...state, mode: 'source' }, { history: false });
                     this.showModeChangeNotice(filePath, 'NOTICE_MODE_EDIT');
                 }
@@ -335,18 +354,17 @@ export default class EnhancedReadModeControlPlugin extends Plugin {
 		let messageKey = ''; // Store the key for the message
         let messageVars: Record<string, string> = { fileName };
 
-		const currentSettings = await this.loadData() || DEFAULT_SETTINGS;
-        const updatedSettings = {
-            defaultReadOnlyFiles: [...currentSettings.defaultReadOnlyFiles],
-            strictReadOnlyFiles: [...currentSettings.strictReadOnlyFiles],
-            strictReadOnlyFolders: [...currentSettings.strictReadOnlyFolders],
-            defaultReadOnlyRegex: [...currentSettings.defaultReadOnlyRegex],
-            strictReadOnlyRegex: [...currentSettings.strictReadOnlyRegex],
-            enableRegexMatching: currentSettings.enableRegexMatching,
-            debugLoggingEnabled: currentSettings.debugLoggingEnabled,
-            forceSourceOnUnmanaged: currentSettings.forceSourceOnUnmanaged,
-            notifyOnModeChange: currentSettings.notifyOnModeChange,
-            pluginLanguage: currentSettings.pluginLanguage,
+		// Load current settings directly to avoid race conditions if settings object is stale
+        // However, this.settings should be the most up-to-date in-memory version.
+        // For safety, let's ensure we're modifying a fresh copy derived from this.settings.
+        const updatedSettings: ReadModeControlSettings = {
+            ...this.settings, // Spread existing settings
+            defaultReadOnlyFiles: [...this.settings.defaultReadOnlyFiles],
+            strictReadOnlyFiles: [...this.settings.strictReadOnlyFiles],
+            strictReadOnlyFolders: [...this.settings.strictReadOnlyFolders], // Keep other lists intact
+            defaultReadOnlyFolders: [...this.settings.defaultReadOnlyFolders],
+            defaultReadOnlyRegex: [...this.settings.defaultReadOnlyRegex],
+            strictReadOnlyRegex: [...this.settings.strictReadOnlyRegex],
         };
 
 
@@ -368,7 +386,7 @@ export default class EnhancedReadModeControlPlugin extends Plugin {
 				}
 				messageKey = 'NOTICE_TOGGLE_ADDED_DEFAULT_SUFFIX';
 			}
-		} else {
+		} else { // targetMode === 'strict'
 			if (strictIndex > -1) {
 				updatedSettings.strictReadOnlyFiles.splice(strictIndex, 1);
 				messageKey = 'NOTICE_TOGGLE_REMOVED_STRICT_SUFFIX';
@@ -384,21 +402,26 @@ export default class EnhancedReadModeControlPlugin extends Plugin {
 			}
 		}
 
-        this.settings = updatedSettings;
-		await this.saveSettings();
-		this.applyModeToActiveLeafAfterToggle();
+        this.settings = updatedSettings; // Update the live settings object
+		await this.saveSettings(); // This will also recompile regexes and re-apply layout changes
+		this.applyModeToActiveLeafAfterToggle(); // Apply mode immediately to the current file
 
-        let fullMessage = (targetMode === 'default' ? t('NOTICE_TOGGLE_REMOVED_DEFAULT_PREFIX', messageVars) : t('NOTICE_TOGGLE_ADDED_DEFAULT_PREFIX', messageVars)) + t(messageKey, messageVars);
-        if (messageKey.startsWith('NOTICE_TOGGLE_REMOVED')) {
-             fullMessage = t(messageKey.replace('_SUFFIX', '_PREFIX'), messageVars) + t(messageKey, messageVars);
-        } else {
-             fullMessage = t(messageKey.replace('_SUFFIX', '_PREFIX'), messageVars) + t(messageKey, messageVars);
+        // Construct the notice message
+        // The logic for prefix/suffix was a bit convoluted, simplifying:
+        let noticeMessage = '';
+        if (messageKey.includes('ADDED_DEFAULT')) {
+            noticeMessage = t('NOTICE_TOGGLE_ADDED_DEFAULT_PREFIX', messageVars) + t('NOTICE_TOGGLE_ADDED_DEFAULT_SUFFIX', messageVars);
+        } else if (messageKey.includes('REMOVED_DEFAULT')) {
+            noticeMessage = t('NOTICE_TOGGLE_REMOVED_DEFAULT_PREFIX', messageVars) + t('NOTICE_TOGGLE_REMOVED_DEFAULT_SUFFIX', messageVars);
+        } else if (messageKey.includes('ADDED_STRICT')) {
+            noticeMessage = t('NOTICE_TOGGLE_ADDED_STRICT_PREFIX', messageVars) + t('NOTICE_TOGGLE_ADDED_STRICT_SUFFIX', messageVars);
+        } else if (messageKey.includes('REMOVED_STRICT')) {
+            noticeMessage = t('NOTICE_TOGGLE_REMOVED_STRICT_PREFIX', messageVars) + t('NOTICE_TOGGLE_REMOVED_STRICT_SUFFIX', messageVars);
         }
-
 
         if (movedFromOtherListKey) {
-            fullMessage += t(movedFromOtherListKey);
+            noticeMessage += t(movedFromOtherListKey);
         }
-		new Notice(fullMessage, 3000);
+		new Notice(noticeMessage, 3000);
 	}
 }

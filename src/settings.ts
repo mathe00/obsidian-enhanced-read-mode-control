@@ -75,26 +75,32 @@ export class ReadModeControlSettingTab extends PluginSettingTab {
         });
 
         inputSetting.addButton((button: ButtonComponent) => {
-            button.setButtonText(itemType === 'regex' ? 'Add Regex' : 'Add Path').setIcon('plus').onClick(async () => {
+            button.setButtonText(itemType === 'regex' ? t('SETTINGS_LIST_UI_ADD_REGEX_BUTTON') : t('SETTINGS_LIST_UI_ADD_PATH_BUTTON')).setIcon('plus').onClick(async () => {
                 const newItem = textInput.inputEl.value.trim();
                 if (!newItem) return;
 
                 let isValid = true;
+                let processedNewItem = newItem; // Store potentially normalized item
+
                 if (itemType === 'file' || itemType === 'folder') {
-                    const normalizedNewItem = normalizePath(newItem);
-                    const abstractFile = this.app.vault.getAbstractFileByPath(normalizedNewItem);
+                    processedNewItem = normalizePath(newItem);
+                     if (itemType === 'folder') { // Normalize folder paths by removing trailing slashes
+                        processedNewItem = processedNewItem.replace(/\/$/, '');
+                    }
+                    const abstractFile = this.app.vault.getAbstractFileByPath(processedNewItem);
                     isValid = itemType === 'file' ? (abstractFile instanceof TFile) : (abstractFile instanceof TFolder);
-                    if (isValid && !currentItems.includes(normalizedNewItem)) {
-                        currentItems.push(normalizedNewItem);
+
+                    if (isValid && !currentItems.includes(processedNewItem)) {
+                        currentItems.push(processedNewItem);
                     } else if (!isValid) {
-                         this.plugin.logDebug(`Attempted to add invalid ${itemType} path: ${newItem}`);
-                    } else {
-                        this.plugin.logDebug(`Path already exists: ${normalizedNewItem}`);
-                        isValid = false;
+                         this.plugin.logDebug(`Attempted to add invalid ${itemType} path: ${newItem} (normalized: ${processedNewItem})`);
+                    } else { // Item already exists
+                        this.plugin.logDebug(`Path already exists: ${processedNewItem}`);
+                        isValid = false; // To prevent adding duplicates and to keep invalid class if needed
                     }
                 } else if (itemType === 'regex') {
                     try {
-                        new RegExp(newItem);
+                        new RegExp(newItem); // processedNewItem is newItem for regex
                         if (!currentItems.includes(newItem)) {
                             currentItems.push(newItem);
                         } else {
@@ -110,12 +116,18 @@ export class ReadModeControlSettingTab extends PluginSettingTab {
 
                 if (!isValid) {
                     textInput.inputEl.classList.add('is-invalid');
+                    // Optionally, provide a notice to the user about why it's invalid or a duplicate
+                    if (currentItems.includes(processedNewItem) || (itemType === 'regex' && currentItems.includes(newItem))) {
+                        new Notice(t(itemType === 'regex' ? 'SETTINGS_LIST_UI_EMPTY_REGEX' : 'SETTINGS_LIST_UI_EMPTY_FOLDERS').replace('No', 'This').replace('added yet.', 'already exists.')); // Crude, needs better translation keys
+                    } else {
+                        new Notice(`Invalid ${itemType}: ${newItem}`);
+                    }
                     return;
                 }
                 textInput.inputEl.classList.remove('is-invalid');
 
                 await saveCallback(currentItems);
-                this.plugin.logDebug(`Added ${itemType}: ${newItem}`);
+                this.plugin.logDebug(`Added ${itemType}: ${processedNewItem}`);
                 this.redisplayList(pathListContainer, currentItems, saveCallback, itemType);
                 textInput.setValue('');
             });
@@ -136,14 +148,20 @@ export class ReadModeControlSettingTab extends PluginSettingTab {
     ): void {
         containerEl.empty();
         if (items.length === 0) {
-            containerEl.createEl('p', { text: `No ${itemType === 'regex' ? 'regex patterns' : itemType + 's'} added yet.`, cls: 'setting-item-description ermc-empty-list-message' });
+            let emptyMessage = '';
+            switch(itemType) {
+                case 'file': emptyMessage = t('SETTINGS_LIST_UI_EMPTY_FILES'); break;
+                case 'folder': emptyMessage = t('SETTINGS_LIST_UI_EMPTY_FOLDERS'); break;
+                case 'regex': emptyMessage = t('SETTINGS_LIST_UI_EMPTY_REGEX'); break;
+            }
+            containerEl.createEl('p', { text: emptyMessage, cls: 'setting-item-description ermc-empty-list-message' });
         }
         items.forEach((item, index) => {
             new Setting(containerEl)
                 .setName(item)
                 .setClass('ermc-path-list-item')
                 .addButton((button) =>
-                    button.setIcon('trash').setTooltip(`Remove ${item}`).onClick(async () => {
+                    button.setIcon('trash').setTooltip(`${t('SETTINGS_LIST_UI_REMOVE_TOOLTIP_PREFIX')} ${item}`).onClick(async () => {
                         items.splice(index, 1);
                         await saveCallback(items);
                         this.plugin.logDebug(`Removed ${itemType}: ${item}`);
@@ -194,7 +212,7 @@ display(): void {
         this.createListManagementUI(
             containerEl,
             t('SETTINGS_DEFAULT_FILES_EXACT_TITLE'),
-            t('SETTINGS_DEFAULT_FILES_EXACT_DESC'), 
+            t('SETTINGS_DEFAULT_FILES_EXACT_DESC'),
             t('SETTINGS_DEFAULT_FILES_EXACT_PLACEHOLDER'),
             this.plugin.settings.defaultReadOnlyFiles,
             async (newPaths) => {
@@ -207,8 +225,22 @@ display(): void {
 
         this.createListManagementUI(
             containerEl,
+            t('SETTINGS_DEFAULT_FOLDERS_EXACT_TITLE'), // New Title Key
+            t('SETTINGS_DEFAULT_FOLDERS_EXACT_DESC'),   // New Desc Key
+            t('SETTINGS_DEFAULT_FOLDERS_EXACT_PLACEHOLDER'), // New Placeholder Key
+            this.plugin.settings.defaultReadOnlyFolders,
+            async (newPaths) => {
+                this.plugin.settings.defaultReadOnlyFolders = newPaths.map(p => normalizePath(p.replace(/^\/|\/$/g, '')));
+                await this.plugin.saveSettings();
+            },
+            'folder',
+            FolderSuggest
+        );
+
+        this.createListManagementUI(
+            containerEl,
             t('SETTINGS_STRICT_FILES_EXACT_TITLE'),
-            t('SETTINGS_STRICT_FILES_EXACT_DESC'), 
+            t('SETTINGS_STRICT_FILES_EXACT_DESC'),
             t('SETTINGS_STRICT_FILES_EXACT_PLACEHOLDER'),
             this.plugin.settings.strictReadOnlyFiles,
             async (newPaths) => {
@@ -222,7 +254,7 @@ display(): void {
         this.createListManagementUI(
             containerEl,
             t('SETTINGS_STRICT_FOLDERS_EXACT_TITLE'),
-            t('SETTINGS_STRICT_FOLDERS_EXACT_DESC'), 
+            t('SETTINGS_STRICT_FOLDERS_EXACT_DESC'),
             t('SETTINGS_STRICT_FOLDERS_EXACT_PLACEHOLDER'),
             this.plugin.settings.strictReadOnlyFolders,
             async (newPaths) => {
@@ -247,7 +279,7 @@ display(): void {
                 .onChange(async (value) => {
                     this.plugin.settings.enableRegexMatching = value;
                     await this.plugin.saveSettings();
-                    this.display();
+                    this.display(); // Rerender to show/hide regex sections
                 })
             );
 
@@ -255,7 +287,7 @@ display(): void {
             this.createListManagementUI(
                 containerEl,
                 t('SETTINGS_DEFAULT_REGEX_TITLE'),
-                t('SETTINGS_DEFAULT_REGEX_DESC'), 
+                t('SETTINGS_DEFAULT_REGEX_DESC'),
                 t('SETTINGS_DEFAULT_REGEX_PLACEHOLDER'),
                 this.plugin.settings.defaultReadOnlyRegex,
                 async (newRegexes) => {
@@ -268,7 +300,7 @@ display(): void {
             this.createListManagementUI(
                 containerEl,
                 t('SETTINGS_STRICT_REGEX_TITLE'),
-                t('SETTINGS_STRICT_REGEX_DESC'), 
+                t('SETTINGS_STRICT_REGEX_DESC'),
                 t('SETTINGS_STRICT_REGEX_PLACEHOLDER'),
                 this.plugin.settings.strictReadOnlyRegex,
                 async (newRegexes) => {
@@ -310,7 +342,7 @@ display(): void {
                     frag.createEl('br');
                     frag.createEl('br');
                     frag.createEl('strong', { text: t('SETTINGS_FORCE_EDIT_UNMANAGED_DESC_OPTION2_LABEL')});
-                    frag.appendText(' • ');
+                    frag.appendText(' ('); // Small correction for consistency if needed, or keep as is
                     frag.createEl('strong', { text: t('SETTINGS_FORCE_EDIT_UNMANAGED_DESC_OPTION2_ACTION_LABEL')});
                     frag.appendText(t('SETTINGS_FORCE_EDIT_UNMANAGED_DESC_OPTION2_ACTION_TEXT'));
                     frag.createEl('br');

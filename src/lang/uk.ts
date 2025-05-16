@@ -17,6 +17,9 @@ export default {
     SETTINGS_DEFAULT_FILES_EXACT_TITLE: 'Файли Лише для Читання за Замовчуванням (Точні Шляхи)',
     SETTINGS_DEFAULT_FILES_EXACT_DESC: 'Файли, перелічені тут, відкриватимуться в режимі лише для читання за замовчуванням. Використовується точне зіставлення шляху.',
     SETTINGS_DEFAULT_FILES_EXACT_PLACEHOLDER: 'Введіть шлях до файлу (напр., Notes/MyFile.md)',
+	SETTINGS_DEFAULT_FOLDERS_EXACT_TITLE: "Теки лише для читання за замовчуванням (точні шляхи)",
+	SETTINGS_DEFAULT_FOLDERS_EXACT_DESC: "Усі нотатки в цих теках (та підтеках) відкриватимуться в режимі лише для читання за замовчуванням. Використовується точне зіставлення шляхів.",
+	SETTINGS_DEFAULT_FOLDERS_EXACT_PLACEHOLDER: "Введіть шлях до теки (напр., Проєкти/Активні)",
 
     SETTINGS_STRICT_FILES_EXACT_TITLE: 'Суворі Файли Лише для Читання (Точні Шляхи)',
     SETTINGS_STRICT_FILES_EXACT_DESC: 'Файли, перелічені тут, будуть примусово відкриті в режимі лише для читання. Використовується точне зіставлення шляху.',

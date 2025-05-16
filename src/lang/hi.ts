@@ -17,6 +17,9 @@ export default {
     SETTINGS_DEFAULT_FILES_EXACT_TITLE: 'डिफ़ॉल्ट केवल-पढ़ने योग्य फ़ाइलें (सटीक पथ)',
     SETTINGS_DEFAULT_FILES_EXACT_DESC: 'यहां सूचीबद्ध फ़ाइलें डिफ़ॉल्ट रूप से केवल-पढ़ने योग्य मोड में खुलेंगी। सटीक पथ मिलान का उपयोग करता है।',
     SETTINGS_DEFAULT_FILES_EXACT_PLACEHOLDER: 'फ़ाइल पथ दर्ज करें (उदा. Notes/MyFile.md)',
+	SETTINGS_DEFAULT_FOLDERS_EXACT_TITLE: "डिफ़ॉल्ट रीड-ओनली फ़ोल्डर (सटीक पथ)",
+	SETTINGS_DEFAULT_FOLDERS_EXACT_DESC: "इन फ़ोल्डरों (और सबफ़ोल्डरों) के भीतर सभी नोट्स डिफ़ॉल्ट रीड-ओनली मोड में खुलेंगे। सटीक पथ मिलान का उपयोग करता है।",
+	SETTINGS_DEFAULT_FOLDERS_EXACT_PLACEHOLDER: "फ़ोल्डर पथ दर्ज करें (उदा., Projects/Active)",
 
     SETTINGS_STRICT_FILES_EXACT_TITLE: 'सख्त केवल-पढ़ने योग्य फ़ाइलें (सटीक पथ)',
     SETTINGS_STRICT_FILES_EXACT_DESC: 'यहां सूचीबद्ध फ़ाइलें केवल-पढ़ने योग्य मोड में बाध्य होंगी। सटीक पथ मिलान का उपयोग करता है।',

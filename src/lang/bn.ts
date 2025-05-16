@@ -17,6 +17,9 @@ export default {
     SETTINGS_DEFAULT_FILES_EXACT_TITLE: 'ডিফল্ট রিড-অনলি ফাইল (সঠিক পাথ)',
     SETTINGS_DEFAULT_FILES_EXACT_DESC: 'এখানে তালিকাভুক্ত ফাইলগুলি ডিফল্টভাবে রিড-অনলি মোডে খুলবে। সঠিক পাথ ম্যাচিং ব্যবহার করে।',
     SETTINGS_DEFAULT_FILES_EXACT_PLACEHOLDER: 'ফাইলের পাথ লিখুন (যেমন, Notes/MyFile.md)',
+	SETTINGS_DEFAULT_FOLDERS_EXACT_TITLE: "ডিফল্ট রিড-অনলি ফোল্ডার (সঠিক পাথ)",
+	SETTINGS_DEFAULT_FOLDERS_EXACT_DESC: "এই ফোল্ডারগুলির (এবং সাবফোল্ডারগুলির) মধ্যে থাকা সমস্ত নোট ডিফল্ট রিড-অনলি মোডে খুলবে। সঠিক পাথ ম্যাচিং ব্যবহার করে।",
+	SETTINGS_DEFAULT_FOLDERS_EXACT_PLACEHOLDER: "ফোল্ডারের পাথ লিখুন (যেমন, Projects/Active)",
 
     SETTINGS_STRICT_FILES_EXACT_TITLE: 'স্ট্রিক্ট রিড-অনলি ফাইল (সঠিক পাথ)',
     SETTINGS_STRICT_FILES_EXACT_DESC: 'এখানে তালিকাভুক্ত ফাইলগুলি জোর করে রিড-অনলি মোডে রাখা হবে। সঠিক পাথ ম্যাচিং ব্যবহার করে।',

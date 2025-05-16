@@ -17,6 +17,9 @@ export default {
     SETTINGS_DEFAULT_FILES_EXACT_TITLE: 'Výchozí Soubory Pouze pro Čtení (Přesné Cesty)',
     SETTINGS_DEFAULT_FILES_EXACT_DESC: 'Soubory uvedené zde se ve výchozím nastavení otevřou v režimu pouze pro čtení. Používá přesnou shodu cesty.',
     SETTINGS_DEFAULT_FILES_EXACT_PLACEHOLDER: 'Zadejte cestu k souboru (např. Poznamky/MujSoubor.md)',
+	SETTINGS_DEFAULT_FOLDERS_EXACT_TITLE: "Výchozí složky pouze pro čtení (přesné cesty)",
+	SETTINGS_DEFAULT_FOLDERS_EXACT_DESC: "Všechny poznámky v těchto složkách (a podsložkách) se otevřou ve výchozím režimu pouze pro čtení. Používá přesné porovnávání cest.",
+	SETTINGS_DEFAULT_FOLDERS_EXACT_PLACEHOLDER: "Zadejte cestu ke složce (např. Projekty/Aktivni)",
 
     SETTINGS_STRICT_FILES_EXACT_TITLE: 'Přísné Soubory Pouze pro Čtení (Přesné Cesty)',
     SETTINGS_STRICT_FILES_EXACT_DESC: 'Soubory uvedené zde budou nuceně v režimu pouze pro čtení. Používá přesnou shodu cesty.',

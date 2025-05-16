@@ -17,6 +17,9 @@ export default {
     SETTINGS_DEFAULT_FILES_EXACT_TITLE: 'File Baca Saja Default (Path Tepat)',
     SETTINGS_DEFAULT_FILES_EXACT_DESC: 'File yang terdaftar di sini akan terbuka dalam mode baca saja secara default. Menggunakan pencocokan path tepat.',
     SETTINGS_DEFAULT_FILES_EXACT_PLACEHOLDER: 'Masukkan path file (mis: Notes/FileSaya.md)',
+	SETTINGS_DEFAULT_FOLDERS_EXACT_TITLE: "Folder Baca-Saja Default (Path Tepat)",
+	SETTINGS_DEFAULT_FOLDERS_EXACT_DESC: "Semua catatan di dalam folder ini (dan subfolder) akan terbuka dalam mode baca-saja default. Menggunakan pencocokan path yang tepat.",
+	SETTINGS_DEFAULT_FOLDERS_EXACT_PLACEHOLDER: "Masukkan path folder (misalnya, Projects/Active)",
 
     SETTINGS_STRICT_FILES_EXACT_TITLE: 'File Baca Saja Ketat (Path Tepat)',
     SETTINGS_STRICT_FILES_EXACT_DESC: 'File yang terdaftar di sini akan dipaksa ke mode baca saja. Menggunakan pencocokan path tepat.',

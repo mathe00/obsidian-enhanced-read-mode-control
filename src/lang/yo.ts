@@ -17,6 +17,9 @@ export default {
     SETTINGS_DEFAULT_FILES_EXACT_TITLE: 'Àwọn Fáìlì Kíkà Nìkan Àiyipada (Àwọn Ọ̀nà Pàtó)',
     SETTINGS_DEFAULT_FILES_EXACT_DESC: 'Àwọn fáìlì tí a ṣe àkójọ síbí yóò ṣí ní ipo kíkà nìkan àiyipada. Ó nlo ìbámu ọ̀nà pàtó.',
     SETTINGS_DEFAULT_FILES_EXACT_PLACEHOLDER: 'Tẹ ọ̀nà fáìlì (f.a., Àwọn Àkọsílẹ̀/FáìlìMi.md)',
+	SETTINGS_DEFAULT_FOLDERS_EXACT_TITLE: "Àwọn Fó́l̀dà Kíkà Nìkan Àiyipada (Àwọn Ọ̀nà Gangan)",
+	SETTINGS_DEFAULT_FOLDERS_EXACT_DESC: "Gbogbo àwọn àkọsílẹ̀ inú àwọn fó́l̀dà wọ̀nyí (àti àwọn abẹ́-fó́l̀dà) yóò ṣí ní ìpo kíkà nìkan àiyipada. Ó ń lo ìbámu ọ̀nà gangan.",
+	SETTINGS_DEFAULT_FOLDERS_EXACT_PLACEHOLDER: "Tẹ ọ̀nà fó́l̀dà sii (fún àpẹẹrẹ, Projects/Active)",
 
     SETTINGS_STRICT_FILES_EXACT_TITLE: 'Àwọn Fáìlì Kíkà Nìkan Líle (Àwọn Ọ̀nà Pàtó)',
     SETTINGS_STRICT_FILES_EXACT_DESC: 'Àwọn fáìlì tí a ṣe àkójọ síbí yóò jẹ́ fipá mú sí ipo kíkà nìkan. Ó nlo ìbámu ọ̀nà pàtó.',

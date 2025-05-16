@@ -17,6 +17,9 @@ export default {
     SETTINGS_DEFAULT_FILES_EXACT_TITLE: 'Oletuslukutilatiedostot (Tarkat Polut)',
     SETTINGS_DEFAULT_FILES_EXACT_DESC: 'Tässä luetellut tiedostot avautuvat oletusarvoisesti lukutilassa. Käyttää tarkkaa polkumatchausta.',
     SETTINGS_DEFAULT_FILES_EXACT_PLACEHOLDER: 'Syötä tiedostopolku (esim. Muistiinpanot/OmaTiedosto.md)',
+	SETTINGS_DEFAULT_FOLDERS_EXACT_TITLE: "Oletusarvoiset Vain luku -kansiot (Tarkat polut)",
+	SETTINGS_DEFAULT_FOLDERS_EXACT_DESC: "Kaikki näiden kansioiden (ja alikansioiden) muistiinpanot avautuvat oletusarvoisessa vain luku -tilassa. Käyttää tarkkaa polun vastaavuutta.",
+	SETTINGS_DEFAULT_FOLDERS_EXACT_PLACEHOLDER: "Anna kansion polku (esim. Projektit/Aktiiviset)",
 
     SETTINGS_STRICT_FILES_EXACT_TITLE: 'Tiukat Lukutilatiedostot (Tarkat Polut)',
     SETTINGS_STRICT_FILES_EXACT_DESC: 'Tässä luetellut tiedostot pakotetaan lukutilaan. Käyttää tarkkaa polkumatchausta.',

@@ -17,6 +17,9 @@ export default {
     SETTINGS_DEFAULT_FILES_EXACT_TITLE: 'Standaard Alleen-lezen Bestanden (Exacte Paden)',
     SETTINGS_DEFAULT_FILES_EXACT_DESC: 'Bestanden die hier worden vermeld, worden standaard in alleen-lezen modus geopend. Gebruikt exacte padmatching.',
     SETTINGS_DEFAULT_FILES_EXACT_PLACEHOLDER: 'Voer bestandspad in (bijv. Notities/MijnBestand.md)',
+	SETTINGS_DEFAULT_FOLDERS_EXACT_TITLE: "Standaard Alleen-lezen Mappen (Exacte Paden)",
+	SETTINGS_DEFAULT_FOLDERS_EXACT_DESC: "Alle notities in deze mappen (en submappen) worden geopend in de standaard alleen-lezen modus. Gebruikt exacte padmatching.",
+	SETTINGS_DEFAULT_FOLDERS_EXACT_PLACEHOLDER: "Voer mappad in (bijv. Projecten/Actief)",
 
     SETTINGS_STRICT_FILES_EXACT_TITLE: 'Strikte Alleen-lezen Bestanden (Exacte Paden)',
     SETTINGS_STRICT_FILES_EXACT_DESC: 'Bestanden die hier worden vermeld, worden geforceerd in alleen-lezen modus. Gebruikt exacte padmatching.',

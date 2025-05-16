@@ -17,6 +17,9 @@ export default {
     SETTINGS_DEFAULT_FILES_EXACT_TITLE: '預設唯讀檔案 (精確路徑)',
     SETTINGS_DEFAULT_FILES_EXACT_DESC: '此處列出的檔案將預設以唯讀模式開啟。使用精確路徑匹配。',
     SETTINGS_DEFAULT_FILES_EXACT_PLACEHOLDER: '輸入檔案路徑 (例如：筆記/我的檔案.md)',
+	SETTINGS_DEFAULT_FOLDERS_EXACT_TITLE: "預設唯讀資料夾（精確路徑）",
+	SETTINGS_DEFAULT_FOLDERS_EXACT_DESC: "這些資料夾（及其子資料夾）中的所有筆記都將以預設唯讀模式開啟。使用精確路徑比對。",
+	SETTINGS_DEFAULT_FOLDERS_EXACT_PLACEHOLDER: "輸入資料夾路徑（例如：Projects/Active）",
 
     SETTINGS_STRICT_FILES_EXACT_TITLE: '嚴格唯讀檔案 (精確路徑)',
     SETTINGS_STRICT_FILES_EXACT_DESC: '此處列出的檔案將被強制以唯讀模式開啟。使用精確路徑匹配。',

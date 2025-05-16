@@ -17,6 +17,9 @@ export default {
     SETTINGS_DEFAULT_FILES_EXACT_TITLE: 'ڈیفالٹ صرف پڑھنے والی فائلیں (عین مطابق پاتھ)',
     SETTINGS_DEFAULT_FILES_EXACT_DESC: 'یہاں درج فائلیں بطور ڈیفالٹ صرف پڑھنے کے موڈ میں کھلیں گی۔ عین مطابق پاتھ میچنگ استعمال ہوتی ہے۔',
     SETTINGS_DEFAULT_FILES_EXACT_PLACEHOLDER: 'فائل کا پاتھ درج کریں (مثال کے طور پر: Notes/MyFile.md)',
+	SETTINGS_DEFAULT_FOLDERS_EXACT_TITLE: "ڈیفالٹ صرف پڑھنے کے لیے فولڈرز (عین راستے)",
+	SETTINGS_DEFAULT_FOLDERS_EXACT_DESC: "ان فولڈرز (اور ذیلی فولڈرز) کے اندر تمام نوٹس ڈیفالٹ صرف پڑھنے کے موڈ میں کھلیں گے۔ عین مطابق راستے کی مماثلت کا استعمال کرتا ہے۔",
+	SETTINGS_DEFAULT_FOLDERS_EXACT_PLACEHOLDER: "فولڈر کا راستہ درج کریں (مثلاً، Projects/Active)",
 
     SETTINGS_STRICT_FILES_EXACT_TITLE: 'سخت صرف پڑھنے والی فائلیں (عین مطابق پاتھ)',
     SETTINGS_STRICT_FILES_EXACT_DESC: 'یہاں درج فائلیں صرف پڑھنے کے موڈ پر مجبور کی جائیں گی۔ عین مطابق پاتھ میچنگ استعمال ہوتی ہے۔',

@@ -17,6 +17,9 @@ export default {
     SETTINGS_DEFAULT_FILES_EXACT_TITLE: 'Fișiere Implicite Doar Citire (Căi Exacte)',
     SETTINGS_DEFAULT_FILES_EXACT_DESC: 'Fișierele listate aici se vor deschide în mod implicit în modul doar citire. Utilizează potrivirea exactă a căii.',
     SETTINGS_DEFAULT_FILES_EXACT_PLACEHOLDER: 'Introduceți calea fișierului (ex: Note/FișierulMeu.md)',
+	SETTINGS_DEFAULT_FOLDERS_EXACT_TITLE: "Foldere Implicit Doar Citire (Căi Exacte)",
+	SETTINGS_DEFAULT_FOLDERS_EXACT_DESC: "Toate notele din aceste foldere (și subfoldere) se vor deschide în modul implicit doar citire. Utilizează potrivirea exactă a căii.",
+	SETTINGS_DEFAULT_FOLDERS_EXACT_PLACEHOLDER: "Introduceți calea folderului (ex: Proiecte/Active)",
 
     SETTINGS_STRICT_FILES_EXACT_TITLE: 'Fișiere Stricte Doar Citire (Căi Exacte)',
     SETTINGS_STRICT_FILES_EXACT_DESC: 'Fișierele listate aici vor fi forțate în modul doar citire. Utilizează potrivirea exactă a căii.',

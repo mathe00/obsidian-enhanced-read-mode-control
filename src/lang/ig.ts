@@ -17,6 +17,9 @@ export default {
     SETTINGS_DEFAULT_FILES_EXACT_TITLE: 'Faịlụ Ọgụgụ Nanị Ndi Mgbakwunye (Ụzọ Kpamkpam)',
     SETTINGS_DEFAULT_FILES_EXACT_DESC: 'Faịlụ ndị edepụtara ebe a ga-emeghe na ọnọdụ ọgụgụ nanị dịka mgbakwunye. Ọ na-eji njikọ ụzọ kpamkpam.',
     SETTINGS_DEFAULT_FILES_EXACT_PLACEHOLDER: 'Tinye ụzọ faịlụ (d.m., Ndetu/FaịlụM.md)',
+	SETTINGS_DEFAULT_FOLDERS_EXACT_TITLE: "Nchekwa ndị Read-Only ndabara (Ụzọ ziri ezi)",
+	SETTINGS_DEFAULT_FOLDERS_EXACT_DESC: "Ihe ndetu niile dị n'ime nchekwa ndị a (na nchekwa nchekwa) ga-emeghe na ọnọdụ read-only ndabara. Na-eji ụzọ ziri ezi dakọtara.",
+	SETTINGS_DEFAULT_FOLDERS_EXACT_PLACEHOLDER: "Tinye ụzọ nchekwa (dịka, Projects/Active)",
 
     SETTINGS_STRICT_FILES_EXACT_TITLE: 'Faịlụ Ọgụgụ Nanị Siri Ike (Ụzọ Kpamkpam)',
     SETTINGS_STRICT_FILES_EXACT_DESC: 'A ga-amanye faịlụ ndị edepụtara ebe a ka ha nọrọ na ọnọdụ ọgụgụ nanị. Ọ na-eji njikọ ụzọ kpamkpam.',

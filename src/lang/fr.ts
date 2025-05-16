@@ -16,6 +16,9 @@ export default {
     SETTINGS_DEFAULT_FILES_EXACT_TITLE: 'Fichiers en Lecture Seule par Défaut (Chemins Exacts)',
     SETTINGS_DEFAULT_FILES_EXACT_DESC: 'Les fichiers listés ici s\'ouvriront en mode lecture seule par défaut. Utilise la correspondance exacte de chemin.',
     SETTINGS_DEFAULT_FILES_EXACT_PLACEHOLDER: 'Entrez le chemin du fichier (ex: Notes/MonFichier.md)',
+    SETTINGS_DEFAULT_FOLDERS_EXACT_TITLE: 'Dossiers en Lecture Seule par Défaut (Chemins Exacts)',
+    SETTINGS_DEFAULT_FOLDERS_EXACT_DESC: 'Toutes les notes dans ces dossiers (et sous-dossiers) s\'ouvriront en mode lecture seule par défaut. Utilise la correspondance exacte de chemin.',
+    SETTINGS_DEFAULT_FOLDERS_EXACT_PLACEHOLDER: 'Entrez le chemin du dossier (ex: Projets/Actifs)',
 
     SETTINGS_STRICT_FILES_EXACT_TITLE: 'Fichiers en Lecture Seule Stricte (Chemins Exacts)',
     SETTINGS_STRICT_FILES_EXACT_DESC: 'Les fichiers listés ici seront forcés en mode lecture seule. Utilise la correspondance exacte de chemin.',

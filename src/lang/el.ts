@@ -17,6 +17,9 @@ export default {
     SETTINGS_DEFAULT_FILES_EXACT_TITLE: 'Προεπιλεγμένα Αρχεία Μόνο για Ανάγνωση (Ακριβείς Διαδρομές)',
     SETTINGS_DEFAULT_FILES_EXACT_DESC: 'Τα αρχεία που παρατίθενται εδώ θα ανοίγουν σε λειτουργία μόνο για ανάγνωση από προεπιλογή. Χρησιμοποιεί ακριβή αντιστοίχιση διαδρομής.',
     SETTINGS_DEFAULT_FILES_EXACT_PLACEHOLDER: 'Εισαγάγετε διαδρομή αρχείου (π.χ., Notes/MyFile.md)',
+	SETTINGS_DEFAULT_FOLDERS_EXACT_TITLE: "Προεπιλεγμένοι Φάκελοι Μόνο για Ανάγνωση (Ακριβείς Διαδρομές)",
+	SETTINGS_DEFAULT_FOLDERS_EXACT_DESC: "Όλες οι σημειώσεις εντός αυτών των φακέλων (και υποφακέλων) θα ανοίγουν σε προεπιλεγμένη λειτουργία μόνο για ανάγνωση. Χρησιμοποιεί ακριβή αντιστοίχιση διαδρομής.",
+	SETTINGS_DEFAULT_FOLDERS_EXACT_PLACEHOLDER: "Εισαγάγετε τη διαδρομή φακέλου (π.χ. Projects/Active)",
 
     SETTINGS_STRICT_FILES_EXACT_TITLE: 'Αυστηρά Αρχεία Μόνο για Ανάγνωση (Ακριβείς Διαδρομές)',
     SETTINGS_STRICT_FILES_EXACT_DESC: 'Τα αρχεία που παρατίθενται εδώ θα εξαναγκάζονται σε λειτουργία μόνο για ανάγνωση. Χρησιμοποιεί ακριβή αντιστοίχιση διαδρομής.',

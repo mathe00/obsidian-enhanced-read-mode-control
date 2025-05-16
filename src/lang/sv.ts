@@ -17,6 +17,9 @@ export default {
     SETTINGS_DEFAULT_FILES_EXACT_TITLE: 'Standard Filer Endast för Läsning (Exakta Sökvägar)',
     SETTINGS_DEFAULT_FILES_EXACT_DESC: 'Filer listade här öppnas som standard i läsläge. Använder exakt sökvägsmatchning.',
     SETTINGS_DEFAULT_FILES_EXACT_PLACEHOLDER: 'Ange filsökväg (t.ex. Anteckningar/MinFil.md)',
+	SETTINGS_DEFAULT_FOLDERS_EXACT_TITLE: "Standard Skrivskyddade Mappar (Exakta Sökvägar)",
+	SETTINGS_DEFAULT_FOLDERS_EXACT_DESC: "Alla anteckningar i dessa mappar (och undermappar) öppnas i standard skrivskyddat läge. Använder exakt sökvägsmatchning.",
+	SETTINGS_DEFAULT_FOLDERS_EXACT_PLACEHOLDER: "Ange mappsökväg (t.ex. Projekt/Aktiva)",
 
     SETTINGS_STRICT_FILES_EXACT_TITLE: 'Strikta Filer Endast för Läsning (Exakta Sökvägar)',
     SETTINGS_STRICT_FILES_EXACT_DESC: 'Filer listade här tvingas till läsläge. Använder exakt sökvägsmatchning.',

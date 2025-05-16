@@ -18,6 +18,8 @@ export interface ReadModeControlSettings {
 	strictReadOnlyFiles: string[];
 	/** List of folder paths where all notes within should open in 'strict' read-only mode. */
 	strictReadOnlyFolders: string[];
+    /** List of folder paths where all notes within should open in 'default' read-only mode. */
+    defaultReadOnlyFolders: string[];
 	/** Whether to enable detailed debug logging in the console. */
 	debugLoggingEnabled: boolean;
 	/** Whether to force 'source' mode on unmanaged notes found in 'preview' mode (fixes same-tab issue but overrides manual state). */
@@ -41,6 +43,7 @@ export const DEFAULT_SETTINGS: ReadModeControlSettings = {
 	defaultReadOnlyFiles: [],
 	strictReadOnlyFiles: [],
 	strictReadOnlyFolders: [],
+    defaultReadOnlyFolders: [],
 	debugLoggingEnabled: false,
 	forceSourceOnUnmanaged: false,
     enableRegexMatching: false,

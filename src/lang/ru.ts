@@ -17,6 +17,9 @@ export default {
     SETTINGS_DEFAULT_FILES_EXACT_TITLE: 'Файлы только для чтения по умолчанию (точные пути)',
     SETTINGS_DEFAULT_FILES_EXACT_DESC: 'Файлы, перечисленные здесь, будут открываться в режиме только для чтения по умолчанию. Используется точное совпадение путей.',
     SETTINGS_DEFAULT_FILES_EXACT_PLACEHOLDER: 'Введите путь к файлу (например, Notes/MyFile.md)',
+	SETTINGS_DEFAULT_FOLDERS_EXACT_TITLE: "Папки только для чтения по умолчанию (точные пути)",
+	SETTINGS_DEFAULT_FOLDERS_EXACT_DESC: "Все заметки в этих папках (и подпапках) будут открываться в режиме только для чтения по умолчанию. Используется точное совпадение путей.",
+	SETTINGS_DEFAULT_FOLDERS_EXACT_PLACEHOLDER: "Введите путь к папке (например, Проекты/Активные)",
 
     SETTINGS_STRICT_FILES_EXACT_TITLE: 'Файлы строго только для чтения (точные пути)',
     SETTINGS_STRICT_FILES_EXACT_DESC: 'Файлы, перечисленные здесь, будут принудительно открываться в режиме только для чтения. Используется точное совпадение путей.',

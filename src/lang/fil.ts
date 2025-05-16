@@ -17,6 +17,9 @@ export default {
     SETTINGS_DEFAULT_FILES_EXACT_TITLE: 'Mga Default na Read-Only File (Eksaktong Path)',
     SETTINGS_DEFAULT_FILES_EXACT_DESC: 'Ang mga file na nakalista dito ay magbubukas sa read-only mode bilang default. Gumagamit ng eksaktong pagtutugma ng path.',
     SETTINGS_DEFAULT_FILES_EXACT_PLACEHOLDER: 'Ilagay ang path ng file (hal: Notes/MyFile.md)',
+	SETTINGS_DEFAULT_FOLDERS_EXACT_TITLE: "Mga Default na Read-Only na Folder (Eksaktong mga Path)",
+	SETTINGS_DEFAULT_FOLDERS_EXACT_DESC: "Lahat ng mga tala sa loob ng mga folder na ito (at mga subfolder) ay magbubukas sa default na read-only mode. Gumagamit ng eksaktong pagtutugma ng path.",
+	SETTINGS_DEFAULT_FOLDERS_EXACT_PLACEHOLDER: "Ilagay ang path ng folder (hal., Mga Proyekto/Aktibo)",
 
     SETTINGS_STRICT_FILES_EXACT_TITLE: 'Mga Mahigpit na Read-Only File (Eksaktong Path)',
     SETTINGS_STRICT_FILES_EXACT_DESC: 'Ang mga file na nakalista dito ay pipiliting nasa read-only mode. Gumagamit ng eksaktong pagtutugma ng path.',

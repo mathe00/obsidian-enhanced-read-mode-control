@@ -17,6 +17,9 @@ export default {
     SETTINGS_DEFAULT_FILES_EXACT_TITLE: 'Standard-Schreibgeschützte Dateien (Exakte Pfade)',
     SETTINGS_DEFAULT_FILES_EXACT_DESC: 'Hier aufgelistete Dateien werden standardmäßig im schreibgeschützten Modus geöffnet. Verwendet exakte Pfadübereinstimmung.',
     SETTINGS_DEFAULT_FILES_EXACT_PLACEHOLDER: 'Dateipfad eingeben (z.B. Notizen/MeineDatei.md)',
+	SETTINGS_DEFAULT_FOLDERS_EXACT_TITLE: "Standardmäßig schreibgeschützte Ordner (Genaue Pfade)",
+	SETTINGS_DEFAULT_FOLDERS_EXACT_DESC: "Alle Notizen in diesen Ordnern (und Unterordnern) werden im standardmäßigen schreibgeschützten Modus geöffnet. Verwendet genaue Pfadübereinstimmung.",
+	SETTINGS_DEFAULT_FOLDERS_EXACT_PLACEHOLDER: "Ordnerpfad eingeben (z.B. Projekte/Aktiv)",
 
     SETTINGS_STRICT_FILES_EXACT_TITLE: 'Streng Schreibgeschützte Dateien (Exakte Pfade)',
     SETTINGS_STRICT_FILES_EXACT_DESC: 'Hier aufgelistete Dateien werden in den streng schreibgeschützten Modus gezwungen. Verwendet exakte Pfadübereinstimmung.',

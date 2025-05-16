@@ -17,6 +17,9 @@ export default {
     SETTINGS_DEFAULT_FILES_EXACT_TITLE: 'デフォルト読み取り専用ファイル (完全パス)',
     SETTINGS_DEFAULT_FILES_EXACT_DESC: 'ここにリストされたファイルはデフォルトで読み取り専用モードで開きます。完全パス一致を使用します。',
     SETTINGS_DEFAULT_FILES_EXACT_PLACEHOLDER: 'ファイルパスを入力 (例: Notes/MyFile.md)',
+	SETTINGS_DEFAULT_FOLDERS_EXACT_TITLE: "デフォルトの読み取り専用フォルダー（完全パス）",
+	SETTINGS_DEFAULT_FOLDERS_EXACT_DESC: "これらのフォルダー（およびサブフォルダー）内のすべてのノートは、デフォルトの読み取り専用モードで開きます。完全パス一致を使用します。",
+	SETTINGS_DEFAULT_FOLDERS_EXACT_PLACEHOLDER: "フォルダーパスを入力（例：Projects/Active）",
 
     SETTINGS_STRICT_FILES_EXACT_TITLE: '厳格な読み取り専用ファイル (完全パス)',
     SETTINGS_STRICT_FILES_EXACT_DESC: 'ここにリストされたファイルは強制的に読み取り専用モードになります。完全パス一致を使用します。',

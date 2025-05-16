@@ -17,6 +17,9 @@ export default {
     SETTINGS_DEFAULT_FILES_EXACT_TITLE: 'Alapértelmezett Csak Olvasható Fájlok (Pontos Útvonalak)',
     SETTINGS_DEFAULT_FILES_EXACT_DESC: 'Az itt felsorolt fájlok alapértelmezés szerint csak olvasható módban nyílnak meg. Pontos útvonalegyezést használ.',
     SETTINGS_DEFAULT_FILES_EXACT_PLACEHOLDER: 'Adja meg a fájl útvonalát (pl. Jegyzetek/SajatFajl.md)',
+	SETTINGS_DEFAULT_FOLDERS_EXACT_TITLE: "Alapértelmezett Csak olvasható mappák (Pontos útvonalak)",
+	SETTINGS_DEFAULT_FOLDERS_EXACT_DESC: "Az ezekben a mappákban (és almappákban) lévő összes jegyzet alapértelmezett csak olvasható módban nyílik meg. Pontos útvonal-egyezést használ.",
+	SETTINGS_DEFAULT_FOLDERS_EXACT_PLACEHOLDER: "Adja meg a mappa útvonalát (pl. Projektek/Aktív)",
 
     SETTINGS_STRICT_FILES_EXACT_TITLE: 'Szigorú Csak Olvasható Fájlok (Pontos Útvonalak)',
     SETTINGS_STRICT_FILES_EXACT_DESC: 'Az itt felsorolt fájlok kényszerítve lesznek csak olvasható módba. Pontos útvonalegyezést használ.',
