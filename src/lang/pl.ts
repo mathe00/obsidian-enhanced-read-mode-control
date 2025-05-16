@@ -50,6 +50,9 @@ export default {
     SETTINGS_LIST_UI_EMPTY_FILES: 'Nie dodano jeszcze żadnych plików.',
     SETTINGS_LIST_UI_EMPTY_FOLDERS: 'Nie dodano jeszcze żadnych folderów.',
     SETTINGS_LIST_UI_EMPTY_REGEX: 'Nie dodano jeszcze żadnych wzorców regex.',
+	SETTINGS_LIST_UI_ALREADY_EXISTS_PATH: "Ścieżka '{path}' już istnieje na tej liście.",
+	SETTINGS_LIST_UI_ALREADY_EXISTS_REGEX: "Wzorzec Regex '{path}' już istnieje na tej liście.",
+	SETTINGS_LIST_UI_INVALID_PATH_OR_REGEX: "Nieprawidłowy {itemType}: '{path}'. Sprawdź format lub istnienie.",
 
     // Behavior Setting
     SETTINGS_FORCE_EDIT_UNMANAGED_TITLE: 'Wymuś Tryb Edycji na Niezarządzanych Notatkach',
@@ -78,6 +81,10 @@ export default {
     SETTINGS_NOTIFY_ON_MODE_CHANGE_DESC: 'Pokaż krótkie powiadomienie, gdy wtyczka aktywnie zmienia tryb widoku notatki przy otwarciu. To jest funkcja BETA.',
     SETTINGS_ENABLE_DEBUG_LOGGING_TITLE: 'Włącz Logowanie Debugowe',
     SETTINGS_ENABLE_DEBUG_LOGGING_DESC: 'Pokaż szczegółowe logi w konsoli deweloperskiej. Wymaga ponownego uruchomienia Obsidian lub przeładowania wtyczki, aby w pełni zadziałało.',
+	SETTINGS_ENABLE_CONFLICT_DETECTION_TITLE: "Włącz Wykrywanie Konfliktów",
+	SETTINGS_ENABLE_CONFLICT_DETECTION_DESC: "Analizuj ustawienia pod kątem sprzecznych reguł (np. ta sama ścieżka na listach domyślnych i ścisłych). Konflikty zostaną podświetlone na poniższych listach.",
+	SETTINGS_NOTIFY_ON_CONFLICT_TITLE: "Powiadamiaj o Konfliktach Konfiguracji",
+	SETTINGS_NOTIFY_ON_CONFLICT_DESC: "Pokaż powiadomienie, jeśli zostaną wykryte konflikty konfiguracji podczas otwierania lub zmiany ustawień.",
 
     // Notifications (from main.ts)
     NOTICE_MODE_CHANGE_PREFIX: "'{fileName}' ustawiono na ",
@@ -87,6 +94,9 @@ export default {
     NOTICE_INVALID_STRICT_REGEX_PREFIX: "Enhanced Read Mode: Nieprawidłowy ścisły wzorzec regex: ",
     NOTICE_INVALID_DEFAULT_REGEX_PREFIX: "Enhanced Read Mode: Nieprawidłowy domyślny wzorzec regex: ",
     NOTICE_NOTIFICATIONS_ENABLED: "Powiadomienia o zmianie trybu włączone.",
+	NOTICE_CONFLICTS_DETECTED_SUMMARY: "Wykryto {count} konflikt(ów) konfiguracji.",
+	NOTICE_CHECK_SETTINGS_FOR_DETAILS: "Sprawdź ustawienia wtyczki, aby uzyskać szczegółowe informacje.",
+	NOTICE_CHECK_SETTINGS_FOR_DETAILS_INLINE: "Sprawdź poniższe listy, aby uzyskać szczegółowe informacje.",
 
     // Command Palette Command Names (from main.ts)
     COMMAND_TOGGLE_DEFAULT: "Enhanced Read Mode Control: Przełącz domyślne tylko do odczytu dla bieżącej notatki",
@@ -107,4 +117,14 @@ export default {
     // Language Setting
     SETTINGS_PLUGIN_LANGUAGE_TITLE: "Język Wtyczki",
     SETTINGS_PLUGIN_LANGUAGE_DESC: "Wybierz język wyświetlania interfejsu tej wtyczki. Wymaga ponownego uruchomienia Obsidian lub przeładowania wtyczki, aby zastosować zmiany.",
+	SETTINGS_DIAGNOSTICS_TITLE: "Diagnostyka Konfiguracji",
+	CONFLICT_DIRECT_SAME_PATH_FILE_DEFAULT: "Konflikt: Ten plik ('{path}') znajduje się również na liście Plików Ściśle Tylko do Odczytu. Będzie ŚCISŁY.",
+	CONFLICT_DIRECT_SAME_PATH_FILE_STRICT: "Konflikt: Ten plik ('{path}') znajduje się również na liście Plików Domyślnie Tylko do Odczytu. Będzie ŚCISŁY zgodnie z priorytetem.",
+	CONFLICT_DIRECT_SAME_PATH_FOLDER_DEFAULT: "Konflikt: Ten folder ('{path}') znajduje się również na liście Folderów Ściśle Tylko do Odczytu. Wszystkie notatki w nim będą ŚCISŁE.",
+	CONFLICT_DIRECT_SAME_PATH_FOLDER_STRICT: "Konflikt: Ten folder ('{path}') znajduje się również na liście Folderów Domyślnie Tylko do Odczytu. Wszystkie notatki w nim będą ŚCISŁE zgodnie z priorytetem.",
+	CONFLICT_DEFAULT_FILE_IN_STRICT_FOLDER: "Nadpisanie: Ten plik ('{path}') znajduje się na liście Domyślnej, ale jest wewnątrz folderu Ścisłego '{conflictingPath}'. Będzie ŚCISŁY.",
+	CONFLICT_STRICT_FILE_IN_DEFAULT_FOLDER: "Info: Ten plik ('{path}') znajduje się na liście Ścisłej i wewnątrz folderu Domyślnego '{conflictingPath}'. Reguła Ścisła specyficzna dla pliku ma pierwszeństwo.",
+	CONFLICT_DEFAULT_FILE_IN_DEFAULT_FOLDER_REDUNDANT: "Redundantne: Ten plik ('{path}') jest już objęty regułą Domyślnego Folderu Tylko do Odczytu для '{conflictingPath}'.",
+	CONFLICT_STRICT_FILE_IN_STRICT_FOLDER_REDUNDANT: "Redundantne: Ten plik ('{path}') jest już objęty regułą Ścisłego Folderu Tylko do Odczytu dla '{conflictingPath}'.",
+
 };

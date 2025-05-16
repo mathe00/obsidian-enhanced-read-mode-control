@@ -50,6 +50,9 @@ export default {
     SETTINGS_LIST_UI_EMPTY_FILES: 'ยังไม่มีไฟล์ถูกเพิ่ม',
     SETTINGS_LIST_UI_EMPTY_FOLDERS: 'ยังไม่มีโฟลเดอร์ถูกเพิ่ม',
     SETTINGS_LIST_UI_EMPTY_REGEX: 'ยังไม่มีรูปแบบ regex ถูกเพิ่ม',
+	SETTINGS_LIST_UI_ALREADY_EXISTS_PATH: "เส้นทาง '{path}' มีอยู่แล้วในรายการนี้",
+	SETTINGS_LIST_UI_ALREADY_EXISTS_REGEX: "รูปแบบ Regex '{path}' มีอยู่แล้วในรายการนี้",
+	SETTINGS_LIST_UI_INVALID_PATH_OR_REGEX: "{itemType} ไม่ถูกต้อง: '{path}' โปรดตรวจสอบรูปแบบหรือการมีอยู่",
 
     // Behavior Setting
     SETTINGS_FORCE_EDIT_UNMANAGED_TITLE: 'บังคับโหมดแก้ไขในบันทึกที่ไม่ได้จัดการ',
@@ -78,6 +81,10 @@ export default {
     SETTINGS_NOTIFY_ON_MODE_CHANGE_DESC: 'แสดงการแจ้งเตือนสั้น ๆ เมื่อปลั๊กอินเปลี่ยนโหมดมุมมองของบันทึกเมื่อเปิด นี่คือคุณสมบัติ BETA',
     SETTINGS_ENABLE_DEBUG_LOGGING_TITLE: 'เปิดใช้งานการบันทึกดีบัก',
     SETTINGS_ENABLE_DEBUG_LOGGING_DESC: 'แสดงบันทึกโดยละเอียดในคอนโซลนักพัฒนาซอฟต์แวร์ ต้องรีสตาร์ท Obsidian หรือโหลดปลั๊กอินใหม่เพื่อให้มีผลเต็มที่',
+	SETTINGS_ENABLE_CONFLICT_DETECTION_TITLE: "เปิดใช้งานการตรวจจับข้อขัดแย้ง",
+	SETTINGS_ENABLE_CONFLICT_DETECTION_DESC: "วิเคราะห์การตั้งค่าสำหรับกฎที่ขัดแย้งกัน (เช่น เส้นทางเดียวกันในรายการเริ่มต้นและรายการแบบเข้มงวด) ข้อขัดแย้งจะถูกเน้นในรายการด้านล่าง",
+	SETTINGS_NOTIFY_ON_CONFLICT_TITLE: "แจ้งเตือนเมื่อเกิดข้อขัดแย้งในการกำหนดค่า",
+	SETTINGS_NOTIFY_ON_CONFLICT_DESC: "แสดงการแจ้งเตือนหากตรวจพบข้อขัดแย้งในการกำหนดค่าเมื่อเปิดหรือเปลี่ยนแปลงการตั้งค่า",
 
     // Notifications (from main.ts)
     NOTICE_MODE_CHANGE_PREFIX: "'{fileName}' ถูกตั้งค่าเป็น ",
@@ -87,6 +94,9 @@ export default {
     NOTICE_INVALID_STRICT_REGEX_PREFIX: "Enhanced Read Mode: รูปแบบ regex แบบเข้มงวดไม่ถูกต้อง: ",
     NOTICE_INVALID_DEFAULT_REGEX_PREFIX: "Enhanced Read Mode: รูปแบบ regex เริ่มต้นไม่ถูกต้อง: ",
     NOTICE_NOTIFICATIONS_ENABLED: "เปิดใช้งานการแจ้งเตือนการเปลี่ยนโหมดแล้ว",
+	NOTICE_CONFLICTS_DETECTED_SUMMARY: "ตรวจพบข้อขัดแย้งในการกำหนดค่า {count} รายการ",
+	NOTICE_CHECK_SETTINGS_FOR_DETAILS: "ตรวจสอบการตั้งค่าปลั๊กอินสำหรับรายละเอียด",
+	NOTICE_CHECK_SETTINGS_FOR_DETAILS_INLINE: "ตรวจสอบรายการด้านล่างสำหรับรายละเอียด",
 
     // Command Palette Command Names (from main.ts)
     COMMAND_TOGGLE_DEFAULT: "Enhanced Read Mode Control: สลับโหมดอ่านอย่างเดียวเริ่มต้นสำหรับบันทึกปัจจุบัน",
@@ -107,4 +117,14 @@ export default {
     // Language Setting
     SETTINGS_PLUGIN_LANGUAGE_TITLE: "ภาษาของปลั๊กอิน",
     SETTINGS_PLUGIN_LANGUAGE_DESC: "เลือกภาษาที่แสดงสำหรับอินเทอร์เฟซปลั๊กอินนี้ ต้องรีสตาร์ท Obsidian หรือโหลดปลั๊กอินใหม่เพื่อใช้การเปลี่ยนแปลง",
+	SETTINGS_DIAGNOSTICS_TITLE: "การวินิจฉัยการกำหนดค่า",
+	CONFLICT_DIRECT_SAME_PATH_FILE_DEFAULT: "ข้อขัดแย้ง: ไฟล์นี้ ('{path}') อยู่ในรายการไฟล์อ่านอย่างเดียวแบบเข้มงวดด้วย จะเป็นแบบเข้มงวด",
+	CONFLICT_DIRECT_SAME_PATH_FILE_STRICT: "ข้อขัดแย้ง: ไฟล์นี้ ('{path}') อยู่ในรายการไฟล์อ่านอย่างเดียวเริ่มต้นด้วย จะเป็นแบบเข้มงวดตามลำดับความสำคัญ",
+	CONFLICT_DIRECT_SAME_PATH_FOLDER_DEFAULT: "ข้อขัดแย้ง: โฟลเดอร์นี้ ('{path}') อยู่ในรายการโฟลเดอร์อ่านอย่างเดียวแบบเข้มงวดด้วย โน้ตทั้งหมดภายในจะเป็นแบบเข้มงวด",
+	CONFLICT_DIRECT_SAME_PATH_FOLDER_STRICT: "ข้อขัดแย้ง: โฟลเดอร์นี้ ('{path}') อยู่ในรายการโฟลเดอร์อ่านอย่างเดียวเริ่มต้นด้วย โน้ตทั้งหมดภายในจะเป็นแบบเข้มงวดตามลำดับความสำคัญ",
+	CONFLICT_DEFAULT_FILE_IN_STRICT_FOLDER: "เขียนทับ: ไฟล์นี้ ('{path}') อยู่ในรายการเริ่มต้น แต่อยู่ภายในโฟลเดอร์แบบเข้มงวด '{conflictingPath}' จะเป็นแบบเข้มงวด",
+	CONFLICT_STRICT_FILE_IN_DEFAULT_FOLDER: "ข้อมูล: ไฟล์นี้ ('{path}') อยู่ในรายการแบบเข้มงวดและอยู่ภายในโฟลเดอร์เริ่มต้น '{conflictingPath}' กฎแบบเข้มงวดเฉพาะไฟล์จะมีความสำคัญกว่า",
+	CONFLICT_DEFAULT_FILE_IN_DEFAULT_FOLDER_REDUNDANT: "ซ้ำซ้อน: ไฟล์นี้ ('{path}') ถูกครอบคลุมโดยกฎโฟลเดอร์อ่านอย่างเดียวเริ่มต้นสำหรับ '{conflictingPath}' แล้ว",
+	CONFLICT_STRICT_FILE_IN_STRICT_FOLDER_REDUNDANT: "ซ้ำซ้อน: ไฟล์นี้ ('{path}') ถูกครอบคลุมโดยกฎโฟลเดอร์อ่านอย่างเดียวแบบเข้มงวดสำหรับ '{conflictingPath}' แล้ว",
+
 };

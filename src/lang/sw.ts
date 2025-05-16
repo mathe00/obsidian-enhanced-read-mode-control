@@ -50,6 +50,9 @@ export default {
     SETTINGS_LIST_UI_EMPTY_FILES: 'Hakuna faili zilizoongezwa bado.',
     SETTINGS_LIST_UI_EMPTY_FOLDERS: 'Hakuna folda zilizoongezwa bado.',
     SETTINGS_LIST_UI_EMPTY_REGEX: 'Hakuna mifumo ya regex iliyoongezwa bado.',
+	SETTINGS_LIST_UI_ALREADY_EXISTS_PATH: "Njia '{path}' tayari ipo kwenye orodha hii.",
+	SETTINGS_LIST_UI_ALREADY_EXISTS_REGEX: "Muundo wa Regex '{path}' tayari upo kwenye orodha hii.",
+	SETTINGS_LIST_UI_INVALID_PATH_OR_REGEX: "{itemType} batili: '{path}'. Tafadhali angalia muundo au uwepo.",
 
     // Behavior Setting
     SETTINGS_FORCE_EDIT_UNMANAGED_TITLE: 'Lazimisha Hali ya Kuhariri kwenye Madokezo Yasiyodhibitiwa',
@@ -78,6 +81,10 @@ export default {
     SETTINGS_NOTIFY_ON_MODE_CHANGE_DESC: 'Onyesha arifa fupi wakati programu-jalizi inabadilisha kikamilifu hali ya mtazamo wa dokezo linapofunguliwa. Hiki ni kipengele cha BETA.',
     SETTINGS_ENABLE_DEBUG_LOGGING_TITLE: 'Washa Uwekaji Kumbukumbu za Utatuzi',
     SETTINGS_ENABLE_DEBUG_LOGGING_DESC: 'Onyesha kumbukumbu za kina katika dashibodi ya msanidi. Inahitaji Obsidian kuanzishwa upya au programu-jalizi kupakiwa upya ili iwe na athari kamili.',
+	SETTINGS_ENABLE_CONFLICT_DETECTION_TITLE: "Washa Ugunduzi wa Mgongano",
+	SETTINGS_ENABLE_CONFLICT_DETECTION_DESC: "Changanua mipangilio ya sheria zinazogongana (k.m. njia sawa katika orodha chaguomsingi na za mkazo). Migongano itaangaziwa katika orodha zilizo hapa chini.",
+	SETTINGS_NOTIFY_ON_CONFLICT_TITLE: "Arifu kuhusu Migongano ya Usanidi",
+	SETTINGS_NOTIFY_ON_CONFLICT_DESC: "Onyesha arifa ikiwa migongano ya usanidi itagunduliwa wakati mipangilio inapofunguliwa au kubadilishwa.",
 
     // Notifications (from main.ts)
     NOTICE_MODE_CHANGE_PREFIX: "'{fileName}' imewekwa kuwa ",
@@ -87,6 +94,9 @@ export default {
     NOTICE_INVALID_STRICT_REGEX_PREFIX: "Enhanced Read Mode: Mfumo batili wa regex kali: ",
     NOTICE_INVALID_DEFAULT_REGEX_PREFIX: "Enhanced Read Mode: Mfumo batili wa regex chaguo-msingi: ",
     NOTICE_NOTIFICATIONS_ENABLED: "Arifa za mabadiliko ya hali zimewashwa.",
+	NOTICE_CONFLICTS_DETECTED_SUMMARY: "Migongano {count} ya usanidi imegunduliwa.",
+	NOTICE_CHECK_SETTINGS_FOR_DETAILS: "Angalia mipangilio ya programu-jalizi kwa maelezo.",
+	NOTICE_CHECK_SETTINGS_FOR_DETAILS_INLINE: "Angalia orodha zilizo hapa chini kwa maelezo.",
 
     // Command Palette Command Names (from main.ts)
     COMMAND_TOGGLE_DEFAULT: "Enhanced Read Mode Control: Geuza kusoma pekee chaguo-msingi kwa dokezo la sasa",
@@ -107,4 +117,14 @@ export default {
     // Language Setting
     SETTINGS_PLUGIN_LANGUAGE_TITLE: "Lugha ya Programu-jalizi",
     SETTINGS_PLUGIN_LANGUAGE_DESC: "Chagua lugha ya kuonyesha kwa kiolesura cha programu-jalizi hii. Inahitaji Obsidian kuanzishwa upya au programu-jalizi kupakiwa upya ili kutumia mabadiliko.",
+	SETTINGS_DIAGNOSTICS_TITLE: "Utambuzi wa Usanidi",
+	CONFLICT_DIRECT_SAME_PATH_FILE_DEFAULT: "Mgongano: Faili hii ('{path}') pia iko kwenye orodha ya Faili za Kusoma Pekee za Mkazo. Itakuwa ya MKAZO.",
+	CONFLICT_DIRECT_SAME_PATH_FILE_STRICT: "Mgongano: Faili hii ('{path}') pia iko kwenye orodha ya Faili za Kusoma Pekee Chaguomsingi. Itakuwa ya MKAZO kulingana na kipaumbele.",
+	CONFLICT_DIRECT_SAME_PATH_FOLDER_DEFAULT: "Mgongano: Folda hii ('{path}') pia iko kwenye orodha ya Folda za Kusoma Pekee za Mkazo. Madokezo yote ndani yatakuwa ya MKAZO.",
+	CONFLICT_DIRECT_SAME_PATH_FOLDER_STRICT: "Mgongano: Folda hii ('{path}') pia iko kwenye orodha ya Folda za Kusoma Pekee Chaguomsingi. Madokezo yote ndani yatakuwa ya MKAZO kulingana na kipaumbele.",
+	CONFLICT_DEFAULT_FILE_IN_STRICT_FOLDER: "Batilisha: Faili hii ('{path}') iko kwenye orodha Chaguomsingi, lakini iko ndani ya folda ya Mkazo '{conflictingPath}'. Itakuwa ya MKAZO.",
+	CONFLICT_STRICT_FILE_IN_DEFAULT_FOLDER: "Taarifa: Faili hii ('{path}') iko kwenye orodha ya Mkazo na ndani ya folda Chaguomsingi '{conflictingPath}'. Sheria ya Mkazo mahususi ya faili ndiyo inayotangulia.",
+	CONFLICT_DEFAULT_FILE_IN_DEFAULT_FOLDER_REDUNDANT: "Ziada: Faili hii ('{path}') tayari imeshughulikiwa na sheria ya Folda ya Kusoma Pekee Chaguomsingi ya '{conflictingPath}'.",
+	CONFLICT_STRICT_FILE_IN_STRICT_FOLDER_REDUNDANT: "Ziada: Faili hii ('{path}') tayari imeshughulikiwa na sheria ya Folda ya Kusoma Pekee ya Mkazo ya '{conflictingPath}'.",
+
 };

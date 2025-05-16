@@ -50,6 +50,9 @@ export default {
     SETTINGS_LIST_UI_EMPTY_FILES: 'Kò sí fáìlì kankan tí a fikún síbẹ̀.',
     SETTINGS_LIST_UI_EMPTY_FOLDERS: 'Kò sí fóldà kankan tí a fikún síbẹ̀.',
     SETTINGS_LIST_UI_EMPTY_REGEX: 'Kò sí àpẹẹrẹ regex kankan tí a fikún síbẹ̀.',
+	SETTINGS_LIST_UI_ALREADY_EXISTS_PATH: "Ọ̀nà '{path}' ti wà tẹ́lẹ̀ nínú àtòjọ yìí.",
+	SETTINGS_LIST_UI_ALREADY_EXISTS_REGEX: "Àpẹẹrẹ Regex '{path}' ti wà tẹ́lẹ̀ nínú àtòjọ yìí.",
+	SETTINGS_LIST_UI_INVALID_PATH_OR_REGEX: "{itemType} tí kò tọ́: '{path}'. Jọ̀wọ́ ṣayẹwo ìṣètò tàbí wíwà rẹ̀.",
 
     // Behavior Setting
     SETTINGS_FORCE_EDIT_UNMANAGED_TITLE: 'Fipá mú Ipo Àtúnṣe lórí Àwọn Àkọsílẹ̀ Tí A Kò Ṣàkóso',
@@ -78,6 +81,10 @@ export default {
     SETTINGS_NOTIFY_ON_MODE_CHANGE_DESC: 'Fi ìfitónilétí kúkúrú hàn nígbà tí ètò ìbánisọ̀rọ̀ bá yí ipo ìwòye àkọsílẹ̀ kan padà nígbà ṣíṣí. Èyí jẹ́ ẹ̀ya BÊTA.',
     SETTINGS_ENABLE_DEBUG_LOGGING_TITLE: 'Jeki Àkọsílẹ̀ Àtúnṣe Kòṣe ṣiṣẹ́',
     SETTINGS_ENABLE_DEBUG_LOGGING_DESC: 'Fi àwọn àkọsílẹ̀ kíkún hàn nínú kọ̀nsólù onítẹ̀síwájú. Ó nílò àtúnṣe Obsidian tàbí àtúnṣe ètò ìbánisọ̀rọ̀ láti mú ipa ní kíkún.',
+	SETTINGS_ENABLE_CONFLICT_DETECTION_TITLE: "Jeki Wiwa Ìtakora ṣiṣẹ",
+	SETTINGS_ENABLE_CONFLICT_DETECTION_DESC: "Ṣe àyẹ̀wò àwọn ètò fún àwọn òfin tí ó tako ara wọn (fún àpẹẹrẹ, ọ̀nà kan náà nínú àwọn àtòjọ àiyipada àti tí ó lágbára). Àwọn ìtakora yóò jẹ́ kí á rí wọn nínú àwọn àtòjọ ìsàlẹ̀.",
+	SETTINGS_NOTIFY_ON_CONFLICT_TITLE: "Fi ìfitónilétí ránṣẹ́ nípa Àwọn Ìtakora Ìṣètò",
+	SETTINGS_NOTIFY_ON_CONFLICT_DESC: "Fi ìfitónilétí hàn bí a bá rí àwọn ìtakora ìṣètò nígbà tí a ṣí tàbí tí a yí àwọn ètò padà.",
 
     // Notifications (from main.ts)
     NOTICE_MODE_CHANGE_PREFIX: "'{fileName}' ti yí padà sí ",
@@ -87,6 +94,9 @@ export default {
     NOTICE_INVALID_STRICT_REGEX_PREFIX: "Ìdarí Ipo Kíkà Onítẹ̀síwájú: Àpẹẹrẹ regex líle tí kò tọ́: ",
     NOTICE_INVALID_DEFAULT_REGEX_PREFIX: "Ìdarí Ipo Kíkà Onítẹ̀síwájú: Àpẹẹrẹ regex àiyipada tí kò tọ́: ",
     NOTICE_NOTIFICATIONS_ENABLED: "Àwọn ìfitónilétí ìyípadà ipo ti ṣiṣẹ́.",
+	NOTICE_CONFLICTS_DETECTED_SUMMARY: "A ti rí {count} ìtakora ìṣètò.",
+	NOTICE_CHECK_SETTINGS_FOR_DETAILS: "Ṣayẹwo àwọn ètò ìṣàlàyé fún àwọn ìjẹ́kùn.",
+	NOTICE_CHECK_SETTINGS_FOR_DETAILS_INLINE: "Ṣayẹwo àwọn àtòjọ ìsàlẹ̀ fún àwọn ìjẹ́kùn.",
 
     // Command Palette Command Names (from main.ts)
     COMMAND_TOGGLE_DEFAULT: "Ìdarí Ipo Kíkà Onítẹ̀síwájú: Yí ipo kíkà nìkan àiyipada padà fún àkọsílẹ̀ lọ́wọ́lọ́wọ́",
@@ -107,4 +117,14 @@ export default {
     // Language Setting
     SETTINGS_PLUGIN_LANGUAGE_TITLE: "Èdè Ètò Ìbánisọ̀rọ̀",
     SETTINGS_PLUGIN_LANGUAGE_DESC: "Yan èdè ìfihàn fún ìbánisọ̀rọ̀ ètò ìbánisọ̀rọ̀ yìí. Ó nílò àtúnṣe Obsidian tàbí àtúnṣe ètò ìbánisọ̀rọ̀ láti fi àwọn àyípadà pamọ́.",
+	SETTINGS_DIAGNOSTICS_TITLE: "Àyẹ̀wò Ìṣètò",
+	CONFLICT_DIRECT_SAME_PATH_FILE_DEFAULT: "Ìtakora: Fáìlì yìí ('{path}') tún wà nínú àtòjọ Àwọn Fáìlì Kíkà Nìkan Tí ó Lágbára. Yóò jẹ́ TÍ Ó LÁGBÁRA.",
+	CONFLICT_DIRECT_SAME_PATH_FILE_STRICT: "Ìtakora: Fáìlì yìí ('{path}') tún wà nínú àtòjọ Àwọn Fáìlì Kíkà Nìkan Àiyipada. Yóò jẹ́ TÍ Ó LÁGBÁRA gẹ́gẹ́ bí àṣẹ.",
+	CONFLICT_DIRECT_SAME_PATH_FOLDER_DEFAULT: "Ìtakora: Fó́l̀dà yìí ('{path}') tún wà nínú àtòjọ Àwọn Fó́l̀dà Kíkà Nìkan Tí ó Lágbára. Gbogbo àwọn àkọsílẹ̀ inú rẹ̀ yóò jẹ́ TÍ Ó LÁGBÁRA.",
+	CONFLICT_DIRECT_SAME_PATH_FOLDER_STRICT: "Ìtakora: Fó́l̀dà yìí ('{path}') tún wà nínú àtòjọ Àwọn Fó́l̀dà Kíkà Nìkan Àiyipada. Gbogbo àwọn àkọsílẹ̀ inú rẹ̀ yóò jẹ́ TÍ Ó LÁGBÁRA gẹ́gẹ́ bí àṣẹ.",
+	CONFLICT_DEFAULT_FILE_IN_STRICT_FOLDER: "Àtúnkọ: Fáìlì yìí ('{path}') wà nínú àtòjọ Àiyipada, ṣùgbọ́n ó wà nínú fó́l̀dà Tí ó Lágbára '{conflictingPath}'. Yóò jẹ́ TÍ Ó LÁGBÁRA.",
+	CONFLICT_STRICT_FILE_IN_DEFAULT_FOLDER: "Ìfitónilétí: Fáìlì yìí ('{path}') wà nínú àtòjọ Tí ó Lágbára àti inú fó́l̀dà Àiyipada '{conflictingPath}'. Òfin Fáìlì Tí ó Lágbára pàtó ni yóò gba ipò iwájú.",
+	CONFLICT_DEFAULT_FILE_IN_DEFAULT_FOLDER_REDUNDANT: "Àtúnṣe: Fáìlì yìí ('{path}') ti wà lábẹ́ òfin Fó́l̀dà Kíkà Nìkan Àiyipada fún '{conflictingPath}'.",
+	CONFLICT_STRICT_FILE_IN_STRICT_FOLDER_REDUNDANT: "Àtúnṣe: Fáìlì yìí ('{path}') ti wà lábẹ́ òfin Fó́l̀dà Kíkà Nìkan Tí ó Lágbára fún '{conflictingPath}'.",
+
 };

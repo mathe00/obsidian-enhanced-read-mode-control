@@ -50,6 +50,9 @@ export default {
     SETTINGS_LIST_UI_EMPTY_FILES: 'Nenhum arquivo adicionado ainda.',
     SETTINGS_LIST_UI_EMPTY_FOLDERS: 'Nenhuma pasta adicionada ainda.',
     SETTINGS_LIST_UI_EMPTY_REGEX: 'Nenhum padrão regex adicionado ainda.',
+	SETTINGS_LIST_UI_ALREADY_EXISTS_PATH: "O caminho '{path}' já existe nesta lista.",
+	SETTINGS_LIST_UI_ALREADY_EXISTS_REGEX: "O padrão Regex '{path}' já existe nesta lista.",
+	SETTINGS_LIST_UI_INVALID_PATH_OR_REGEX: "{itemType} inválido: '{path}'. Verifique o formato ou a existência.",
 
     // Configuração de Comportamento
     SETTINGS_FORCE_EDIT_UNMANAGED_TITLE: 'Forçar Modo Edição em Notas Não Gerenciadas',
@@ -78,6 +81,10 @@ export default {
     SETTINGS_NOTIFY_ON_MODE_CHANGE_DESC: 'Mostrar uma breve notificação quando o plugin alterar ativamente o modo de visualização de uma nota ao abri-la. Esta é uma funcionalidade BETA.',
     SETTINGS_ENABLE_DEBUG_LOGGING_TITLE: 'Habilitar Registro de Depuração',
     SETTINGS_ENABLE_DEBUG_LOGGING_DESC: 'Mostrar registros detalhados no console do desenvolvedor. Requer reinicialização do Obsidian ou recarregamento do plugin para ter efeito total.',
+	SETTINGS_ENABLE_CONFLICT_DETECTION_TITLE: "Ativar Detecção de Conflitos",
+	SETTINGS_ENABLE_CONFLICT_DETECTION_DESC: "Analisar configurações para regras conflitantes (ex: mesmo caminho nas listas padrão e estrita). Os conflitos serão destacados nas listas abaixo.",
+	SETTINGS_NOTIFY_ON_CONFLICT_TITLE: "Notificar sobre Conflitos de Configuração",
+	SETTINGS_NOTIFY_ON_CONFLICT_DESC: "Mostrar uma notificação se conflitos de configuração forem detectados ao abrir ou alterar as configurações.",
 
     // Notificações (de main.ts)
     NOTICE_MODE_CHANGE_PREFIX: "'{fileName}' definido para ",
@@ -87,6 +94,9 @@ export default {
     NOTICE_INVALID_STRICT_REGEX_PREFIX: "Enhanced Read Mode: Padrão regex estrito inválido: ",
     NOTICE_INVALID_DEFAULT_REGEX_PREFIX: "Enhanced Read Mode: Padrão regex padrão inválido: ",
     NOTICE_NOTIFICATIONS_ENABLED: "Notificações de mudança de modo habilitadas.",
+	NOTICE_CONFLICTS_DETECTED_SUMMARY: "{count} conflito(s) de configuração detectado(s).",
+	NOTICE_CHECK_SETTINGS_FOR_DETAILS: "Verifique as configurações do plugin para obter detalhes.",
+	NOTICE_CHECK_SETTINGS_FOR_DETAILS_INLINE: "Verifique as listas abaixo para obter detalhes.",
 
     // Nomes de Comando da Paleta de Comandos (de main.ts)
     COMMAND_TOGGLE_DEFAULT: "Enhanced Read Mode Control: Alternar somente leitura padrão para nota atual",
@@ -107,4 +117,14 @@ export default {
     // Configuração de Idioma
     SETTINGS_PLUGIN_LANGUAGE_TITLE: "Idioma do Plugin",
     SETTINGS_PLUGIN_LANGUAGE_DESC: "Escolha o idioma de exibição para a interface deste plugin. Requer reinicialização do Obsidian ou recarregamento do plugin para aplicar as alterações.",
+	SETTINGS_DIAGNOSTICS_TITLE: "Diagnóstico de Configuração",
+	CONFLICT_DIRECT_SAME_PATH_FILE_DEFAULT: "Conflito: Este arquivo ('{path}') também está na lista de Arquivos Somente Leitura Estritos. Será ESTRITO.",
+	CONFLICT_DIRECT_SAME_PATH_FILE_STRICT: "Conflito: Este arquivo ('{path}') também está na lista de Arquivos Somente Leitura Padrão. Será ESTRITO conforme a prioridade.",
+	CONFLICT_DIRECT_SAME_PATH_FOLDER_DEFAULT: "Conflito: Esta pasta ('{path}') também está na lista de Pastas Somente Leitura Estritas. Todas as notas dentro serão ESTRITAS.",
+	CONFLICT_DIRECT_SAME_PATH_FOLDER_STRICT: "Conflito: Esta pasta ('{path}') também está na lista de Pastas Somente Leitura Padrão. Todas as notas dentro serão ESTRITAS conforme a prioridade.",
+	CONFLICT_DEFAULT_FILE_IN_STRICT_FOLDER: "Substituição: Este arquivo ('{path}') está em uma lista Padrão, mas está dentro da pasta Estrita '{conflictingPath}'. Será ESTRITO.",
+	CONFLICT_STRICT_FILE_IN_DEFAULT_FOLDER: "Info: Este arquivo ('{path}') está em uma lista Estrita e dentro da pasta Padrão '{conflictingPath}'. A regra Estrita específica do arquivo tem precedência.",
+	CONFLICT_DEFAULT_FILE_IN_DEFAULT_FOLDER_REDUNDANT: "Redundante: Este arquivo ('{path}') já está coberto pela regra de Pasta Somente Leitura Padrão para '{conflictingPath}'.",
+	CONFLICT_STRICT_FILE_IN_STRICT_FOLDER_REDUNDANT: "Redundante: Este arquivo ('{path}') já está coberto pela regra de Pasta Somente Leitura Estrita para '{conflictingPath}'.",
+
 };

@@ -50,6 +50,9 @@ export default {
     SETTINGS_LIST_UI_EMPTY_FILES: 'Chưa có tệp nào được thêm.',
     SETTINGS_LIST_UI_EMPTY_FOLDERS: 'Chưa có thư mục nào được thêm.',
     SETTINGS_LIST_UI_EMPTY_REGEX: 'Chưa có mẫu regex nào được thêm.',
+	SETTINGS_LIST_UI_ALREADY_EXISTS_PATH: "Đường dẫn '{path}' đã tồn tại trong danh sách này.",
+	SETTINGS_LIST_UI_ALREADY_EXISTS_REGEX: "Mẫu Regex '{path}' đã tồn tại trong danh sách này.",
+	SETTINGS_LIST_UI_INVALID_PATH_OR_REGEX: "{itemType} không hợp lệ: '{path}'. Vui lòng kiểm tra định dạng hoặc sự tồn tại.",
 
     // Behavior Setting
     SETTINGS_FORCE_EDIT_UNMANAGED_TITLE: 'Buộc Chế độ Chỉnh sửa trên Ghi chú Không được Quản lý',
@@ -78,6 +81,10 @@ export default {
     SETTINGS_NOTIFY_ON_MODE_CHANGE_DESC: 'Hiển thị thông báo ngắn khi plugin chủ động thay đổi chế độ xem của ghi chú khi mở. Đây là tính năng BETA.',
     SETTINGS_ENABLE_DEBUG_LOGGING_TITLE: 'Bật Ghi nhật ký Gỡ lỗi',
     SETTINGS_ENABLE_DEBUG_LOGGING_DESC: 'Hiển thị nhật ký chi tiết trong bảng điều khiển dành cho nhà phát triển. Yêu cầu khởi động lại Obsidian hoặc tải lại plugin để có hiệu lực đầy đủ.',
+	SETTINGS_ENABLE_CONFLICT_DETECTION_TITLE: "Bật Phát hiện Xung đột",
+	SETTINGS_ENABLE_CONFLICT_DETECTION_DESC: "Phân tích cài đặt để tìm các quy tắc xung đột (ví dụ: cùng một đường dẫn trong danh sách mặc định và nghiêm ngặt). Các xung đột sẽ được đánh dấu trong danh sách dưới đây.",
+	SETTINGS_NOTIFY_ON_CONFLICT_TITLE: "Thông báo khi có Xung đột Cấu hình",
+	SETTINGS_NOTIFY_ON_CONFLICT_DESC: "Hiển thị thông báo nếu phát hiện xung đột cấu hình khi cài đặt được mở hoặc thay đổi.",
 
     // Notifications (from main.ts)
     NOTICE_MODE_CHANGE_PREFIX: "'{fileName}' được đặt thành ",
@@ -87,6 +94,9 @@ export default {
     NOTICE_INVALID_STRICT_REGEX_PREFIX: "Enhanced Read Mode: Mẫu regex nghiêm ngặt không hợp lệ: ",
     NOTICE_INVALID_DEFAULT_REGEX_PREFIX: "Enhanced Read Mode: Mẫu regex mặc định không hợp lệ: ",
     NOTICE_NOTIFICATIONS_ENABLED: "Thông báo thay đổi chế độ đã được bật.",
+	NOTICE_CONFLICTS_DETECTED_SUMMARY: "Đã phát hiện {count} xung đột cấu hình.",
+	NOTICE_CHECK_SETTINGS_FOR_DETAILS: "Kiểm tra cài đặt plugin để biết chi tiết.",
+	NOTICE_CHECK_SETTINGS_FOR_DETAILS_INLINE: "Kiểm tra danh sách dưới đây để biết chi tiết.",
 
     // Command Palette Command Names (from main.ts)
     COMMAND_TOGGLE_DEFAULT: "Enhanced Read Mode Control: Chuyển đổi chỉ đọc mặc định cho ghi chú hiện tại",
@@ -107,4 +117,14 @@ export default {
     // Language Setting
     SETTINGS_PLUGIN_LANGUAGE_TITLE: "Ngôn ngữ Plugin",
     SETTINGS_PLUGIN_LANGUAGE_DESC: "Chọn ngôn ngữ hiển thị cho giao diện plugin này. Yêu cầu khởi động lại Obsidian hoặc tải lại plugin để áp dụng các thay đổi.",
+	SETTINGS_DIAGNOSTICS_TITLE: "Chẩn đoán Cấu hình",
+	CONFLICT_DIRECT_SAME_PATH_FILE_DEFAULT: "Xung đột: Tệp này ('{path}') cũng có trong danh sách Tệp Chỉ Đọc Nghiêm ngặt. Nó sẽ là NGHIÊM NGẶT.",
+	CONFLICT_DIRECT_SAME_PATH_FILE_STRICT: "Xung đột: Tệp này ('{path}') cũng có trong danh sách Tệp Chỉ Đọc Mặc định. Nó sẽ là NGHIÊM NGẶT theo ưu tiên.",
+	CONFLICT_DIRECT_SAME_PATH_FOLDER_DEFAULT: "Xung đột: Thư mục này ('{path}') cũng có trong danh sách Thư mục Chỉ Đọc Nghiêm ngặt. Tất cả ghi chú bên trong sẽ là NGHIÊM NGẶT.",
+	CONFLICT_DIRECT_SAME_PATH_FOLDER_STRICT: "Xung đột: Thư mục này ('{path}') cũng có trong danh sách Thư mục Chỉ Đọc Mặc định. Tất cả ghi chú bên trong sẽ là NGHIÊM NGẶT theo ưu tiên.",
+	CONFLICT_DEFAULT_FILE_IN_STRICT_FOLDER: "Ghi đè: Tệp này ('{path}') nằm trong danh sách Mặc định, nhưng nó nằm trong thư mục Nghiêm ngặt '{conflictingPath}'. Nó sẽ là NGHIÊM NGẶT.",
+	CONFLICT_STRICT_FILE_IN_DEFAULT_FOLDER: "Thông tin: Tệp này ('{path}') nằm trong danh sách Nghiêm ngặt và bên trong thư mục Mặc định '{conflictingPath}'. Quy tắc Nghiêm ngặt cụ thể của tệp được ưu tiên.",
+	CONFLICT_DEFAULT_FILE_IN_DEFAULT_FOLDER_REDUNDANT: "Thừa: Tệp này ('{path}') đã được bao gồm bởi quy tắc Thư mục Chỉ Đọc Mặc định cho '{conflictingPath}'.",
+	CONFLICT_STRICT_FILE_IN_STRICT_FOLDER_REDUNDANT: "Thừa: Tệp này ('{path}') đã được bao gồm bởi quy tắc Thư mục Chỉ Đọc Nghiêm ngặt cho '{conflictingPath}'.",
+
 };

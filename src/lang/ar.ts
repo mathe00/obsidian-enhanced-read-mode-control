@@ -50,6 +50,9 @@ export default {
     SETTINGS_LIST_UI_EMPTY_FILES: 'لم تتم إضافة ملفات بعد.',
     SETTINGS_LIST_UI_EMPTY_FOLDERS: 'لم تتم إضافة مجلدات بعد.',
     SETTINGS_LIST_UI_EMPTY_REGEX: 'لم تتم إضافة أنماط Regex بعد.',
+	SETTINGS_LIST_UI_ALREADY_EXISTS_PATH: "المسار '{path}' موجود بالفعل في هذه القائمة.",
+	SETTINGS_LIST_UI_ALREADY_EXISTS_REGEX: "نمط Regex '{path}' موجود بالفعل في هذه القائمة.",
+	SETTINGS_LIST_UI_INVALID_PATH_OR_REGEX: "{itemType} غير صالح: '{path}'. يرجى التحقق من التنسيق أو الوجود.",
 
     // إعداد السلوك
     SETTINGS_FORCE_EDIT_UNMANAGED_TITLE: 'فرض وضع التحرير على الملاحظات غير المُدارة',
@@ -78,6 +81,10 @@ export default {
     SETTINGS_NOTIFY_ON_MODE_CHANGE_DESC: 'إظهار إشعار موجز عندما يغير الملحق وضع عرض الملاحظة بشكل فعال عند الفتح. هذه ميزة تجريبية (BETA).',
     SETTINGS_ENABLE_DEBUG_LOGGING_TITLE: 'تمكين تسجيل تصحيح الأخطاء',
     SETTINGS_ENABLE_DEBUG_LOGGING_DESC: 'إظهار سجلات مفصلة في وحدة تحكم المطور. يتطلب إعادة تشغيل أوبسيديان أو إعادة تحميل الملحق لتطبيق التأثير بالكامل.',
+	SETTINGS_ENABLE_CONFLICT_DETECTION_TITLE: "تمكين كشف التعارض",
+	SETTINGS_ENABLE_CONFLICT_DETECTION_DESC: "تحليل الإعدادات بحثًا عن قواعد متعارضة (مثل نفس المسار في القوائم الافتراضية والصارمة). سيتم تمييز التعارضات في القوائم أدناه.",
+	SETTINGS_NOTIFY_ON_CONFLICT_TITLE: "الإخطار عند تعارض التكوين",
+	SETTINGS_NOTIFY_ON_CONFLICT_DESC: "إظهار إشعار إذا تم اكتشاف تعارضات في التكوين عند فتح الإعدادات أو تغييرها.",
 
     // الإشعارات (من main.ts)
     NOTICE_MODE_CHANGE_PREFIX: "تم تعيين '{fileName}' إلى ",
@@ -87,6 +94,9 @@ export default {
     NOTICE_INVALID_STRICT_REGEX_PREFIX: "Enhanced Read Mode: نمط Regex صارم غير صالح: ",
     NOTICE_INVALID_DEFAULT_REGEX_PREFIX: "Enhanced Read Mode: نمط Regex افتراضي غير صالح: ",
     NOTICE_NOTIFICATIONS_ENABLED: "تم تمكين إشعارات تغيير الوضع.",
+	NOTICE_CONFLICTS_DETECTED_SUMMARY: "تم اكتشاف {count} تعارض(ات) في التكوين.",
+	NOTICE_CHECK_SETTINGS_FOR_DETAILS: "تحقق من إعدادات البرنامج المساعد للحصول على التفاصيل.",
+	NOTICE_CHECK_SETTINGS_FOR_DETAILS_INLINE: "تحقق من القوائم أدناه للحصول على التفاصيل.",
 
     // أسماء أوامر لوحة الأوامر (من main.ts)
     COMMAND_TOGGLE_DEFAULT: "Enhanced Read Mode Control: تبديل القراءة فقط الافتراضية للملاحظة الحالية",
@@ -107,4 +117,14 @@ export default {
     // إعداد اللغة
     SETTINGS_PLUGIN_LANGUAGE_TITLE: "لغة الملحق",
     SETTINGS_PLUGIN_LANGUAGE_DESC: "اختر لغة العرض لواجهة هذا الملحق. يتطلب إعادة تشغيل أوبسيديان أو إعادة تحميل الملحق لتطبيق التغييرات.",
+	SETTINGS_DIAGNOSTICS_TITLE: "تشخيصات التكوين",
+	CONFLICT_DIRECT_SAME_PATH_FILE_DEFAULT: "تعارض: هذا الملف ('{path}') موجود أيضًا في قائمة ملفات القراءة فقط الصارمة. سيكون صارمًا.",
+	CONFLICT_DIRECT_SAME_PATH_FILE_STRICT: "تعارض: هذا الملف ('{path}') موجود أيضًا في قائمة ملفات القراءة فقط الافتراضية. سيكون صارمًا حسب الأولوية.",
+	CONFLICT_DIRECT_SAME_PATH_FOLDER_DEFAULT: "تعارض: هذا المجلد ('{path}') موجود أيضًا في قائمة مجلدات القراءة فقط الصارمة. ستكون جميع الملاحظات بداخله صارمة.",
+	CONFLICT_DIRECT_SAME_PATH_FOLDER_STRICT: "تعارض: هذا المجلد ('{path}') موجود أيضًا في قائمة مجلدات القراءة فقط الافتراضية. ستكون جميع الملاحظات بداخله صارمة حسب الأولوية.",
+	CONFLICT_DEFAULT_FILE_IN_STRICT_FOLDER: "تجاوز: هذا الملف ('{path}') موجود في قائمة افتراضية، ولكنه داخل المجلد الصارم '{conflictingPath}'. سيكون صارمًا.",
+	CONFLICT_STRICT_FILE_IN_DEFAULT_FOLDER: "معلومة: هذا الملف ('{path}') موجود في قائمة صارمة وداخل المجلد الافتراضي '{conflictingPath}'. قاعدة الملف الصارم لها الأسبقية.",
+	CONFLICT_DEFAULT_FILE_IN_DEFAULT_FOLDER_REDUNDANT: "متكرر: هذا الملف ('{path}') مغطى بالفعل بقاعدة مجلد القراءة فقط الافتراضي لـ '{conflictingPath}'.",
+	CONFLICT_STRICT_FILE_IN_STRICT_FOLDER_REDUNDANT: "متكرر: هذا الملف ('{path}') مغطى بالفعل بقاعدة مجلد القراءة فقط الصارم لـ '{conflictingPath}'.",
+
 };

@@ -50,6 +50,9 @@ export default {
     SETTINGS_LIST_UI_EMPTY_FILES: 'Inga filer tillagda ännu.',
     SETTINGS_LIST_UI_EMPTY_FOLDERS: 'Inga mappar tillagda ännu.',
     SETTINGS_LIST_UI_EMPTY_REGEX: 'Inga regex-mönster tillagda ännu.',
+	SETTINGS_LIST_UI_ALREADY_EXISTS_PATH: "Sökvägen '{path}' finns redan i den här listan.",
+	SETTINGS_LIST_UI_ALREADY_EXISTS_REGEX: "Regex-mönstret '{path}' finns redan i den här listan.",
+	SETTINGS_LIST_UI_INVALID_PATH_OR_REGEX: "Ogiltig {itemType}: '{path}'. Kontrollera formatet eller förekomsten.",
 
     // Behavior Setting
     SETTINGS_FORCE_EDIT_UNMANAGED_TITLE: 'Tvinga Redigeringsläge på Ohanterade Anteckningar',
@@ -78,6 +81,10 @@ export default {
     SETTINGS_NOTIFY_ON_MODE_CHANGE_DESC: 'Visa ett kort meddelande när insticksprogrammet aktivt ändrar en antecknings visningsläge vid öppning. Detta är en BETA-funktion.',
     SETTINGS_ENABLE_DEBUG_LOGGING_TITLE: 'Aktivera Felsökningsloggning',
     SETTINGS_ENABLE_DEBUG_LOGGING_DESC: 'Visa detaljerade loggar i utvecklarkonsolen. Kräver omstart av Obsidian eller omladdning av insticksprogrammet för full effekt.',
+	SETTINGS_ENABLE_CONFLICT_DETECTION_TITLE: "Aktivera Konfliktdetektering",
+	SETTINGS_ENABLE_CONFLICT_DETECTION_DESC: "Analysera inställningar för motstridiga regler (t.ex. samma sökväg i standard- och strikta listor). Konflikter kommer att markeras i listorna nedan.",
+	SETTINGS_NOTIFY_ON_CONFLICT_TITLE: "Meddela vid Konfigurationskonflikter",
+	SETTINGS_NOTIFY_ON_CONFLICT_DESC: "Visa ett meddelande om konfigurationskonflikter upptäcks när inställningarna öppnas eller ändras.",
 
     // Notifications (from main.ts)
     NOTICE_MODE_CHANGE_PREFIX: "'{fileName}' satt till ",
@@ -87,6 +94,9 @@ export default {
     NOTICE_INVALID_STRICT_REGEX_PREFIX: "Enhanced Read Mode: Ogiltigt strikt regex-mönster: ",
     NOTICE_INVALID_DEFAULT_REGEX_PREFIX: "Enhanced Read Mode: Ogiltigt standard regex-mönster: ",
     NOTICE_NOTIFICATIONS_ENABLED: "Meddelanden om lägesändring aktiverade.",
+	NOTICE_CONFLICTS_DETECTED_SUMMARY: "{count} konfigurationskonflikt(er) upptäcktes.",
+	NOTICE_CHECK_SETTINGS_FOR_DETAILS: "Kontrollera plugin-inställningarna för detaljer.",
+	NOTICE_CHECK_SETTINGS_FOR_DETAILS_INLINE: "Kontrollera listorna nedan för detaljer.",
 
     // Command Palette Command Names (from main.ts)
     COMMAND_TOGGLE_DEFAULT: "Enhanced Read Mode Control: Växla standard endast läsning för aktuell anteckning",
@@ -107,4 +117,14 @@ export default {
     // Language Setting
     SETTINGS_PLUGIN_LANGUAGE_TITLE: "Insticksprogrammets Språk",
     SETTINGS_PLUGIN_LANGUAGE_DESC: "Välj visningsspråk för detta insticksprograms gränssnitt. Kräver omstart av Obsidian eller omladdning av insticksprogrammet för att tillämpa ändringar.",
+	SETTINGS_DIAGNOSTICS_TITLE: "Konfigurationsdiagnostik",
+	CONFLICT_DIRECT_SAME_PATH_FILE_DEFAULT: "Konflikt: Denna fil ('{path}') finns också i listan Strikt Skrivskyddade Filer. Den kommer att vara STRIKT.",
+	CONFLICT_DIRECT_SAME_PATH_FILE_STRICT: "Konflikt: Denna fil ('{path}') finns också i listan Standard Skrivskyddade Filer. Den kommer att vara STRIKT enligt prioritet.",
+	CONFLICT_DIRECT_SAME_PATH_FOLDER_DEFAULT: "Konflikt: Denna mapp ('{path}') finns också i listan Strikt Skrivskyddade Mappar. Alla anteckningar i den kommer att vara STRIKTA.",
+	CONFLICT_DIRECT_SAME_PATH_FOLDER_STRICT: "Konflikt: Denna mapp ('{path}') finns också i listan Standard Skrivskyddade Mappar. Alla anteckningar i den kommer att vara STRIKTA enligt prioritet.",
+	CONFLICT_DEFAULT_FILE_IN_STRICT_FOLDER: "Åsidosättning: Denna fil ('{path}') finns i en Standardlista, men den är inuti den Strikta mappen '{conflictingPath}'. Den kommer att vara STRIKT.",
+	CONFLICT_STRICT_FILE_IN_DEFAULT_FOLDER: "Info: Denna fil ('{path}') finns i en Strikt lista och inuti Standardmappen '{conflictingPath}'. Den filspecifika Strikta regeln har företräde.",
+	CONFLICT_DEFAULT_FILE_IN_DEFAULT_FOLDER_REDUNDANT: "Redundant: Denna fil ('{path}') täcks redan av regeln Standard Skrivskyddad Mapp för '{conflictingPath}'.",
+	CONFLICT_STRICT_FILE_IN_STRICT_FOLDER_REDUNDANT: "Redundant: Denna fil ('{path}') täcks redan av regeln Strikt Skrivskyddad Mapp för '{conflictingPath}'.",
+
 };

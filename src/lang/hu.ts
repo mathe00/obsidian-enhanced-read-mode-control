@@ -50,6 +50,9 @@ export default {
     SETTINGS_LIST_UI_EMPTY_FILES: 'Még nincsenek fájlok hozzáadva.',
     SETTINGS_LIST_UI_EMPTY_FOLDERS: 'Még nincsenek mappák hozzáadva.',
     SETTINGS_LIST_UI_EMPTY_REGEX: 'Még nincsenek regex minták hozzáadva.',
+	SETTINGS_LIST_UI_ALREADY_EXISTS_PATH: "A(z) '{path}' útvonal már létezik ebben a listában.",
+	SETTINGS_LIST_UI_ALREADY_EXISTS_REGEX: "A(z) '{path}' Regex minta már létezik ebben a listában.",
+	SETTINGS_LIST_UI_INVALID_PATH_OR_REGEX: "Érvénytelen {itemType}: '{path}'. Kérjük, ellenőrizze a formátumot vagy a létezést.",
 
     // Behavior Setting
     SETTINGS_FORCE_EDIT_UNMANAGED_TITLE: 'Szerkesztési Mód Kényszerítése Nem Kezelt Jegyzetekre',
@@ -78,6 +81,10 @@ export default {
     SETTINGS_NOTIFY_ON_MODE_CHANGE_DESC: 'Rövid értesítés megjelenítése, amikor a bővítmény aktívan megváltoztatja egy jegyzet nézeti módját megnyitáskor. Ez egy BÉTA funkció.',
     SETTINGS_ENABLE_DEBUG_LOGGING_TITLE: 'Hibakeresési Naplózás Engedélyezése',
     SETTINGS_ENABLE_DEBUG_LOGGING_DESC: 'Részletes naplók megjelenítése a fejlesztői konzolon. Teljes hatáshoz az Obsidian újraindítása vagy a bővítmény újratöltése szükséges.',
+	SETTINGS_ENABLE_CONFLICT_DETECTION_TITLE: "Ütközésészlelés engedélyezése",
+	SETTINGS_ENABLE_CONFLICT_DETECTION_DESC: "Az ütköző szabályok beállításainak elemzése (pl. ugyanaz az útvonal az alapértelmezett és a szigorú listákban). Az ütközések az alábbi listákban lesznek kiemelve.",
+	SETTINGS_NOTIFY_ON_CONFLICT_TITLE: "Értesítés konfigurációs ütközésekről",
+	SETTINGS_NOTIFY_ON_CONFLICT_DESC: "Értesítés megjelenítése, ha konfigurációs ütközéseket észlel a beállítások megnyitásakor vagy módosításakor.",
 
     // Notifications (from main.ts)
     NOTICE_MODE_CHANGE_PREFIX: "'{fileName}' beállítva: ",
@@ -87,6 +94,9 @@ export default {
     NOTICE_INVALID_STRICT_REGEX_PREFIX: "Enhanced Read Mode: Érvénytelen szigorú regex minta: ",
     NOTICE_INVALID_DEFAULT_REGEX_PREFIX: "Enhanced Read Mode: Érvénytelen alapértelmezett regex minta: ",
     NOTICE_NOTIFICATIONS_ENABLED: "Módváltási értesítések engedélyezve.",
+	NOTICE_CONFLICTS_DETECTED_SUMMARY: "{count} konfigurációs ütközés észlelve.",
+	NOTICE_CHECK_SETTINGS_FOR_DETAILS: "A részletekért ellenőrizze a bővítmény beállításait.",
+	NOTICE_CHECK_SETTINGS_FOR_DETAILS_INLINE: "A részletekért ellenőrizze az alábbi listákat.",
 
     // Command Palette Command Names (from main.ts)
     COMMAND_TOGGLE_DEFAULT: "Enhanced Read Mode Control: Alapértelmezett csak olvasható váltása az aktuális jegyzethez",
@@ -107,4 +117,14 @@ export default {
     // Language Setting
     SETTINGS_PLUGIN_LANGUAGE_TITLE: "Bővítmény Nyelve",
     SETTINGS_PLUGIN_LANGUAGE_DESC: "Válassza ki ennek a bővítménynek a megjelenítési nyelvét. A változtatások alkalmazásához az Obsidian újraindítása vagy a bővítmény újratöltése szükséges.",
+	SETTINGS_DIAGNOSTICS_TITLE: "Konfigurációs diagnosztika",
+	CONFLICT_DIRECT_SAME_PATH_FILE_DEFAULT: "Konfliktus: Ez a fájl ('{path}') a Szigorúan csak olvasható fájlok listájában is szerepel. SZIGORÚ lesz.",
+	CONFLICT_DIRECT_SAME_PATH_FILE_STRICT: "Konfliktus: Ez a fájl ('{path}') az Alapértelmezett csak olvasható fájlok listájában is szerepel. Prioritás szerint SZIGORÚ lesz.",
+	CONFLICT_DIRECT_SAME_PATH_FOLDER_DEFAULT: "Konfliktus: Ez a mappa ('{path}') a Szigorúan csak olvasható mappák listájában is szerepel. Minden benne lévő jegyzet SZIGORÚ lesz.",
+	CONFLICT_DIRECT_SAME_PATH_FOLDER_STRICT: "Konfliktus: Ez a mappa ('{path}') az Alapértelmezett csak olvasható mappák listájában is szerepel. Minden benne lévő jegyzet prioritás szerint SZIGORÚ lesz.",
+	CONFLICT_DEFAULT_FILE_IN_STRICT_FOLDER: "Felülbírálás: Ez a fájl ('{path}') egy Alapértelmezett listában van, de a Szigorú '{conflictingPath}' mappán belül található. SZIGORÚ lesz.",
+	CONFLICT_STRICT_FILE_IN_DEFAULT_FOLDER: "Információ: Ez a fájl ('{path}') egy Szigorú listában van, és az Alapértelmezett '{conflictingPath}' mappán belül található. A fájlspecifikus Szigorú szabály élvez elsőbbséget.",
+	CONFLICT_DEFAULT_FILE_IN_DEFAULT_FOLDER_REDUNDANT: "Redundáns: Ezt a fájlt ('{path}') már lefedi az Alapértelmezett csak olvasható mappa szabálya a '{conflictingPath}' számára.",
+	CONFLICT_STRICT_FILE_IN_STRICT_FOLDER_REDUNDANT: "Redundáns: Ezt a fájlt ('{path}') már lefedi a Szigorúan csak olvasható mappa szabálya a '{conflictingPath}' számára.",
+
 };

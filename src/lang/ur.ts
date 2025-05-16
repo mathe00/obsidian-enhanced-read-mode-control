@@ -50,6 +50,9 @@ export default {
     SETTINGS_LIST_UI_EMPTY_FILES: 'ابھی تک کوئی فائل شامل نہیں کی گئی۔',
     SETTINGS_LIST_UI_EMPTY_FOLDERS: 'ابھی تک کوئی فولڈر شامل نہیں کیا گیا۔',
     SETTINGS_LIST_UI_EMPTY_REGEX: 'ابھی تک کوئی ریجیکس پیٹرن شامل نہیں کیا گیا۔',
+	SETTINGS_LIST_UI_ALREADY_EXISTS_PATH: "راستہ '{path}' اس فہرست میں پہلے سے موجود ہے۔",
+	SETTINGS_LIST_UI_ALREADY_EXISTS_REGEX: "ریجیکس پیٹرن '{path}' اس فہرست میں پہلے سے موجود ہے۔",
+	SETTINGS_LIST_UI_INVALID_PATH_OR_REGEX: "غلط {itemType}: '{path}'۔ براہ کرم فارمیٹ یا موجودگی چیک کریں۔",
 
     // Behavior Setting
     SETTINGS_FORCE_EDIT_UNMANAGED_TITLE: 'غیر منظم نوٹس پر ایڈیٹ موڈ مجبور کریں',
@@ -78,6 +81,10 @@ export default {
     SETTINGS_NOTIFY_ON_MODE_CHANGE_DESC: 'جب پلگ ان کسی نوٹ کا ویو موڈ کھولنے پر فعال طور پر تبدیل کرتا ہے تو ایک مختصر اطلاع دکھائیں۔ یہ ایک بیٹا فیچر ہے۔',
     SETTINGS_ENABLE_DEBUG_LOGGING_TITLE: 'ڈیبگ لاگنگ فعال کریں',
     SETTINGS_ENABLE_DEBUG_LOGGING_DESC: 'ڈیولپر کنسول میں تفصیلی لاگز دکھائیں۔ مکمل اثر کے لیے آبسیڈین کو دوبارہ شروع کرنے یا پلگ ان کو دوبارہ لوڈ کرنے کی ضرورت ہے۔',
+	SETTINGS_ENABLE_CONFLICT_DETECTION_TITLE: "تنازعہ کا پتہ لگانے کو فعال کریں",
+	SETTINGS_ENABLE_CONFLICT_DETECTION_DESC: "متضاد اصول کے لیے ترتیبات کا تجزیہ کریں (مثلاً ڈیفالٹ اور سخت فہرستوں میں ایک ہی راستہ)۔ تنازعات کو نیچے دی گئی فہرستوں میں نمایاں کیا جائے گا۔",
+	SETTINGS_NOTIFY_ON_CONFLICT_TITLE: "کنفیگریشن تنازعات پر مطلع کریں",
+	SETTINGS_NOTIFY_ON_CONFLICT_DESC: "اگر ترتیبات کھولتے یا تبدیل کرتے وقت کنفیگریشن تنازعات کا پتہ چلتا ہے تو ایک اطلاع دکھائیں۔",
 
     // Notifications (from main.ts)
     NOTICE_MODE_CHANGE_PREFIX: "'{fileName}' پر سیٹ کیا گیا ",
@@ -87,6 +94,9 @@ export default {
     NOTICE_INVALID_STRICT_REGEX_PREFIX: "Enhanced Read Mode: غلط سخت ریجیکس پیٹرن: ",
     NOTICE_INVALID_DEFAULT_REGEX_PREFIX: "Enhanced Read Mode: غلط ڈیفالٹ ریجیکس پیٹرن: ",
     NOTICE_NOTIFICATIONS_ENABLED: "موڈ کی تبدیلی کی اطلاعات فعال ہیں۔",
+	NOTICE_CONFLICTS_DETECTED_SUMMARY: "{count} کنفیگریشن تنازعات کا پتہ چلا۔",
+	NOTICE_CHECK_SETTINGS_FOR_DETAILS: "تفصیلات کے لیے پلگ ان کی ترتیبات چیک کریں۔",
+	NOTICE_CHECK_SETTINGS_FOR_DETAILS_INLINE: "تفصیلات کے لیے نیچے دی گئی فہرستیں چیک کریں۔",
 
     // Command Palette Command Names (from main.ts)
     COMMAND_TOGGLE_DEFAULT: "Enhanced Read Mode Control: موجودہ نوٹ کے لیے ڈیفالٹ صرف پڑھنے والا ٹوگل کریں",
@@ -107,4 +117,14 @@ export default {
     // Language Setting
     SETTINGS_PLUGIN_LANGUAGE_TITLE: "پلگ ان کی زبان",
     SETTINGS_PLUGIN_LANGUAGE_DESC: "اس پلگ ان کے انٹرفیس کے لیے ڈسپلے زبان منتخب کریں۔ تبدیلیوں کو لاگو کرنے کے لیے آبسیڈین کو دوبارہ شروع کرنے یا پلگ ان کو دوبارہ لوڈ کرنے کی ضرورت ہے۔",
+	SETTINGS_DIAGNOSTICS_TITLE: "کنفیگریشن تشخیصات",
+	CONFLICT_DIRECT_SAME_PATH_FILE_DEFAULT: "تصادم: یہ فائل ('{path}') سخت صرف پڑھنے والی فائلوں کی فہرست میں بھی ہے۔ یہ سخت ہوگی۔",
+	CONFLICT_DIRECT_SAME_PATH_FILE_STRICT: "تصادم: یہ فائل ('{path}') ڈیفالٹ صرف پڑھنے والی فائلوں کی فہرست میں بھی ہے۔ یہ ترجیح کے مطابق سخت ہوگی۔",
+	CONFLICT_DIRECT_SAME_PATH_FOLDER_DEFAULT: "تصادم: یہ فولڈر ('{path}') سخت صرف پڑھنے والے فولڈرز کی فہرست میں بھی ہے۔ اس کے اندر تمام نوٹس سخت ہوں گے۔",
+	CONFLICT_DIRECT_SAME_PATH_FOLDER_STRICT: "تصادم: یہ فولڈر ('{path}') ڈیفالٹ صرف پڑھنے والے فولڈرز کی فہرست میں بھی ہے۔ اس کے اندر تمام نوٹس ترجیح کے مطابق سخت ہوں گے۔",
+	CONFLICT_DEFAULT_FILE_IN_STRICT_FOLDER: "اوور رائڈ: یہ فائل ('{path}') ڈیفالٹ فہرست میں ہے، لیکن یہ سخت فولڈر '{conflictingPath}' کے اندر ہے۔ یہ سخت ہوگی۔",
+	CONFLICT_STRICT_FILE_IN_DEFAULT_FOLDER: "معلومات: یہ فائل ('{path}') سخت فہرست میں ہے اور ڈیفالٹ فولڈر '{conflictingPath}' کے اندر ہے۔ فائل کے لیے مخصوص سخت اصول کو ترجیح حاصل ہے۔",
+	CONFLICT_DEFAULT_FILE_IN_DEFAULT_FOLDER_REDUNDANT: "غیر ضروری: یہ فائل ('{path}') پہلے ہی '{conflictingPath}' کے لیے ڈیفالٹ صرف پڑھنے والے فولڈر کے اصول کے تحت آتی ہے۔",
+	CONFLICT_STRICT_FILE_IN_STRICT_FOLDER_REDUNDANT: "غیر ضروری: یہ فائل ('{path}') پہلے ہی '{conflictingPath}' کے لیے سخت صرف پڑھنے والے فولڈر کے اصول کے تحت آتی ہے۔",
+
 };

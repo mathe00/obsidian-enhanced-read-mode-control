@@ -4,14 +4,14 @@
 export default {
     // General
     LANG_AUTO_DETECT_OBSIDIAN: 'Automático (Idioma de Obsidian)',
-    LANG_AUTO: 'Automático (Idioma de Obsidian)', // Fallback or specific use
+    LANG_AUTO: 'Automático (Idioma de Obsidian)',
 
     // Settings Tab Titles
     SETTINGS_TAB_MAIN_TITLE: 'Configuración de Enhanced Read Mode Control',
     SETTINGS_SECTION_EXACT_PATHS: 'Coincidencia Exacta de Ruta',
     SETTINGS_SECTION_REGEX_BETA: 'Coincidencia de Ruta por Regex (BETA)',
     SETTINGS_SECTION_BEHAVIOR: 'Comportamiento',
-    SETTINGS_SECTION_FEEDBACK_DEBUG: 'Feedback y Depuración',
+    SETTINGS_SECTION_FEEDBACK_DEBUG: 'Feedback, Depuración y Diagnósticos',
 
     // Exact Path List Management
     SETTINGS_DEFAULT_FILES_EXACT_TITLE: 'Archivos de Solo Lectura por Defecto (Rutas Exactas)',
@@ -50,6 +50,9 @@ export default {
     SETTINGS_LIST_UI_EMPTY_FILES: 'No hay archivos añadidos aún.',
     SETTINGS_LIST_UI_EMPTY_FOLDERS: 'No hay carpetas añadidas aún.',
     SETTINGS_LIST_UI_EMPTY_REGEX: 'No hay patrones regex añadidos aún.',
+    SETTINGS_LIST_UI_ALREADY_EXISTS_PATH: "La ruta '{path}' ya existe en esta lista.",
+    SETTINGS_LIST_UI_ALREADY_EXISTS_REGEX: "El patrón Regex '{path}' ya existe en esta lista.",
+    SETTINGS_LIST_UI_INVALID_PATH_OR_REGEX: "{itemType} inválido: '{path}'. Por favor, compruebe el formato o la existencia.",
 
     // Behavior Setting
     SETTINGS_FORCE_EDIT_UNMANAGED_TITLE: 'Forzar Modo Edición en Notas No Gestionadas',
@@ -64,7 +67,7 @@ export default {
     SETTINGS_FORCE_EDIT_UNMANAGED_DESC_OPTION1_BENEFIT_LABEL: 'Beneficio:',
     SETTINGS_FORCE_EDIT_UNMANAGED_DESC_OPTION1_BENEFIT_TEXT: ' Respeta completamente los cambios manuales. Si establece una nota normal en solo lectura, permanece así.',
     SETTINGS_FORCE_EDIT_UNMANAGED_DESC_OPTION1_DRAWBACK_LABEL: 'Desventaja:',
-    SETTINGS_FORCE_EDIT_UNMANAGED_DESC_OPTION1_DRAWBACK_TEXT: ' El error de "atascado en solo lectura" en la misma pestaña persiste. Debe volver manualmente al modo edición en ese caso específico.',
+    SETTINGS_FORCE_EDIT_UNMANAGED_DESC_OPTION1_DRAWBACK_TEXT: ' El error de "atascado en solo lectura" en la misma pestaña persiste. Debe volver manually al modo edición en ese caso específico.',
     SETTINGS_FORCE_EDIT_UNMANAGED_DESC_OPTION2_LABEL: 'Opción 2: HABILITADO',
     SETTINGS_FORCE_EDIT_UNMANAGED_DESC_OPTION2_ACTION_LABEL: 'Acción:',
     SETTINGS_FORCE_EDIT_UNMANAGED_DESC_OPTION2_ACTION_TEXT: ' El plugin fuerza CUALQUIER nota normal encontrada en modo de solo lectura a volver al modo edición al abrirla.',
@@ -78,8 +81,12 @@ export default {
     SETTINGS_NOTIFY_ON_MODE_CHANGE_DESC: 'Mostrar una breve notificación cuando el plugin cambie activamente el modo de vista de una nota al abrirla. Esta es una función BETA.',
     SETTINGS_ENABLE_DEBUG_LOGGING_TITLE: 'Habilitar Registro de Depuración',
     SETTINGS_ENABLE_DEBUG_LOGGING_DESC: 'Mostrar registros detallados en la consola de desarrollador. Requiere reiniciar Obsidian o recargar el plugin para que tenga pleno efecto.',
+    SETTINGS_ENABLE_CONFLICT_DETECTION_TITLE: 'Habilitar Detección de Conflictos',
+    SETTINGS_ENABLE_CONFLICT_DETECTION_DESC: 'Analizar configuraciones para reglas conflictivas (ej: misma ruta en listas por defecto y estrictas). Los conflictos se resaltarán en las listas de abajo.',
+    SETTINGS_NOTIFY_ON_CONFLICT_TITLE: 'Notificar en Conflictos de Configuración',
+    SETTINGS_NOTIFY_ON_CONFLICT_DESC: 'Mostrar una notificación si se detectan conflictos de configuración al abrir o cambiar las configuraciones.',
 
-    // Notifications (from main.ts)
+    // Notifications (from main.ts and settings.ts)
     NOTICE_MODE_CHANGE_PREFIX: "'{fileName}' establecido a ",
     NOTICE_MODE_DEFAULT: "Solo Lectura por Defecto.",
     NOTICE_MODE_STRICT: "Solo Lectura Estricta.",
@@ -87,6 +94,9 @@ export default {
     NOTICE_INVALID_STRICT_REGEX_PREFIX: "Enhanced Read Mode: Patrón regex estricto inválido: ",
     NOTICE_INVALID_DEFAULT_REGEX_PREFIX: "Enhanced Read Mode: Patrón regex por defecto inválido: ",
     NOTICE_NOTIFICATIONS_ENABLED: "Notificaciones de cambio de modo habilitadas.",
+    NOTICE_CONFLICTS_DETECTED_SUMMARY: "{count} conflicto(s) de configuración detectado(s).",
+    NOTICE_CHECK_SETTINGS_FOR_DETAILS: "Compruebe la configuración del plugin para más detalles.",
+    NOTICE_CHECK_SETTINGS_FOR_DETAILS_INLINE: "Compruebe las listas de abajo para más detalles.",
 
     // Command Palette Command Names (from main.ts)
     COMMAND_TOGGLE_DEFAULT: "Enhanced Read Mode Control: Alternar solo lectura por defecto para nota actual",
@@ -107,4 +117,15 @@ export default {
     // Language Setting
     SETTINGS_PLUGIN_LANGUAGE_TITLE: "Idioma del Plugin",
     SETTINGS_PLUGIN_LANGUAGE_DESC: "Elija el idioma de visualización para la interfaz de este plugin. Requiere reiniciar Obsidian o recargar el plugin para aplicar los cambios.",
+
+    // Conflict Messages (for tooltips)
+    SETTINGS_DIAGNOSTICS_TITLE: "Diagnósticos de Configuración",
+    CONFLICT_DIRECT_SAME_PATH_FILE_DEFAULT: "Conflicto: Este archivo ('{path}') también está en la lista de Archivos Estrictos. Será ESTRICTO.",
+    CONFLICT_DIRECT_SAME_PATH_FILE_STRICT: "Conflicto: Este archivo ('{path}') también está en la lista de Archivos por Defecto. Será ESTRICTO (prioridad).",
+    CONFLICT_DIRECT_SAME_PATH_FOLDER_DEFAULT: "Conflicto: Esta carpeta ('{path}') también está en la lista de Carpetas Estrictas. Todas las notas dentro serán ESTRICTAS.",
+    CONFLICT_DIRECT_SAME_PATH_FOLDER_STRICT: "Conflicto: Esta carpeta ('{path}') también está en la lista de Carpetas por Defecto. Todas las notas dentro serán ESTRICTAS (prioridad).",
+    CONFLICT_DEFAULT_FILE_IN_STRICT_FOLDER: "Prioridad: Este archivo ('{path}') está en una lista por Defecto, pero está dentro de la carpeta Estricta '{conflictingPath}'. Será ESTRICTO.",
+    CONFLICT_STRICT_FILE_IN_DEFAULT_FOLDER: "Info: Este archivo ('{path}') está en una lista Estricta y dentro de la carpeta por Defecto '{conflictingPath}'. La regla Estricta del archivo tiene prioridad.",
+    CONFLICT_DEFAULT_FILE_IN_DEFAULT_FOLDER_REDUNDANT: "Redundante: Este archivo ('{path}') ya está cubierto por la regla de la Carpeta por Defecto para '{conflictingPath}'.",
+    CONFLICT_STRICT_FILE_IN_STRICT_FOLDER_REDUNDANT: "Redundante: Este archivo ('{path}') ya está cubierto por la regla de la Carpeta Estricta para '{conflictingPath}'.",
 };

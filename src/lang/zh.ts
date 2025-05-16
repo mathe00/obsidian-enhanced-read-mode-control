@@ -50,6 +50,9 @@ export default {
     SETTINGS_LIST_UI_EMPTY_FILES: '尚未添加文件。',
     SETTINGS_LIST_UI_EMPTY_FOLDERS: '尚未添加文件夹。',
     SETTINGS_LIST_UI_EMPTY_REGEX: '尚未添加正则表达式模式。',
+	SETTINGS_LIST_UI_ALREADY_EXISTS_PATH: "路径“{path}”已存在于此列表中。",
+	SETTINGS_LIST_UI_ALREADY_EXISTS_REGEX: "正则表达式模式“{path}”已存在于此列表中。",
+	SETTINGS_LIST_UI_INVALID_PATH_OR_REGEX: "无效的 {itemType}：“{path}”。请检查格式或是否存在。",
 
     // 行为设置
     SETTINGS_FORCE_EDIT_UNMANAGED_TITLE: '对未管理笔记强制编辑模式',
@@ -78,6 +81,10 @@ export default {
     SETTINGS_NOTIFY_ON_MODE_CHANGE_DESC: '当插件在打开笔记时主动更改其视图模式时，显示简短通知。这是一个BETA功能。',
     SETTINGS_ENABLE_DEBUG_LOGGING_TITLE: '启用调试日志',
     SETTINGS_ENABLE_DEBUG_LOGGING_DESC: '在开发者控制台中显示详细日志。需要重启 Obsidian 或重新加载插件才能完全生效。',
+	SETTINGS_ENABLE_CONFLICT_DETECTION_TITLE: "启用冲突检测",
+	SETTINGS_ENABLE_CONFLICT_DETECTION_DESC: "分析设置以查找冲突规则（例如，默认列表和严格列表中的相同路径）。冲突将在下面的列表中突出显示。",
+	SETTINGS_NOTIFY_ON_CONFLICT_TITLE: "配置冲突时通知",
+	SETTINGS_NOTIFY_ON_CONFLICT_DESC: "打开或更改设置时检测到配置冲突时显示通知。",
 
     // 通知 (来自 main.ts)
     NOTICE_MODE_CHANGE_PREFIX: "'{fileName}' 已设为 ",
@@ -87,6 +94,9 @@ export default {
     NOTICE_INVALID_STRICT_REGEX_PREFIX: "Enhanced Read Mode：无效的严格正则表达式模式：",
     NOTICE_INVALID_DEFAULT_REGEX_PREFIX: "Enhanced Read Mode：无效的默认正则表达式模式：",
     NOTICE_NOTIFICATIONS_ENABLED: "模式更改通知已启用。",
+	NOTICE_CONFLICTS_DETECTED_SUMMARY: "检测到 {count} 个配置冲突。",
+	NOTICE_CHECK_SETTINGS_FOR_DETAILS: "有关详细信息，请检查插件设置。",
+	NOTICE_CHECK_SETTINGS_FOR_DETAILS_INLINE: "有关详细信息，请检查以下列表。",
 
     // 命令面板命令名称 (来自 main.ts)
     COMMAND_TOGGLE_DEFAULT: "Enhanced Read Mode Control：切换当前笔记的默认只读状态",
@@ -107,4 +117,14 @@ export default {
     // 语言设置
     SETTINGS_PLUGIN_LANGUAGE_TITLE: "插件语言",
     SETTINGS_PLUGIN_LANGUAGE_DESC: "选择此插件界面的显示语言。需要重启 Obsidian 或重新加载插件以应用更改。",
+	SETTINGS_DIAGNOSTICS_TITLE: "配置诊断",
+	CONFLICT_DIRECT_SAME_PATH_FILE_DEFAULT: "冲突：此文件（'{path}'）也存在于严格只读文件列表中。它将是严格的。",
+	CONFLICT_DIRECT_SAME_PATH_FILE_STRICT: "冲突：此文件（'{path}'）也存在于默认只读文件列表中。根据优先级，它将是严格的。",
+	CONFLICT_DIRECT_SAME_PATH_FOLDER_DEFAULT: "冲突：此文件夹（'{path}'）也存在于严格只读文件夹列表中。其中的所有笔记都将是严格的。",
+	CONFLICT_DIRECT_SAME_PATH_FOLDER_STRICT: "冲突：此文件夹（'{path}'）也存在于默认只读文件夹列表中。根据优先级，其中的所有笔记都将是严格的。",
+	CONFLICT_DEFAULT_FILE_IN_STRICT_FOLDER: "覆盖：此文件（'{path}'）位于默认列表中，但它位于严格文件夹“{conflictingPath}”内。它将是严格的。",
+	CONFLICT_STRICT_FILE_IN_DEFAULT_FOLDER: "信息：此文件（'{path}'）位于严格列表中，并且位于默认文件夹“{conflictingPath}”内。文件特定的严格规则优先。",
+	CONFLICT_DEFAULT_FILE_IN_DEFAULT_FOLDER_REDUNDANT: "冗余：此文件（'{path}'）已被“{conflictingPath}”的默认只读文件夹规则覆盖。",
+	CONFLICT_STRICT_FILE_IN_STRICT_FOLDER_REDUNDANT: "冗余：此文件（'{path}'）已被“{conflictingPath}”的严格只读文件夹规则覆盖。",
+
 };

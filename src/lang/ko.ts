@@ -50,6 +50,9 @@ export default {
     SETTINGS_LIST_UI_EMPTY_FILES: '아직 추가된 파일이 없습니다.',
     SETTINGS_LIST_UI_EMPTY_FOLDERS: '아직 추가된 폴더가 없습니다.',
     SETTINGS_LIST_UI_EMPTY_REGEX: '아직 추가된 정규식 패턴이 없습니다.',
+	SETTINGS_LIST_UI_ALREADY_EXISTS_PATH: "경로 '{path}'이(가) 이 목록에 이미 존재합니다.",
+	SETTINGS_LIST_UI_ALREADY_EXISTS_REGEX: "정규식 패턴 '{path}'이(가) 이 목록에 이미 존재합니다.",
+	SETTINGS_LIST_UI_INVALID_PATH_OR_REGEX: "잘못된 {itemType}: '{path}'. 형식이나 존재 여부를 확인하십시오.",
 
     // Behavior Setting
     SETTINGS_FORCE_EDIT_UNMANAGED_TITLE: '관리되지 않는 노트에서 편집 모드 강제',
@@ -78,6 +81,10 @@ export default {
     SETTINGS_NOTIFY_ON_MODE_CHANGE_DESC: '플러그인이 노트의 보기 모드를 열 때 적극적으로 변경하면 간단한 알림을 표시합니다. 이것은 베타 기능입니다.',
     SETTINGS_ENABLE_DEBUG_LOGGING_TITLE: '디버그 로깅 활성화',
     SETTINGS_ENABLE_DEBUG_LOGGING_DESC: '개발자 콘솔에 자세한 로그를 표시합니다. 완전히 적용하려면 Obsidian을 다시 시작하거나 플러그인을 다시 로드해야 합니다.',
+	SETTINGS_ENABLE_CONFLICT_DETECTION_TITLE: "충돌 감지 활성화",
+	SETTINGS_ENABLE_CONFLICT_DETECTION_DESC: "충돌하는 규칙에 대한 설정 분석 (예: 기본 및 엄격한 목록의 동일한 경로). 충돌은 아래 목록에서 강조 표시됩니다.",
+	SETTINGS_NOTIFY_ON_CONFLICT_TITLE: "구성 충돌 시 알림",
+	SETTINGS_NOTIFY_ON_CONFLICT_DESC: "설정을 열거나 변경할 때 구성 충돌이 감지되면 알림을 표시합니다.",
 
     // Notifications (from main.ts)
     NOTICE_MODE_CHANGE_PREFIX: "'{fileName}'이(가) ",
@@ -87,6 +94,9 @@ export default {
     NOTICE_INVALID_STRICT_REGEX_PREFIX: "Enhanced Read Mode: 잘못된 엄격한 정규식 패턴: ",
     NOTICE_INVALID_DEFAULT_REGEX_PREFIX: "Enhanced Read Mode: 잘못된 기본 정규식 패턴: ",
     NOTICE_NOTIFICATIONS_ENABLED: "모드 변경 알림이 활성화되었습니다.",
+	NOTICE_CONFLICTS_DETECTED_SUMMARY: "{count}개의 구성 충돌이 감지되었습니다.",
+	NOTICE_CHECK_SETTINGS_FOR_DETAILS: "자세한 내용은 플러그인 설정을 확인하십시오.",
+	NOTICE_CHECK_SETTINGS_FOR_DETAILS_INLINE: "자세한 내용은 아래 목록을 확인하십시오.",
 
     // Command Palette Command Names (from main.ts)
     COMMAND_TOGGLE_DEFAULT: "Enhanced Read Mode Control: 현재 노트의 기본 읽기 전용 전환",
@@ -107,4 +117,14 @@ export default {
     // Language Setting
     SETTINGS_PLUGIN_LANGUAGE_TITLE: "플러그인 언어",
     SETTINGS_PLUGIN_LANGUAGE_DESC: "이 플러그인 인터페이스의 표시 언어를 선택합니다. 변경 사항을 적용하려면 Obsidian을 다시 시작하거나 플러그인을 다시 로드해야 합니다.",
+	SETTINGS_DIAGNOSTICS_TITLE: "구성 진단",
+	CONFLICT_DIRECT_SAME_PATH_FILE_DEFAULT: "충돌: 이 파일 ('{path}')은 엄격한 읽기 전용 파일 목록에도 있습니다. 엄격하게 적용됩니다.",
+	CONFLICT_DIRECT_SAME_PATH_FILE_STRICT: "충돌: 이 파일 ('{path}')은 기본 읽기 전용 파일 목록에도 있습니다. 우선 순위에 따라 엄격하게 적용됩니다.",
+	CONFLICT_DIRECT_SAME_PATH_FOLDER_DEFAULT: "충돌: 이 폴더 ('{path}')는 엄격한 읽기 전용 폴더 목록에도 있습니다. 내부의 모든 노트는 엄격하게 적용됩니다.",
+	CONFLICT_DIRECT_SAME_PATH_FOLDER_STRICT: "충돌: 이 폴더 ('{path}')는 기본 읽기 전용 폴더 목록에도 있습니다. 내부의 모든 노트는 우선 순위에 따라 엄격하게 적용됩니다.",
+	CONFLICT_DEFAULT_FILE_IN_STRICT_FOLDER: "덮어쓰기: 이 파일 ('{path}')은 기본 목록에 있지만 엄격한 폴더 '{conflictingPath}' 내에 있습니다. 엄격하게 적용됩니다.",
+	CONFLICT_STRICT_FILE_IN_DEFAULT_FOLDER: "정보: 이 파일 ('{path}')은 엄격한 목록에 있으며 기본 폴더 '{conflictingPath}' 내에 있습니다. 파일별 엄격한 규칙이 우선합니다.",
+	CONFLICT_DEFAULT_FILE_IN_DEFAULT_FOLDER_REDUNDANT: "중복: 이 파일 ('{path}')은 이미 '{conflictingPath}'에 대한 기본 읽기 전용 폴더 규칙에 포함됩니다.",
+	CONFLICT_STRICT_FILE_IN_STRICT_FOLDER_REDUNDANT: "중복: 이 파일 ('{path}')은 이미 '{conflictingPath}'에 대한 엄격한 읽기 전용 폴더 규칙에 포함됩니다.",
+
 };

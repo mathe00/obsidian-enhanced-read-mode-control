@@ -50,6 +50,9 @@ export default {
     SETTINGS_LIST_UI_EMPTY_FILES: 'Nog geen bestanden toegevoegd.',
     SETTINGS_LIST_UI_EMPTY_FOLDERS: 'Nog geen mappen toegevoegd.',
     SETTINGS_LIST_UI_EMPTY_REGEX: 'Nog geen regex-patronen toegevoegd.',
+	SETTINGS_LIST_UI_ALREADY_EXISTS_PATH: "Pad '{path}' bestaat al in deze lijst.",
+	SETTINGS_LIST_UI_ALREADY_EXISTS_REGEX: "Regex-patroon '{path}' bestaat al in deze lijst.",
+	SETTINGS_LIST_UI_INVALID_PATH_OR_REGEX: "Ongeldige {itemType}: '{path}'. Controleer het formaat of het bestaan.",
 
     // Behavior Setting
     SETTINGS_FORCE_EDIT_UNMANAGED_TITLE: 'Forceer Bewerkmodus op Onbeheerde Notities',
@@ -78,6 +81,10 @@ export default {
     SETTINGS_NOTIFY_ON_MODE_CHANGE_DESC: 'Toon een korte melding wanneer de plugin actief de weergavemodus van een notitie wijzigt bij het openen. Dit is een BETA-functie.',
     SETTINGS_ENABLE_DEBUG_LOGGING_TITLE: 'Foutopsporingslogboek Inschakelen',
     SETTINGS_ENABLE_DEBUG_LOGGING_DESC: 'Toon gedetailleerde logboeken in de ontwikkelaarsconsole. Vereist herstart van Obsidian of herladen van de plugin voor volledig effect.',
+	SETTINGS_ENABLE_CONFLICT_DETECTION_TITLE: "Conflictdetectie inschakelen",
+	SETTINGS_ENABLE_CONFLICT_DETECTION_DESC: "Analyseer instellingen op conflicterende regels (bijv. hetzelfde pad in standaard en strikte lijsten). Conflicten worden gemarkeerd in de onderstaande lijsten.",
+	SETTINGS_NOTIFY_ON_CONFLICT_TITLE: "Melden bij configuratieconflicten",
+	SETTINGS_NOTIFY_ON_CONFLICT_DESC: "Melding weergeven als configuratieconflicten worden gedetecteerd bij het openen of wijzigen van instellingen.",
 
     // Notifications (from main.ts)
     NOTICE_MODE_CHANGE_PREFIX: "'{fileName}' ingesteld op ",
@@ -87,6 +94,9 @@ export default {
     NOTICE_INVALID_STRICT_REGEX_PREFIX: "Enhanced Read Mode: Ongeldig strikt regex-patroon: ",
     NOTICE_INVALID_DEFAULT_REGEX_PREFIX: "Enhanced Read Mode: Ongeldig standaard regex-patroon: ",
     NOTICE_NOTIFICATIONS_ENABLED: "Meldingen voor moduswijziging ingeschakeld.",
+	NOTICE_CONFLICTS_DETECTED_SUMMARY: "{count} configuratieconflict(en) gedetecteerd.",
+	NOTICE_CHECK_SETTINGS_FOR_DETAILS: "Controleer de plugin-instellingen voor details.",
+	NOTICE_CHECK_SETTINGS_FOR_DETAILS_INLINE: "Controleer de onderstaande lijsten voor details.",
 
     // Command Palette Command Names (from main.ts)
     COMMAND_TOGGLE_DEFAULT: "Enhanced Read Mode Control: Schakel standaard alleen-lezen voor huidige notitie",
@@ -107,4 +117,14 @@ export default {
     // Language Setting
     SETTINGS_PLUGIN_LANGUAGE_TITLE: "Taal van Plugin",
     SETTINGS_PLUGIN_LANGUAGE_DESC: "Kies de weergavetaal voor de interface van deze plugin. Vereist herstart van Obsidian of herladen van de plugin om wijzigingen toe te passen.",
+	SETTINGS_DIAGNOSTICS_TITLE: "Configuratiediagnostiek",
+	CONFLICT_DIRECT_SAME_PATH_FILE_DEFAULT: "Conflict: Dit bestand ('{path}') staat ook in de lijst Strikt Alleen-lezen Bestanden. Het wordt STRIKT.",
+	CONFLICT_DIRECT_SAME_PATH_FILE_STRICT: "Conflict: Dit bestand ('{path}') staat ook in de lijst Standaard Alleen-lezen Bestanden. Het wordt STRIKT volgens prioriteit.",
+	CONFLICT_DIRECT_SAME_PATH_FOLDER_DEFAULT: "Conflict: Deze map ('{path}') staat ook in de lijst Strikt Alleen-lezen Mappen. Alle notities erin worden STRIKT.",
+	CONFLICT_DIRECT_SAME_PATH_FOLDER_STRICT: "Conflict: Deze map ('{path}') staat ook in de lijst Standaard Alleen-lezen Mappen. Alle notities erin worden STRIKT volgens prioriteit.",
+	CONFLICT_DEFAULT_FILE_IN_STRICT_FOLDER: "Overschrijven: Dit bestand ('{path}') staat in een Standaard lijst, maar bevindt zich in de Strikte map '{conflictingPath}'. Het wordt STRIKT.",
+	CONFLICT_STRICT_FILE_IN_DEFAULT_FOLDER: "Info: Dit bestand ('{path}') staat in een Strikte lijst en in de Standaard map '{conflictingPath}'. De bestandsspecifieke Strikte regel heeft voorrang.",
+	CONFLICT_DEFAULT_FILE_IN_DEFAULT_FOLDER_REDUNDANT: "Redundant: Dit bestand ('{path}') wordt al gedekt door de regel Standaard Alleen-lezen Map voor '{conflictingPath}'.",
+	CONFLICT_STRICT_FILE_IN_STRICT_FOLDER_REDUNDANT: "Redundant: Dit bestand ('{path}') wordt al gedekt door de regel Strikt Alleen-lezen Map voor '{conflictingPath}'.",
+
 };

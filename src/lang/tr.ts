@@ -50,6 +50,9 @@ export default {
     SETTINGS_LIST_UI_EMPTY_FILES: 'Henüz dosya eklenmedi.',
     SETTINGS_LIST_UI_EMPTY_FOLDERS: 'Henüz klasör eklenmedi.',
     SETTINGS_LIST_UI_EMPTY_REGEX: 'Henüz regex deseni eklenmedi.',
+	SETTINGS_LIST_UI_ALREADY_EXISTS_PATH: "'{path}' yolu bu listede zaten mevcut.",
+	SETTINGS_LIST_UI_ALREADY_EXISTS_REGEX: "Regex deseni '{path}' bu listede zaten mevcut.",
+	SETTINGS_LIST_UI_INVALID_PATH_OR_REGEX: "Geçersiz {itemType}: '{path}'. Lütfen biçimi veya varlığı kontrol edin.",
 
     // Behavior Setting
     SETTINGS_FORCE_EDIT_UNMANAGED_TITLE: 'Yönetilmeyen Notlarda Düzenleme Modunu Zorla',
@@ -78,6 +81,10 @@ export default {
     SETTINGS_NOTIFY_ON_MODE_CHANGE_DESC: 'Eklenti bir notun görünüm modunu açarken aktif olarak değiştirdiğinde kısa bir bildirim gösterin. Bu bir BETA özelliğidir.',
     SETTINGS_ENABLE_DEBUG_LOGGING_TITLE: 'Hata Ayıklama Günlüğünü Etkinleştir',
     SETTINGS_ENABLE_DEBUG_LOGGING_DESC: 'Geliştirici konsolunda ayrıntılı günlükleri gösterin. Tamamen etkili olması için Obsidian\'ı yeniden başlatmak veya eklentiyi yeniden yüklemek gerekir.',
+	SETTINGS_ENABLE_CONFLICT_DETECTION_TITLE: "Çakışma Algılamayı Etkinleştir",
+	SETTINGS_ENABLE_CONFLICT_DETECTION_DESC: "Çakışan kurallar için ayarları analiz edin (ör. varsayılan ve katı listelerde aynı yol). Çakışmalar aşağıdaki listelerde vurgulanacaktır.",
+	SETTINGS_NOTIFY_ON_CONFLICT_TITLE: "Yapılandırma Çakışmalarında Bildir",
+	SETTINGS_NOTIFY_ON_CONFLICT_DESC: "Ayarlar açıldığında veya değiştirildiğinde yapılandırma çakışmaları algılanırsa bir bildirim gösterin.",
 
     // Notifications (from main.ts)
     NOTICE_MODE_CHANGE_PREFIX: "'{fileName}' şu şekilde ayarlandı: ",
@@ -87,6 +94,9 @@ export default {
     NOTICE_INVALID_STRICT_REGEX_PREFIX: "Enhanced Read Mode: Geçersiz katı regex deseni: ",
     NOTICE_INVALID_DEFAULT_REGEX_PREFIX: "Enhanced Read Mode: Geçersiz varsayılan regex deseni: ",
     NOTICE_NOTIFICATIONS_ENABLED: "Mod değişikliği bildirimleri etkinleştirildi.",
+	NOTICE_CONFLICTS_DETECTED_SUMMARY: "{count} yapılandırma çakışması algılandı.",
+	NOTICE_CHECK_SETTINGS_FOR_DETAILS: "Ayrıntılar için eklenti ayarlarını kontrol edin.",
+	NOTICE_CHECK_SETTINGS_FOR_DETAILS_INLINE: "Ayrıntılar için aşağıdaki listeleri kontrol edin.",
 
     // Command Palette Command Names (from main.ts)
     COMMAND_TOGGLE_DEFAULT: "Enhanced Read Mode Control: Geçerli not için varsayılan salt okunurluğu değiştir",
@@ -107,4 +117,14 @@ export default {
     // Language Setting
     SETTINGS_PLUGIN_LANGUAGE_TITLE: "Eklenti Dili",
     SETTINGS_PLUGIN_LANGUAGE_DESC: "Bu eklenti arayüzü için görüntüleme dilini seçin. Değişikliklerin uygulanması için Obsidian'ı yeniden başlatmak veya eklentiyi yeniden yüklemek gerekir.",
+	SETTINGS_DIAGNOSTICS_TITLE: "Yapılandırma Tanıları",
+	CONFLICT_DIRECT_SAME_PATH_FILE_DEFAULT: "Çakışma: Bu dosya ('{path}') aynı zamanda Katı Salt Okunur Dosyalar listesinde. KATI olacak.",
+	CONFLICT_DIRECT_SAME_PATH_FILE_STRICT: "Çakışma: Bu dosya ('{path}') aynı zamanda Varsayılan Salt Okunur Dosyalar listesinde. Önceliğe göre KATI olacak.",
+	CONFLICT_DIRECT_SAME_PATH_FOLDER_DEFAULT: "Çakışma: Bu klasör ('{path}') aynı zamanda Katı Salt Okunur Klasörler listesinde. İçindeki tüm notlar KATI olacak.",
+	CONFLICT_DIRECT_SAME_PATH_FOLDER_STRICT: "Çakışma: Bu klasör ('{path}') aynı zamanda Varsayılan Salt Okunur Klasörler listesinde. İçindeki tüm notlar önceliğe göre KATI olacak.",
+	CONFLICT_DEFAULT_FILE_IN_STRICT_FOLDER: "Geçersiz Kılma: Bu dosya ('{path}') bir Varsayılan listede, ancak Katı klasör '{conflictingPath}' içinde. KATI olacak.",
+	CONFLICT_STRICT_FILE_IN_DEFAULT_FOLDER: "Bilgi: Bu dosya ('{path}') bir Katı listede ve Varsayılan '{conflictingPath}' klasörünün içinde. Dosyaya özgü Katı kural önceliklidir.",
+	CONFLICT_DEFAULT_FILE_IN_DEFAULT_FOLDER_REDUNDANT: "Gereksiz: Bu dosya ('{path}') zaten '{conflictingPath}' için Varsayılan Salt Okunur Klasör kuralı kapsamında.",
+	CONFLICT_STRICT_FILE_IN_STRICT_FOLDER_REDUNDANT: "Gereksiz: Bu dosya ('{path}') zaten '{conflictingPath}' için Katı Salt Okunur Klasör kuralı kapsamında.",
+
 };

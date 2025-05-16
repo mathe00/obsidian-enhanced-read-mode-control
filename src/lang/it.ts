@@ -50,6 +50,9 @@ export default {
     SETTINGS_LIST_UI_EMPTY_FILES: 'Nessun file aggiunto ancora.',
     SETTINGS_LIST_UI_EMPTY_FOLDERS: 'Nessuna cartella aggiunta ancora.',
     SETTINGS_LIST_UI_EMPTY_REGEX: 'Nessun pattern regex aggiunto ancora.',
+	SETTINGS_LIST_UI_ALREADY_EXISTS_PATH: "Il percorso '{path}' esiste già in questo elenco.",
+	SETTINGS_LIST_UI_ALREADY_EXISTS_REGEX: "Il pattern Regex '{path}' esiste già in questo elenco.",
+	SETTINGS_LIST_UI_INVALID_PATH_OR_REGEX: "{itemType} non valido: '{path}'. Controllare il formato o l'esistenza.",
 
     // Behavior Setting
     SETTINGS_FORCE_EDIT_UNMANAGED_TITLE: 'Forza Modalità Modifica su Note Non Gestite',
@@ -78,6 +81,10 @@ export default {
     SETTINGS_NOTIFY_ON_MODE_CHANGE_DESC: 'Mostra una breve notifica quando il plugin cambia attivamente la modalità di visualizzazione di una nota all\'apertura. Questa è una funzionalità BETA.',
     SETTINGS_ENABLE_DEBUG_LOGGING_TITLE: 'Abilita Log di Debug',
     SETTINGS_ENABLE_DEBUG_LOGGING_DESC: 'Mostra log dettagliati nella console sviluppatore. Richiede il riavvio di Obsidian o il ricaricamento del plugin per avere pieno effetto.',
+	SETTINGS_ENABLE_CONFLICT_DETECTION_TITLE: "Abilita Rilevamento Conflitti",
+	SETTINGS_ENABLE_CONFLICT_DETECTION_DESC: "Analizza le impostazioni per regole in conflitto (ad es. stesso percorso negli elenchi predefinito e rigoroso). I conflitti verranno evidenziati negli elenchi sottostanti.",
+	SETTINGS_NOTIFY_ON_CONFLICT_TITLE: "Notifica Conflitti di Configurazione",
+	SETTINGS_NOTIFY_ON_CONFLICT_DESC: "Mostra una notifica se vengono rilevati conflitti di configurazione all'apertura o alla modifica delle impostazioni.",
 
     // Notifications (from main.ts)
     NOTICE_MODE_CHANGE_PREFIX: "'{fileName}' impostato su ",
@@ -87,6 +94,9 @@ export default {
     NOTICE_INVALID_STRICT_REGEX_PREFIX: "Enhanced Read Mode: Pattern regex rigoroso non valido: ",
     NOTICE_INVALID_DEFAULT_REGEX_PREFIX: "Enhanced Read Mode: Pattern regex predefinito non valido: ",
     NOTICE_NOTIFICATIONS_ENABLED: "Notifiche cambio modalità abilitate.",
+	NOTICE_CONFLICTS_DETECTED_SUMMARY: "Rilevati {count} conflitti di configurazione.",
+	NOTICE_CHECK_SETTINGS_FOR_DETAILS: "Controlla le impostazioni del plugin per i dettagli.",
+	NOTICE_CHECK_SETTINGS_FOR_DETAILS_INLINE: "Controlla gli elenchi sottostanti per i dettagli.",
 
     // Command Palette Command Names (from main.ts)
     COMMAND_TOGGLE_DEFAULT: "Enhanced Read Mode Control: Alterna sola lettura predefinita per nota corrente",
@@ -107,4 +117,14 @@ export default {
     // Language Setting
     SETTINGS_PLUGIN_LANGUAGE_TITLE: "Lingua Plugin",
     SETTINGS_PLUGIN_LANGUAGE_DESC: "Scegli la lingua di visualizzazione per l'interfaccia di questo plugin. Richiede il riavvio di Obsidian o il ricaricamento del plugin per applicare le modifiche.",
+	SETTINGS_DIAGNOSTICS_TITLE: "Diagnostica Configurazione",
+	CONFLICT_DIRECT_SAME_PATH_FILE_DEFAULT: "Conflitto: Questo file ('{path}') è anche nell'elenco File di Sola Lettura Rigorosa. Sarà RIGOROSO.",
+	CONFLICT_DIRECT_SAME_PATH_FILE_STRICT: "Conflitto: Questo file ('{path}') è anche nell'elenco File di Sola Lettura Predefiniti. Sarà RIGOROSO come da priorità.",
+	CONFLICT_DIRECT_SAME_PATH_FOLDER_DEFAULT: "Conflitto: Questa cartella ('{path}') è anche nell'elenco Cartelle di Sola Lettura Rigorosa. Tutte le note all'interno saranno RIGOROSE.",
+	CONFLICT_DIRECT_SAME_PATH_FOLDER_STRICT: "Conflitto: Questa cartella ('{path}') è anche nell'elenco Cartelle di Sola Lettura Predefinite. Tutte le note all'interno saranno RIGOROSE come da priorità.",
+	CONFLICT_DEFAULT_FILE_IN_STRICT_FOLDER: "Sovrascrittura: Questo file ('{path}') è in un elenco Predefinito, ma si trova all'interno della cartella Rigorosa '{conflictingPath}'. Sarà RIGOROSO.",
+	CONFLICT_STRICT_FILE_IN_DEFAULT_FOLDER: "Info: Questo file ('{path}') è in un elenco Rigoroso e all'interno della cartella Predefinita '{conflictingPath}'. La regola Rigorosa specifica del file ha la precedenza.",
+	CONFLICT_DEFAULT_FILE_IN_DEFAULT_FOLDER_REDUNDANT: "Ridondante: Questo file ('{path}') è già coperto dalla regola Cartella di Sola Lettura Predefinita per '{conflictingPath}'.",
+	CONFLICT_STRICT_FILE_IN_STRICT_FOLDER_REDUNDANT: "Ridondante: Questo file ('{path}') è già coperto dalla regola Cartella di Sola Lettura Rigorosa per '{conflictingPath}'.",
+
 };

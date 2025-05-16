@@ -50,6 +50,9 @@ export default {
     SETTINGS_LIST_UI_EMPTY_FILES: 'هنوز هیچ فایلی اضافه نشده است.',
     SETTINGS_LIST_UI_EMPTY_FOLDERS: 'هنوز هیچ پوشه‌ای اضافه نشده است.',
     SETTINGS_LIST_UI_EMPTY_REGEX: 'هنوز هیچ الگوی regex اضافه نشده است.',
+	SETTINGS_LIST_UI_ALREADY_EXISTS_PATH: "مسیر '{path}' از قبل در این لیست وجود دارد.",
+	SETTINGS_LIST_UI_ALREADY_EXISTS_REGEX: "الگوی Regex '{path}' از قبل در این لیست وجود دارد.",
+	SETTINGS_LIST_UI_INVALID_PATH_OR_REGEX: "{itemType} نامعتبر: '{path}'. لطفاً قالب یا وجود را بررسی کنید.",
 
     // Behavior Setting
     SETTINGS_FORCE_EDIT_UNMANAGED_TITLE: 'اجبار حالت ویرایش بر روی یادداشت‌های مدیریت نشده',
@@ -78,6 +81,10 @@ export default {
     SETTINGS_NOTIFY_ON_MODE_CHANGE_DESC: 'هنگامی که افزونه به طور فعال حالت نمایش یک یادداشت را هنگام باز شدن تغییر می‌دهد، یک اعلان کوتاه نشان دهید. این یک ویژگی بتا است.',
     SETTINGS_ENABLE_DEBUG_LOGGING_TITLE: 'فعال کردن ثبت اشکال‌زدایی',
     SETTINGS_ENABLE_DEBUG_LOGGING_DESC: 'نمایش گزارش‌های دقیق در کنسول توسعه‌دهنده. برای اعمال کامل تغییرات نیاز به راه‌اندازی مجدد آبسیدین یا بارگذاری مجدد افزونه است.',
+	SETTINGS_ENABLE_CONFLICT_DETECTION_TITLE: "فعال کردن تشخیص تضاد",
+	SETTINGS_ENABLE_CONFLICT_DETECTION_DESC: "تنظیمات را برای قوانین متضاد تجزیه و تحلیل کنید (مثلاً مسیر یکسان در لیست های پیش فرض و سختگیر). تضادها در لیست های زیر برجسته می شوند.",
+	SETTINGS_NOTIFY_ON_CONFLICT_TITLE: "اطلاع رسانی در مورد تضادهای پیکربندی",
+	SETTINGS_NOTIFY_ON_CONFLICT_DESC: "در صورت شناسایی تضادهای پیکربندی هنگام باز کردن یا تغییر تنظیمات، یک اعلان نشان داده شود.",
 
     // Notifications (from main.ts)
     NOTICE_MODE_CHANGE_PREFIX: "'{fileName}' به حالت ",
@@ -87,6 +94,9 @@ export default {
     NOTICE_INVALID_STRICT_REGEX_PREFIX: "Enhanced Read Mode: الگوی regex سختگیرانه نامعتبر: ",
     NOTICE_INVALID_DEFAULT_REGEX_PREFIX: "Enhanced Read Mode: الگوی regex پیش‌فرض نامعتبر: ",
     NOTICE_NOTIFICATIONS_ENABLED: "اطلاع‌رسانی‌های تغییر حالت فعال شدند.",
+	NOTICE_CONFLICTS_DETECTED_SUMMARY: "{count} تضاد پیکربندی شناسایی شد.",
+	NOTICE_CHECK_SETTINGS_FOR_DETAILS: "برای جزئیات، تنظیمات افزونه را بررسی کنید.",
+	NOTICE_CHECK_SETTINGS_FOR_DETAILS_INLINE: "برای جزئیات، لیست های زیر را بررسی کنید.",
 
     // Command Palette Command Names (from main.ts)
     COMMAND_TOGGLE_DEFAULT: "Enhanced Read Mode Control: تغییر حالت فقط خواندنی پیش‌فرض برای یادداشت فعلی",
@@ -107,4 +117,14 @@ export default {
     // Language Setting
     SETTINGS_PLUGIN_LANGUAGE_TITLE: "زبان افزونه",
     SETTINGS_PLUGIN_LANGUAGE_DESC: "زبان نمایش رابط کاربری این افزونه را انتخاب کنید. برای اعمال تغییرات نیاز به راه‌اندازی مجدد آبسیدین یا بارگذاری مجدد افزونه است.",
+	SETTINGS_DIAGNOSTICS_TITLE: "تشخیص پیکربندی",
+	CONFLICT_DIRECT_SAME_PATH_FILE_DEFAULT: "تضاد: این فایل ('{path}') در لیست فایل های فقط خواندنی سختگیر نیز وجود دارد. سختگیر خواهد بود.",
+	CONFLICT_DIRECT_SAME_PATH_FILE_STRICT: "تضاد: این فایل ('{path}') در لیست فایل های فقط خواندنی پیش فرض نیز وجود دارد. طبق اولویت سختگیر خواهد بود.",
+	CONFLICT_DIRECT_SAME_PATH_FOLDER_DEFAULT: "تضاد: این پوشه ('{path}') در لیست پوشه های فقط خواندنی سختگیر نیز وجود دارد. تمام یادداشت های داخل آن سختگیر خواهند بود.",
+	CONFLICT_DIRECT_SAME_PATH_FOLDER_STRICT: "تضاد: این پوشه ('{path}') در لیست پوشه های فقط خواندنی پیش فرض نیز وجود دارد. طبق اولویت تمام یادداشت های داخل آن سختگیر خواهند بود.",
+	CONFLICT_DEFAULT_FILE_IN_STRICT_FOLDER: "نادیده گرفتن: این فایل ('{path}') در یک لیست پیش فرض قرار دارد، اما داخل پوشه سختگیر '{conflictingPath}' است. سختگیر خواهد بود.",
+	CONFLICT_STRICT_FILE_IN_DEFAULT_FOLDER: "اطلاعات: این فایل ('{path}') در یک لیست سختگیر و داخل پوشه پیش فرض '{conflictingPath}' قرار دارد. قانون سختگیر مخصوص فایل اولویت دارد.",
+	CONFLICT_DEFAULT_FILE_IN_DEFAULT_FOLDER_REDUNDANT: "اضافی: این فایل ('{path}') قبلاً توسط قانون پوشه فقط خواندنی پیش فرض برای '{conflictingPath}' پوشش داده شده است.",
+	CONFLICT_STRICT_FILE_IN_STRICT_FOLDER_REDUNDANT: "اضافی: این فایل ('{path}') قبلاً توسط قانون پوشه فقط خواندنی سختگیر برای '{conflictingPath}' پوشش داده شده است.",
+
 };
