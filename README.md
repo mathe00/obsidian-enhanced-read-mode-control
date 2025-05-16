@@ -31,6 +31,7 @@ Tired of Obsidian forgetting your preferred view mode? Need to protect certain n
 -   [Why this plugin? 🤔](#why-this-plugin)
     -   [Feature Highlight: Strict Mode & Folder Rules 🛡️](#strict-mode-feature)
     -   [Feature Highlight: Default Mode - A Better Memory ✨](#default-mode-feature)
+-   [🚦 Conflict Detection & Diagnostics](#conflict-detection) <!-- NOUVELLE LIGNE -->
 -   [🚀 Future Features (Roadmap)](#roadmap)
 -   [🛠️ Installation](#installation)
     -   [From Obsidian Community Plugins (Recommended - When Available)](#install-community)
@@ -69,6 +70,7 @@ Whether you want to gently nudge certain notes to open in read mode first ("Defa
 *   **🐞 Debug Logging:** An optional setting to enable detailed console logs for troubleshooting.
 *   **✅ Reliable State Management:** Ensures consistent view mode application based on your rules and chosen behavior.
 *   **✨ Improved Settings UI:** Manage exact path lists with autocompletion and an interactive add/remove interface.
+*   **🚦 Conflict Detection (NEW):** Identifies and highlights conflicting or redundant rules in your exact path settings, with optional notifications and visual cues in the settings UI.
 
 <a id="why-this-plugin"></a>
 ## Why this plugin? 🤔
@@ -159,6 +161,31 @@ This is useful for:
 *   **Notes You Primarily Read:** Reduce friction for your most common interaction.
 
 It provides reliable "open in read mode" behavior for the notes you specify.
+
+<a id="conflict-detection"></a>
+## 🚦 Conflict Detection & Diagnostics
+
+To help you maintain a clean and predictable configuration, **Enhanced Read Mode Control** includes a conflict detection system for your path-based rules.
+
+*   **How it works:** When enabled, the plugin analyzes your "Default Read-Only" and "Strict Read-Only" lists for files and folders to identify potential conflicts or redundancies.
+    *   **Direct Conflicts:** Same file/folder path in both a "Default" and "Strict" list.
+    *   **Override Warnings:** A file in a "Default" list that resides within a "Strict" folder (the file will be strict).
+    *   **Informational:** A file in a "Strict" list that resides within a "Default" folder (the file's strict rule takes precedence).
+    *   **Redundancies:** A file explicitly listed that is already covered by a folder rule of the same mode.
+*   **Enabling Detection:**
+    *   Go to **Settings** > **Community Plugins** > **Enhanced Read Mode Control**.
+    *   Under the "**Feedback, Debugging & Diagnostics**" section, toggle on "**Enable Conflict Detection**".
+*   **Visual Indicators:**
+    *   If conflicts are detected and detection is enabled, items in your path lists that are involved in a conflict or redundancy will be:
+        *   Marked with a warning icon (⚠️).
+        *   Displayed with their path text in an orange/warning color.
+        *   Hovering over the item or its icon will show a tooltip explaining the specific issue.
+*   **Notifications:**
+    *   You can also enable "**Notify on Configuration Conflicts**". If active, a summary notification will appear when you open the settings or save changes if any conflicts are found.
+*   **Diagnostics Section:**
+    *   When conflict detection is enabled and conflicts are present, a "Configuration Diagnostics" summary will appear at the top of the plugin's settings tab.
+
+This feature helps ensure your rules behave as expected and highlights areas where your configuration might be simplified or clarified. *Currently, conflict detection applies only to exact path rules for files and folders, not regex patterns.*
 
 <a id="roadmap"></a>
 ## 🚀 Future Features (Roadmap)
@@ -261,10 +288,14 @@ You will find the following options grouped by functionality:
         *   **Drawback:** Overrides manual choices. If you set a normal note to read-only, this plugin WILL force it back to edit mode when you reopen it.
     *   Choose the behavior that best suits your workflow.
 
-**4. Feedback & Debugging:**
+**4. Feedback, Debugging & Diagnostics:**
 
 *   **Notify on Mode Change (BETA):**
     *   Show a brief notification when the plugin actively changes a note's view mode upon opening.
+*   **Enable Conflict Detection (NEW):**
+    *   Toggle this on to analyze your exact path settings for conflicting or redundant rules. Conflicts will be visually highlighted in the path lists.
+*   **Notify on Configuration Conflicts (NEW):**
+    *   Show a global notification if configuration conflicts are detected when the settings tab is opened or when settings are saved.
 *   **Enable Debug Logging:**
     *   Toggle this on to see detailed messages from the plugin in the developer console. Useful for troubleshooting. Requires a reload/restart to take full effect.
 
