@@ -1,9 +1,19 @@
 // src/suggesters.ts
 
-import { App, AbstractInputSuggest, TFolder, TFile, TAbstractFile } from 'obsidian';
+import {
+	App,
+	AbstractInputSuggest,
+	TFolder,
+	TFile,
+	TAbstractFile,
+} from "obsidian";
 
 export class FolderSuggest extends AbstractInputSuggest<TFolder> {
-	constructor(app: App, private inputEl: HTMLInputElement) { // Type changed to HTMLInputElement
+	constructor(
+		app: App,
+		private inputEl: HTMLInputElement,
+	) {
+		// Type changed to HTMLInputElement
 		super(app, inputEl);
 	}
 
@@ -14,8 +24,11 @@ export class FolderSuggest extends AbstractInputSuggest<TFolder> {
 
 		if (!inputStr.trim()) {
 			allFiles.forEach((file: TAbstractFile) => {
-				if (file instanceof TFolder && !file.path.includes('/')) {
-					if (file.name !== '.obsidian' && !file.name.startsWith('.')) {
+				if (file instanceof TFolder && !file.path.includes("/")) {
+					if (
+						file.name !== ".obsidian" &&
+						!file.name.startsWith(".")
+					) {
 						folders.push(file);
 					}
 				}
@@ -26,7 +39,11 @@ export class FolderSuggest extends AbstractInputSuggest<TFolder> {
 
 		allFiles.forEach((file: TAbstractFile) => {
 			if (file instanceof TFolder) {
-				if (file.name === '.obsidian' || file.name.startsWith('.') || file.name === '__pycache__') {
+				if (
+					file.name === ".obsidian" ||
+					file.name.startsWith(".") ||
+					file.name === "__pycache__"
+				) {
 					return;
 				}
 				if (file.path.toLowerCase().contains(lowerCaseInputStr)) {
@@ -44,13 +61,17 @@ export class FolderSuggest extends AbstractInputSuggest<TFolder> {
 
 	selectSuggestion(item: TFolder): void {
 		this.inputEl.value = item.path;
-		this.inputEl.trigger('input');
+		this.inputEl.trigger("input");
 		this.close();
 	}
 }
 
 export class FileSuggest extends AbstractInputSuggest<TFile> {
-	constructor(app: App, private inputEl: HTMLInputElement) { // Type changed to HTMLInputElement
+	constructor(
+		app: App,
+		private inputEl: HTMLInputElement,
+	) {
+		// Type changed to HTMLInputElement
 		super(app, inputEl);
 	}
 
@@ -80,7 +101,7 @@ export class FileSuggest extends AbstractInputSuggest<TFile> {
 
 	selectSuggestion(item: TFile): void {
 		this.inputEl.value = item.path;
-		this.inputEl.trigger('input');
+		this.inputEl.trigger("input");
 		this.close();
 	}
 }
