@@ -91,7 +91,7 @@ export const PURE_AVAILABLE_LANGUAGES: Record<string, string> = {
 };
 
 let activeTranslations: LanguagePack = en; // Default to English
-let currentLanguageCode: string = 'en';
+let currentLanguageCode = 'en';
 
 
 export function getAvailableLanguages(): Record<string, string> {
@@ -173,7 +173,7 @@ export function loadTranslations(plugin: EnhancedReadModeControlPlugin): void {
  * @returns The translated string or the key itself if not found.
  */
 export function t(key: string, vars?: Record<string, string>): string {
-    let text: any = activeTranslations; // Use activeTranslations
+    let text: string | Record<string, string | Record<string, string>> | undefined = activeTranslations; // Use activeTranslations
     const keyParts = key.split('.');
     for (const part of keyParts) {
         if (text && typeof text === 'object' && part in text) {
@@ -186,7 +186,7 @@ export function t(key: string, vars?: Record<string, string>): string {
 
     if (typeof text !== 'string') {
         // Fallback to English if key not found in current language
-        let fallbackText: any = en; // Default to English pack
+        let fallbackText: string | Record<string, string | Record<string, string>> | undefined = en; // Default to English pack
         for (const part of keyParts) {
             if (fallbackText && typeof fallbackText === 'object' && part in fallbackText) {
                 fallbackText = fallbackText[part];

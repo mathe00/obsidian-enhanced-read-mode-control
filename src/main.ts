@@ -1,12 +1,10 @@
 // src/main.ts
 
 import {
-	App,
 	MarkdownView,
 	Notice,
 	Plugin,
 	TFile,
-	WorkspaceLeaf,
 } from 'obsidian';
 import {
 	ReadModeControlSettings,
@@ -356,7 +354,7 @@ export default class EnhancedReadModeControlPlugin extends Plugin {
 		this.logDebug(`toggleFileInList: Toggling path '${filePath}' for target mode '${targetMode}'.`);
 
 		let messageKey = ''; 
-        let messageVars: Record<string, string> = { fileName };
+        const messageVars: Record<string, string> = { fileName };
 
         const updatedSettings: ReadModeControlSettings = {
             ...this.settings, 

@@ -3,7 +3,7 @@
 import { App, PluginSettingTab, Setting, ToggleComponent, ButtonComponent, TextComponent, TFolder, TFile, normalizePath, Notice,setIcon } from 'obsidian';
 import EnhancedReadModeControlPlugin from './main';
 import { FileSuggest, FolderSuggest } from './suggesters';
-import { t, getAvailableLanguages, loadTranslations } from './lang/translations';
+import { t, getAvailableLanguages } from './lang/translations';
 import { ReadModeControlSettings, ConflictInfo } from './types';
 
 
