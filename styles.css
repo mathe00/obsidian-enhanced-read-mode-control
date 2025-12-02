@@ -8,9 +8,63 @@
 	width: 100%; /* Allow input to take more space */
 }
 
+/* Enhanced styling for the input field to make it wider and more prominent */
+.ermc-path-input-setting .setting-item-info input {
+	width: 100% !important;
+	max-width: 100% !important;
+	flex: 1 1 auto !important;
+	min-width: 300px !important;
+	padding: 8px 12px !important;
+	border: 1px solid var(--background-modifier-border) !important;
+	border-radius: 6px !important;
+	background-color: var(--background-primary) !important;
+	font-size: var(--font-ui-medium) !important;
+	transition: all 0.2s ease-in-out !important;
+}
+
+.ermc-path-input-setting .setting-item-info input:focus {
+	border-color: var(--interactive-accent) !important;
+	box-shadow: 0 0 0 2px var(--interactive-accent-hover) !important;
+	outline: none !important;
+}
+
+.ermc-path-input-setting .setting-item-info input:hover {
+	border-color: var(--interactive-accent-hover) !important;
+}
+
+/* Style for the input container to ensure proper layout */
+.ermc-path-input-setting {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	margin-bottom: 8px;
+}
+
+.ermc-path-input-setting .setting-item-control {
+	flex-shrink: 0;
+}
+
 /* For our custom path list items, hide the default description area */
 .setting-item.ermc-path-list-item .setting-item-description {
 	display: none !important;
+}
+
+/* Enhanced styling for path list items with rounded borders and distinct appearance */
+.setting-item.ermc-path-list-item {
+	background-color: var(--background-primary-alt);
+	border: 1px solid var(--background-modifier-border);
+	border-radius: 8px;
+	margin: 4px 0;
+	padding: 8px 12px;
+	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+	transition: all 0.2s ease-in-out;
+}
+
+.setting-item.ermc-path-list-item:hover {
+	background-color: var(--background-modifier-hover);
+	border-color: var(--interactive-accent);
+	box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+	transform: translateY(-1px);
 }
 
 /* Ensure the name (our path) is visible and styled */
