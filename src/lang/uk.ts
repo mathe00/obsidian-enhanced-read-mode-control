@@ -50,6 +50,9 @@ export default {
     SETTINGS_LIST_UI_EMPTY_FILES: 'Ще не додано жодного файлу.',
     SETTINGS_LIST_UI_EMPTY_FOLDERS: 'Ще не додано жодної папки.',
     SETTINGS_LIST_UI_EMPTY_REGEX: 'Ще не додано жодного шаблону regex.',
+	SETTINGS_LIST_UI_ALREADY_EXISTS_PATH: "Шлях '{path}' вже існує в цьому списку.",
+	SETTINGS_LIST_UI_ALREADY_EXISTS_REGEX: "Шаблон Regex '{path}' вже існує в цьому списку.",
+	SETTINGS_LIST_UI_INVALID_PATH_OR_REGEX: "Недійсний {itemType}: '{path}'. Перевірте формат або існування.",
 
     // Behavior Setting
     SETTINGS_FORCE_EDIT_UNMANAGED_TITLE: 'Примусовий Режим Редагування для Некерованих Нотаток',
@@ -78,6 +81,10 @@ export default {
     SETTINGS_NOTIFY_ON_MODE_CHANGE_DESC: 'Показувати коротке сповіщення, коли плагін активно змінює режим перегляду нотатки при відкритті. Це функція БЕТА.',
     SETTINGS_ENABLE_DEBUG_LOGGING_TITLE: 'Увімкнути Журнал Налагодження',
     SETTINGS_ENABLE_DEBUG_LOGGING_DESC: 'Показувати детальні журнали в консолі розробника. Потребує перезапуску Obsidian або перезавантаження плагіна для повного ефекту.',
+	SETTINGS_ENABLE_CONFLICT_DETECTION_TITLE: "Увімкнути виявлення конфліктів",
+	SETTINGS_ENABLE_CONFLICT_DETECTION_DESC: "Аналізувати налаштування на наявність конфліктних правил (наприклад, однаковий шлях у списках за замовчуванням та суворих). Конфлікти будуть виділені у списках нижче.",
+	SETTINGS_NOTIFY_ON_CONFLICT_TITLE: "Сповіщати про конфлікти конфігурації",
+	SETTINGS_NOTIFY_ON_CONFLICT_DESC: "Показувати сповіщення, якщо виявлено конфлікти конфігурації під час відкриття або зміни налаштувань.",
 
     // Notifications (from main.ts)
     NOTICE_MODE_CHANGE_PREFIX: "'{fileName}' встановлено на ",
@@ -87,6 +94,9 @@ export default {
     NOTICE_INVALID_STRICT_REGEX_PREFIX: "Enhanced Read Mode: Неправильний суворий шаблон regex: ",
     NOTICE_INVALID_DEFAULT_REGEX_PREFIX: "Enhanced Read Mode: Неправильний шаблон regex за замовчуванням: ",
     NOTICE_NOTIFICATIONS_ENABLED: "Сповіщення про зміну режиму увімкнено.",
+	NOTICE_CONFLICTS_DETECTED_SUMMARY: "Виявлено {count} конфлікт(ів) конфігурації.",
+	NOTICE_CHECK_SETTINGS_FOR_DETAILS: "Перевірте налаштування плагіна для деталей.",
+	NOTICE_CHECK_SETTINGS_FOR_DETAILS_INLINE: "Перевірте списки нижче для деталей.",
 
     // Command Palette Command Names (from main.ts)
     COMMAND_TOGGLE_DEFAULT: "Enhanced Read Mode Control: Перемкнути лише для читання за замовчуванням для поточної нотатки",
@@ -107,4 +117,14 @@ export default {
     // Language Setting
     SETTINGS_PLUGIN_LANGUAGE_TITLE: "Мова Плагіна",
     SETTINGS_PLUGIN_LANGUAGE_DESC: "Виберіть мову відображення для інтерфейсу цього плагіна. Потребує перезапуску Obsidian або перезавантаження плагіна для застосування змін.",
+	SETTINGS_DIAGNOSTICS_TITLE: "Діагностика конфігурації",
+	CONFLICT_DIRECT_SAME_PATH_FILE_DEFAULT: "Конфлікт: Цей файл ('{path}') також є у списку Файли суворого режиму лише для читання. Він буде СУВОРИМ.",
+	CONFLICT_DIRECT_SAME_PATH_FILE_STRICT: "Конфлікт: Цей файл ('{path}') також є у списку Файли лише для читання за замовчуванням. Він буде СУВОРИМ відповідно до пріоритету.",
+	CONFLICT_DIRECT_SAME_PATH_FOLDER_DEFAULT: "Конфлікт: Ця тека ('{path}') також є у списку Теки суворого режиму лише для читання. Усі нотатки в ній будуть СУВОРИМИ.",
+	CONFLICT_DIRECT_SAME_PATH_FOLDER_STRICT: "Конфлікт: Ця тека ('{path}') також є у списку Теки лише для читання за замовчуванням. Усі нотатки в ній будуть СУВОРИМИ відповідно до пріоритету.",
+	CONFLICT_DEFAULT_FILE_IN_STRICT_FOLDER: "Перевизначення: Цей файл ('{path}') є у списку За замовчуванням, але він всередині теки Суворого режиму '{conflictingPath}'. Він буде СУВОРИМ.",
+	CONFLICT_STRICT_FILE_IN_DEFAULT_FOLDER: "Інформація: Цей файл ('{path}') є у списку Суворого режиму та всередині теки За замовчуванням '{conflictingPath}'. Правило Суворого режиму для файлу має пріоритет.",
+	CONFLICT_DEFAULT_FILE_IN_DEFAULT_FOLDER_REDUNDANT: "Надлишково: Цей файл ('{path}') вже охоплений правилом Теки лише для читання за замовчуванням для '{conflictingPath}'.",
+	CONFLICT_STRICT_FILE_IN_STRICT_FOLDER_REDUNDANT: "Надлишково: Цей файл ('{path}') вже охоплений правилом Теки суворого режиму лише для читання для '{conflictingPath}'.",
+
 };

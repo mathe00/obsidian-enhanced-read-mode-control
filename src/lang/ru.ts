@@ -50,6 +50,9 @@ export default {
     SETTINGS_LIST_UI_EMPTY_FILES: 'Файлы еще не добавлены.',
     SETTINGS_LIST_UI_EMPTY_FOLDERS: 'Папки еще не добавлены.',
     SETTINGS_LIST_UI_EMPTY_REGEX: 'Шаблоны Regex еще не добавлены.',
+	SETTINGS_LIST_UI_ALREADY_EXISTS_PATH: "Путь '{path}' уже существует в этом списке.",
+	SETTINGS_LIST_UI_ALREADY_EXISTS_REGEX: "Шаблон Regex '{path}' уже существует в этом списке.",
+	SETTINGS_LIST_UI_INVALID_PATH_OR_REGEX: "Недопустимый {itemType}: '{path}'. Проверьте формат или существование.",
 
     // Behavior Setting
     SETTINGS_FORCE_EDIT_UNMANAGED_TITLE: 'Принудительный режим редактирования для неуправляемых заметок',
@@ -78,6 +81,10 @@ export default {
     SETTINGS_NOTIFY_ON_MODE_CHANGE_DESC: 'Показывать короткое уведомление, когда плагин активно изменяет режим просмотра заметки при ее открытии. Это БЕТА-функция.',
     SETTINGS_ENABLE_DEBUG_LOGGING_TITLE: 'Включить журнал отладки',
     SETTINGS_ENABLE_DEBUG_LOGGING_DESC: 'Показывать подробные журналы в консоли разработчика. Требуется перезапуск Obsidian или перезагрузка плагина для полного применения.',
+	SETTINGS_ENABLE_CONFLICT_DETECTION_TITLE: "Включить обнаружение конфликтов",
+	SETTINGS_ENABLE_CONFLICT_DETECTION_DESC: "Анализировать настройки на предмет конфликтующих правил (например, один и тот же путь в списках по умолчанию и строгом). Конфликты будут выделены в списках ниже.",
+	SETTINGS_NOTIFY_ON_CONFLICT_TITLE: "Уведомлять о конфликтах конфигурации",
+	SETTINGS_NOTIFY_ON_CONFLICT_DESC: "Показывать уведомление, если при открытии или изменении настроек обнаружены конфликты конфигурации.",
 
     // Notifications (from main.ts)
     NOTICE_MODE_CHANGE_PREFIX: "'{fileName}' установлен в режим ",
@@ -87,6 +94,9 @@ export default {
     NOTICE_INVALID_STRICT_REGEX_PREFIX: "Enhanced Read Mode: Неверный шаблон строгого regex: ",
     NOTICE_INVALID_DEFAULT_REGEX_PREFIX: "Enhanced Read Mode: Неверный шаблон regex по умолчанию: ",
     NOTICE_NOTIFICATIONS_ENABLED: "Уведомления об изменении режима включены.",
+	NOTICE_CONFLICTS_DETECTED_SUMMARY: "Обнаружено {count} конфликт(ов) конфигурации.",
+	NOTICE_CHECK_SETTINGS_FOR_DETAILS: "Подробности смотрите в настройках плагина.",
+	NOTICE_CHECK_SETTINGS_FOR_DETAILS_INLINE: "Подробности смотрите в списках ниже.",
 
     // Command Palette Command Names (from main.ts)
     COMMAND_TOGGLE_DEFAULT: "Enhanced Read Mode Control: Переключить режим только для чтения по умолчанию для текущей заметки",
@@ -107,4 +117,14 @@ export default {
     // Language Setting
     SETTINGS_PLUGIN_LANGUAGE_TITLE: "Язык плагина",
     SETTINGS_PLUGIN_LANGUAGE_DESC: "Выберите язык отображения для интерфейса этого плагина. Требуется перезапуск Obsidian или перезагрузка плагина для применения изменений.",
+	SETTINGS_DIAGNOSTICS_TITLE: "Диагностика конфигурации",
+	CONFLICT_DIRECT_SAME_PATH_FILE_DEFAULT: "Конфликт: Этот файл ('{path}') также находится в списке Файлы строгого только для чтения. Он будет СТРОГИМ.",
+	CONFLICT_DIRECT_SAME_PATH_FILE_STRICT: "Конфликт: Этот файл ('{path}') также находится в списке Файлы только для чтения по умолчанию. Он будет СТРОГИМ в соответствии с приоритетом.",
+	CONFLICT_DIRECT_SAME_PATH_FOLDER_DEFAULT: "Конфликт: Эта папка ('{path}') также находится в списке Папки строгого только для чтения. Все заметки в ней будут СТРОГИМИ.",
+	CONFLICT_DIRECT_SAME_PATH_FOLDER_STRICT: "Конфликт: Эта папка ('{path}') также находится в списке Папки только для чтения по умолчанию. Все заметки в ней будут СТРОГИМИ в соответствии с приоритетом.",
+	CONFLICT_DEFAULT_FILE_IN_STRICT_FOLDER: "Переопределение: Этот файл ('{path}') находится в списке По умолчанию, но он внутри папки Строгого режима '{conflictingPath}'. Он будет СТРОГИМ.",
+	CONFLICT_STRICT_FILE_IN_DEFAULT_FOLDER: "Информация: Этот файл ('{path}') находится в списке Строгого режима и внутри папки По умолчанию '{conflictingPath}'. Правило Строгого режима для файла имеет приоритет.",
+	CONFLICT_DEFAULT_FILE_IN_DEFAULT_FOLDER_REDUNDANT: "Избыточно: Этот файл ('{path}') уже покрывается правилом Папки только для чтения по умолчанию для '{conflictingPath}'.",
+	CONFLICT_STRICT_FILE_IN_STRICT_FOLDER_REDUNDANT: "Избыточно: Этот файл ('{path}') уже покрывается правилом Папки строгого только для чтения для '{conflictingPath}'.",
+
 };

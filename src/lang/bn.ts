@@ -50,6 +50,9 @@ export default {
     SETTINGS_LIST_UI_EMPTY_FILES: 'এখনও কোনো ফাইল যোগ করা হয়নি।',
     SETTINGS_LIST_UI_EMPTY_FOLDERS: 'এখনও কোনো ফোল্ডার যোগ করা হয়নি।',
     SETTINGS_LIST_UI_EMPTY_REGEX: 'এখনও কোনো রেজেক্স প্যাটার্ন যোগ করা হয়নি।',
+	SETTINGS_LIST_UI_ALREADY_EXISTS_PATH: "পাথ '{path}' এই তালিকায় ইতিমধ্যে বিদ্যমান।",
+	SETTINGS_LIST_UI_ALREADY_EXISTS_REGEX: "রেজেক্স প্যাটার্ন '{path}' এই তালিকায় ইতিমধ্যে বিদ্যমান।",
+	SETTINGS_LIST_UI_INVALID_PATH_OR_REGEX: "অবৈধ {itemType}: '{path}'। অনুগ্রহ করে ফর্ম্যাট বা অস্তিত্ব পরীক্ষা করুন।",
 
     // Behavior Setting
     SETTINGS_FORCE_EDIT_UNMANAGED_TITLE: 'অব্যবস্থাপিত নোটগুলিতে এডিট মোড ফোর্স করুন',
@@ -78,6 +81,10 @@ export default {
     SETTINGS_NOTIFY_ON_MODE_CHANGE_DESC: 'প্লাগইন খোলার সময় সক্রিয়ভাবে একটি নোটের ভিউ মোড পরিবর্তন করলে একটি সংক্ষিপ্ত বিজ্ঞপ্তি দেখান। এটি একটি বিটা বৈশিষ্ট্য।',
     SETTINGS_ENABLE_DEBUG_LOGGING_TITLE: 'ডিবাগ লগিং সক্রিয় করুন',
     SETTINGS_ENABLE_DEBUG_LOGGING_DESC: 'ডেভেলপার কনসোলে বিস্তারিত লগ দেখান। সম্পূর্ণ প্রভাবের জন্য অবসিডিয়ান পুনরায় চালু করা বা প্লাগইন পুনরায় লোড করা প্রয়োজন।',
+	SETTINGS_ENABLE_CONFLICT_DETECTION_TITLE: "বিরোধ সনাক্তকরণ সক্ষম করুন",
+	SETTINGS_ENABLE_CONFLICT_DETECTION_DESC: "বিরোধপূর্ণ নিয়মগুলির জন্য সেটিংস বিশ্লেষণ করুন (যেমন ডিফল্ট এবং স্ট্রিক্ট তালিকায় একই পাথ)। বিরোধগুলি নীচের তালিকায় হাইলাইট করা হবে।",
+	SETTINGS_NOTIFY_ON_CONFLICT_TITLE: "কনফিগারেশন বিরোধে অবহিত করুন",
+	SETTINGS_NOTIFY_ON_CONFLICT_DESC: "সেটিংস খোলা বা পরিবর্তন করার সময় কনফিগারেশন বিরোধ সনাক্ত করা হলে একটি বিজ্ঞপ্তি দেখান।",
 
     // Notifications (from main.ts)
     NOTICE_MODE_CHANGE_PREFIX: "'{fileName}' সেট করা হয়েছে ", // e.g., "'MyNote.md' সেট করা হয়েছে "
@@ -87,6 +94,9 @@ export default {
     NOTICE_INVALID_STRICT_REGEX_PREFIX: "এনহ্যান্সড রিড মোড: অবৈধ স্ট্রিক্ট রেজেক্স প্যাটার্ন: ",
     NOTICE_INVALID_DEFAULT_REGEX_PREFIX: "এনহ্যান্সড রিড মোড: অবৈধ ডিফল্ট রেজেক্স প্যাটার্ন: ",
     NOTICE_NOTIFICATIONS_ENABLED: "মোড পরিবর্তনের বিজ্ঞপ্তি সক্রিয় করা হয়েছে।",
+	NOTICE_CONFLICTS_DETECTED_SUMMARY: "{count}টি কনফিগারেশন বিরোধ সনাক্ত করা হয়েছে।",
+	NOTICE_CHECK_SETTINGS_FOR_DETAILS: "বিস্তারিত জানার জন্য প্লাগইন সেটিংস পরীক্ষা করুন।",
+	NOTICE_CHECK_SETTINGS_FOR_DETAILS_INLINE: "বিস্তারিত জানার জন্য নীচের তালিকাগুলি পরীক্ষা করুন।",
 
     // Command Palette Command Names (from main.ts)
     COMMAND_TOGGLE_DEFAULT: "এনহ্যান্সড রিড মোড কন্ট্রোল: বর্তমান নোটের জন্য ডিফল্ট রিড-অনলি টগল করুন",
@@ -107,4 +117,14 @@ export default {
     // Language Setting
     SETTINGS_PLUGIN_LANGUAGE_TITLE: "প্লাগইন ভাষা",
     SETTINGS_PLUGIN_LANGUAGE_DESC: "এই প্লাগইনের ইন্টারফেসের জন্য প্রদর্শনের ভাষা চয়ন করুন। পরিবর্তনগুলি প্রয়োগ করতে অবসিডিয়ান পুনরায় চালু করা বা প্লাগইন পুনরায় লোড করা প্রয়োজন।",
+	SETTINGS_DIAGNOSTICS_TITLE: "কনফিগারেশন ডায়াগনস্টিকস",
+	CONFLICT_DIRECT_SAME_PATH_FILE_DEFAULT: "বিরোধ: এই ফাইলটি ('{path}') স্ট্রিক্ট রিড-অনলি ফাইল তালিকাতেও রয়েছে। এটি স্ট্রিক্ট হবে।",
+	CONFLICT_DIRECT_SAME_PATH_FILE_STRICT: "বিরোধ: এই ফাইলটি ('{path}') ডিফল্ট রিড-অনলি ফাইল তালিকাতেও রয়েছে। অগ্রাধিকার অনুযায়ী এটি স্ট্রিক্ট হবে।",
+	CONFLICT_DIRECT_SAME_PATH_FOLDER_DEFAULT: "বিরোধ: এই ফোল্ডারটি ('{path}') স্ট্রিক্ট রিড-অনলি ফোল্ডার তালিকাতেও রয়েছে। এর ভিতরের সমস্ত নোট স্ট্রিক্ট হবে।",
+	CONFLICT_DIRECT_SAME_PATH_FOLDER_STRICT: "বিরোধ: এই ফোল্ডারটি ('{path}') ডিফল্ট রিড-অনলি ফোল্ডার তালিকাতেও রয়েছে। অগ্রাধিকার অনুযায়ী এর ভিতরের সমস্ত নোট স্ট্রিক্ট হবে।",
+	CONFLICT_DEFAULT_FILE_IN_STRICT_FOLDER: "ওভাররাইড: এই ফাইলটি ('{path}') একটি ডিফল্ট তালিকায় রয়েছে, কিন্তু এটি স্ট্রিক্ট ফোল্ডার '{conflictingPath}'-এর ভিতরে। এটি স্ট্রিক্ট হবে।",
+	CONFLICT_STRICT_FILE_IN_DEFAULT_FOLDER: "তথ্য: এই ফাইলটি ('{path}') একটি স্ট্রিক্ট তালিকায় রয়েছে এবং ডিফল্ট ফোল্ডার '{conflictingPath}'-এর ভিতরে। ফাইল-নির্দিষ্ট স্ট্রিক্ট নিয়ম অগ্রাধিকার পাবে।",
+	CONFLICT_DEFAULT_FILE_IN_DEFAULT_FOLDER_REDUNDANT: "অপ্রয়োজনীয়: এই ফাইলটি ('{path}') ইতিমধ্যে '{conflictingPath}'-এর জন্য ডিফল্ট রিড-অনলি ফোল্ডার নিয়ম দ্বারা আচ্ছাদিত।",
+	CONFLICT_STRICT_FILE_IN_STRICT_FOLDER_REDUNDANT: "অপ্রয়োজনীয়: এই ফাইলটি ('{path}') ইতিমধ্যে '{conflictingPath}'-এর জন্য স্ট্রিক্ট রিড-অনলি ফোল্ডার নিয়ম দ্বারা আচ্ছাদিত।",
+
 };

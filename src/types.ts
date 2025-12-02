@@ -34,6 +34,10 @@ export interface ReadModeControlSettings {
     notifyOnModeChange: boolean;
     /** Selected language for the plugin interface. 'auto' means follow Obsidian's language. */
     pluginLanguage: string;
+    /** Whether to enable conflict detection in settings UI. */
+    conflictDetectionEnabled: boolean;
+    /** Whether to show a notification if configuration conflicts are detected. */
+    notifyOnConflict: boolean;
 }
 
 /**
@@ -51,4 +55,30 @@ export const DEFAULT_SETTINGS: ReadModeControlSettings = {
     strictReadOnlyRegex: [],
     notifyOnModeChange: false,
     pluginLanguage: 'auto', // Default to automatic language detection
+    conflictDetectionEnabled: true, // Enabled by default
+    notifyOnConflict: true, // Enabled by default
 };
+
+/**
+ * Describes a detected configuration conflict.
+ */
+export interface ConflictInfo {
+    /** The path of the item causing or involved in the conflict. */
+    path: string;
+    /** The type of list this path belongs to. */
+    listType: 'defaultFile' | 'strictFile' | 'defaultFolder' | 'strictFolder';
+    /** The nature of the conflict. */
+    conflictType:
+        | 'directSamePathFile'         // File in both defaultFiles and strictFiles
+        | 'directSamePathFolder'       // Folder in both defaultFolders and strictFolders
+        | 'defaultFileInStrictFolder'  // Default file is inside a strict folder (will be strict)
+        | 'strictFileInDefaultFolder'  // Strict file is inside a default folder (info: file rule wins)
+        | 'defaultFileInDefaultFolder' // Default file is inside a default folder (redundant)
+        | 'strictFileInStrictFolder';  // Strict file is inside a strict folder (redundant)
+    /** Translation key for the conflict message. */
+    messageKey: string;
+    /** For 'fileInFolder' type conflicts, this is the path of the folder. For 'directSamePath' it's the conflicting item's path. */
+    conflictingPath?: string;
+    /** The type of list the conflictingPath belongs to. */
+    conflictingListType?: 'defaultFile' | 'strictFile' | 'defaultFolder' | 'strictFolder';
+}

@@ -50,6 +50,9 @@ export default {
     SETTINGS_LIST_UI_EMPTY_FILES: 'Wala pang naidagdag na file.',
     SETTINGS_LIST_UI_EMPTY_FOLDERS: 'Wala pang naidagdag na folder.',
     SETTINGS_LIST_UI_EMPTY_REGEX: 'Wala pang naidagdag na pattern ng regex.',
+	SETTINGS_LIST_UI_ALREADY_EXISTS_PATH: "Ang path na '{path}' ay umiiral na sa listahang ito.",
+	SETTINGS_LIST_UI_ALREADY_EXISTS_REGEX: "Ang Regex pattern na '{path}' ay umiiral na sa listahang ito.",
+	SETTINGS_LIST_UI_INVALID_PATH_OR_REGEX: "Di-wastong {itemType}: '{path}'. Pakisuri ang format o pag-iral.",
 
     // Behavior Setting
     SETTINGS_FORCE_EDIT_UNMANAGED_TITLE: 'Pilitin ang Edit Mode sa mga Hindi Pinamamahalaang Tala',
@@ -78,6 +81,10 @@ export default {
     SETTINGS_NOTIFY_ON_MODE_CHANGE_DESC: 'Magpakita ng maikling abiso kapag aktibong binabago ng plugin ang view mode ng isang tala kapag binuksan. Ito ay isang BETA feature.',
     SETTINGS_ENABLE_DEBUG_LOGGING_TITLE: 'Paganahin ang Pag-log ng Debug',
     SETTINGS_ENABLE_DEBUG_LOGGING_DESC: 'Magpakita ng mga detalyadong log sa developer console. Nangangailangan ng pag-restart ng Obsidian o pag-reload ng plugin para sa buong epekto.',
+	SETTINGS_ENABLE_CONFLICT_DETECTION_TITLE: "Paganahin ang Pagtuklas ng Salungatan",
+	SETTINGS_ENABLE_CONFLICT_DETECTION_DESC: "Suriin ang mga setting para sa magkasalungat na panuntunan (hal., parehong path sa default at mahigpit na mga listahan). Ang mga salungatan ay iha-highlight sa mga listahan sa ibaba.",
+	SETTINGS_NOTIFY_ON_CONFLICT_TITLE: "Ipagbigay-alam sa mga Salungatan sa Configuration",
+	SETTINGS_NOTIFY_ON_CONFLICT_DESC: "Magpakita ng abiso kung may nakitang mga salungatan sa configuration kapag binuksan o binago ang mga setting.",
 
     // Notifications (from main.ts)
     NOTICE_MODE_CHANGE_PREFIX: "'{fileName}' itinakda sa ",
@@ -87,6 +94,9 @@ export default {
     NOTICE_INVALID_STRICT_REGEX_PREFIX: "Enhanced Read Mode: Hindi wastong mahigpit na pattern ng regex: ",
     NOTICE_INVALID_DEFAULT_REGEX_PREFIX: "Enhanced Read Mode: Hindi wastong default na pattern ng regex: ",
     NOTICE_NOTIFICATIONS_ENABLED: "Pinagana ang mga abiso sa pagbabago ng mode.",
+	NOTICE_CONFLICTS_DETECTED_SUMMARY: "Nakakita ng {count} salungatan sa configuration.",
+	NOTICE_CHECK_SETTINGS_FOR_DETAILS: "Suriin ang mga setting ng plugin para sa mga detalye.",
+	NOTICE_CHECK_SETTINGS_FOR_DETAILS_INLINE: "Suriin ang mga listahan sa ibaba para sa mga detalye.",
 
     // Command Palette Command Names (from main.ts)
     COMMAND_TOGGLE_DEFAULT: "Enhanced Read Mode Control: I-toggle ang default na read-only para sa kasalukuyang tala",
@@ -107,4 +117,14 @@ export default {
     // Language Setting
     SETTINGS_PLUGIN_LANGUAGE_TITLE: "Wika ng Plugin",
     SETTINGS_PLUGIN_LANGUAGE_DESC: "Piliin ang wika ng display para sa interface ng plugin na ito. Nangangailangan ng pag-restart ng Obsidian o pag-reload ng plugin para mailapat ang mga pagbabago.",
+	SETTINGS_DIAGNOSTICS_TITLE: "Mga Diagnostic ng Configuration",
+	CONFLICT_DIRECT_SAME_PATH_FILE_DEFAULT: "Salungatan: Ang file na ito ('{path}') ay nasa listahan din ng Mahigpit na Read-Only na mga File. Ito ay magiging MAHIGPIT.",
+	CONFLICT_DIRECT_SAME_PATH_FILE_STRICT: "Salungatan: Ang file na ito ('{path}') ay nasa listahan din ng Default na Read-Only na mga File. Ito ay magiging MAHIGPIT ayon sa priyoridad.",
+	CONFLICT_DIRECT_SAME_PATH_FOLDER_DEFAULT: "Salungatan: Ang folder na ito ('{path}') ay nasa listahan din ng Mahigpit na Read-Only na mga Folder. Lahat ng mga tala sa loob ay magiging MAHIGPIT.",
+	CONFLICT_DIRECT_SAME_PATH_FOLDER_STRICT: "Salungatan: Ang folder na ito ('{path}') ay nasa listahan din ng Default na Read-Only na mga Folder. Lahat ng mga tala sa loob ay magiging MAHIGPIT ayon sa priyoridad.",
+	CONFLICT_DEFAULT_FILE_IN_STRICT_FOLDER: "Override: Ang file na ito ('{path}') ay nasa isang Default na listahan, ngunit ito ay nasa loob ng Mahigpit na folder '{conflictingPath}'. Ito ay magiging MAHIGPIT.",
+	CONFLICT_STRICT_FILE_IN_DEFAULT_FOLDER: "Impormasyon: Ang file na ito ('{path}') ay nasa isang Mahigpit na listahan at nasa loob ng Default na folder '{conflictingPath}'. Ang Mahigpit na panuntunan na partikular sa file ang mangingibabaw.",
+	CONFLICT_DEFAULT_FILE_IN_DEFAULT_FOLDER_REDUNDANT: "Kalabisan: Ang file na ito ('{path}') ay sakop na ng panuntunan ng Default na Read-Only Folder para sa '{conflictingPath}'.",
+	CONFLICT_STRICT_FILE_IN_STRICT_FOLDER_REDUNDANT: "Kalabisan: Ang file na ito ('{path}') ay sakop na ng panuntunan ng Mahigpit na Read-Only Folder para sa '{conflictingPath}'.",
+
 };

@@ -50,6 +50,9 @@ export default {
     SETTINGS_LIST_UI_EMPTY_FILES: 'Noch keine Dateien hinzugefügt.',
     SETTINGS_LIST_UI_EMPTY_FOLDERS: 'Noch keine Ordner hinzugefügt.',
     SETTINGS_LIST_UI_EMPTY_REGEX: 'Noch keine Regex-Muster hinzugefügt.',
+	SETTINGS_LIST_UI_ALREADY_EXISTS_PATH: "Pfad '{path}' ist in dieser Liste bereits vorhanden.",
+	SETTINGS_LIST_UI_ALREADY_EXISTS_REGEX: "Regex-Muster '{path}' ist in dieser Liste bereits vorhanden.",
+	SETTINGS_LIST_UI_INVALID_PATH_OR_REGEX: "Ungültiger {itemType}: '{path}'. Bitte überprüfen Sie das Format oder das Vorhandensein.",
 
     // Verhaltenseinstellung
     SETTINGS_FORCE_EDIT_UNMANAGED_TITLE: 'Bearbeitungsmodus für nicht verwaltete Notizen erzwingen',
@@ -78,6 +81,10 @@ export default {
     SETTINGS_NOTIFY_ON_MODE_CHANGE_DESC: 'Zeigt eine kurze Benachrichtigung an, wenn das Plugin beim Öffnen aktiv den Ansichtsmodus einer Notiz ändert. Dies ist eine BETA-Funktion.',
     SETTINGS_ENABLE_DEBUG_LOGGING_TITLE: 'Debugging-Protokoll aktivieren',
     SETTINGS_ENABLE_DEBUG_LOGGING_DESC: 'Detaillierte Protokolle in der Entwicklerkonsole anzeigen. Erfordert einen Neustart von Obsidian oder ein Neuladen des Plugins, um vollständig wirksam zu werden.',
+	SETTINGS_ENABLE_CONFLICT_DETECTION_TITLE: "Konflikterkennung aktivieren",
+	SETTINGS_ENABLE_CONFLICT_DETECTION_DESC: "Einstellungen auf widersprüchliche Regeln analysieren (z. B. gleicher Pfad in Standard- und strengen Listen). Konflikte werden in den folgenden Listen hervorgehoben.",
+	SETTINGS_NOTIFY_ON_CONFLICT_TITLE: "Bei Konfigurationskonflikten benachrichtigen",
+	SETTINGS_NOTIFY_ON_CONFLICT_DESC: "Benachrichtigung anzeigen, wenn beim Öffnen oder Ändern der Einstellungen Konfigurationskonflikte erkannt werden.",
 
     // Benachrichtigungen (aus main.ts)
     NOTICE_MODE_CHANGE_PREFIX: "'{fileName}' gesetzt auf ",
@@ -87,6 +94,9 @@ export default {
     NOTICE_INVALID_STRICT_REGEX_PREFIX: "Enhanced Read Mode: Ungültiges strenges Regex-Muster: ",
     NOTICE_INVALID_DEFAULT_REGEX_PREFIX: "Enhanced Read Mode: Ungültiges Standard-Regex-Muster: ",
     NOTICE_NOTIFICATIONS_ENABLED: "Benachrichtigungen bei Modusänderung aktiviert.",
+	NOTICE_CONFLICTS_DETECTED_SUMMARY: "{count} Konfigurationskonflikt(e) erkannt.",
+	NOTICE_CHECK_SETTINGS_FOR_DETAILS: "Details finden Sie in den Plugin-Einstellungen.",
+	NOTICE_CHECK_SETTINGS_FOR_DETAILS_INLINE: "Details finden Sie in den folgenden Listen.",
 
     // Befehlspaletten-Befehlsnamen (aus main.ts)
     COMMAND_TOGGLE_DEFAULT: "Enhanced Read Mode Control: Standard-Schreibschutz für aktuelle Notiz umschalten",
@@ -107,4 +117,14 @@ export default {
     // Spracheinstellung
     SETTINGS_PLUGIN_LANGUAGE_TITLE: "Plugin-Sprache",
     SETTINGS_PLUGIN_LANGUAGE_DESC: "Wählen Sie die Anzeigesprache für die Benutzeroberfläche dieses Plugins. Erfordert einen Neustart von Obsidian oder ein Neuladen des Plugins, um Änderungen anzuwenden.",
+	SETTINGS_DIAGNOSTICS_TITLE: "Konfigurationsdiagnose",
+	CONFLICT_DIRECT_SAME_PATH_FILE_DEFAULT: "Konflikt: Diese Datei ('{path}') befindet sich auch in der Liste der streng schreibgeschützten Dateien. Sie wird STRENG schreibgeschützt sein.",
+	CONFLICT_DIRECT_SAME_PATH_FILE_STRICT: "Konflikt: Diese Datei ('{path}') befindet sich auch in der Liste der standardmäßig schreibgeschützten Dateien. Sie wird gemäß Priorität STRENG schreibgeschützt sein.",
+	CONFLICT_DIRECT_SAME_PATH_FOLDER_DEFAULT: "Konflikt: Dieser Ordner ('{path}') befindet sich auch in der Liste der streng schreibgeschützten Ordner. Alle Notizen darin werden STRENG schreibgeschützt sein.",
+	CONFLICT_DIRECT_SAME_PATH_FOLDER_STRICT: "Konflikt: Dieser Ordner ('{path}') befindet sich auch in der Liste der standardmäßig schreibgeschützten Ordner. Alle Notizen darin werden gemäß Priorität STRENG schreibgeschützt sein.",
+	CONFLICT_DEFAULT_FILE_IN_STRICT_FOLDER: "Überschreibung: Diese Datei ('{path}') befindet sich in einer Standardliste, aber innerhalb des streng schreibgeschützten Ordners '{conflictingPath}'. Sie wird STRENG schreibgeschützt sein.",
+	CONFLICT_STRICT_FILE_IN_DEFAULT_FOLDER: "Info: Diese Datei ('{path}') befindet sich in einer strengen Liste und innerhalb des Standardordners '{conflictingPath}'. Die dateispezifische strenge Regel hat Vorrang.",
+	CONFLICT_DEFAULT_FILE_IN_DEFAULT_FOLDER_REDUNDANT: "Redundant: Diese Datei ('{path}') wird bereits durch die Regel für standardmäßig schreibgeschützte Ordner für '{conflictingPath}' abgedeckt.",
+	CONFLICT_STRICT_FILE_IN_STRICT_FOLDER_REDUNDANT: "Redundant: Diese Datei ('{path}') wird bereits durch die Regel für streng schreibgeschützte Ordner für '{conflictingPath}' abgedeckt.",
+
 };

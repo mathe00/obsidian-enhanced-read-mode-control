@@ -50,6 +50,9 @@ export default {
     SETTINGS_LIST_UI_EMPTY_FILES: 'Belum ada fail ditambah.',
     SETTINGS_LIST_UI_EMPTY_FOLDERS: 'Belum ada folder ditambah.',
     SETTINGS_LIST_UI_EMPTY_REGEX: 'Belum ada corak regex ditambah.',
+	SETTINGS_LIST_UI_ALREADY_EXISTS_PATH: "Laluan '{path}' sudah wujud dalam senarai ini.",
+	SETTINGS_LIST_UI_ALREADY_EXISTS_REGEX: "Corak Regex '{path}' sudah wujud dalam senarai ini.",
+	SETTINGS_LIST_UI_INVALID_PATH_OR_REGEX: "{itemType} tidak sah: '{path}'. Sila semak format atau kewujudan.",
 
     // Behavior Setting
     SETTINGS_FORCE_EDIT_UNMANAGED_TITLE: 'Paksa Mod Edit pada Nota Tidak Terurus',
@@ -78,6 +81,10 @@ export default {
     SETTINGS_NOTIFY_ON_MODE_CHANGE_DESC: 'Tunjukkan pemberitahuan ringkas apabila plugin secara aktif menukar mod paparan nota semasa dibuka. Ini adalah ciri BETA.',
     SETTINGS_ENABLE_DEBUG_LOGGING_TITLE: 'Dayakan Pengelogan Nyahpepijat',
     SETTINGS_ENABLE_DEBUG_LOGGING_DESC: 'Tunjukkan log terperinci dalam konsol pembangun. Memerlukan Obsidian dimulakan semula atau plugin dimuat semula untuk kesan penuh.',
+	SETTINGS_ENABLE_CONFLICT_DETECTION_TITLE: "Dayakan Pengesanan Konflik",
+	SETTINGS_ENABLE_CONFLICT_DETECTION_DESC: "Analisis tetapan untuk peraturan yang bercanggah (cth., laluan yang sama dalam senarai lalai dan ketat). Konflik akan diserlahkan dalam senarai di bawah.",
+	SETTINGS_NOTIFY_ON_CONFLICT_TITLE: "Maklumkan mengenai Konflik Konfigurasi",
+	SETTINGS_NOTIFY_ON_CONFLICT_DESC: "Tunjukkan pemberitahuan jika konflik konfigurasi dikesan semasa tetapan dibuka atau diubah.",
 
     // Notifications (from main.ts)
     NOTICE_MODE_CHANGE_PREFIX: "'{fileName}' ditetapkan kepada ",
@@ -87,6 +94,9 @@ export default {
     NOTICE_INVALID_STRICT_REGEX_PREFIX: "Enhanced Read Mode: Corak regex ketat tidak sah: ",
     NOTICE_INVALID_DEFAULT_REGEX_PREFIX: "Enhanced Read Mode: Corak regex lalai tidak sah: ",
     NOTICE_NOTIFICATIONS_ENABLED: "Pemberitahuan perubahan mod didayakan.",
+	NOTICE_CONFLICTS_DETECTED_SUMMARY: "{count} konflik konfigurasi dikesan.",
+	NOTICE_CHECK_SETTINGS_FOR_DETAILS: "Semak tetapan pemalam untuk butiran.",
+	NOTICE_CHECK_SETTINGS_FOR_DETAILS_INLINE: "Semak senarai di bawah untuk butiran.",
 
     // Command Palette Command Names (from main.ts)
     COMMAND_TOGGLE_DEFAULT: "Enhanced Read Mode Control: Togol baca sahaja lalai untuk nota semasa",
@@ -107,4 +117,14 @@ export default {
     // Language Setting
     SETTINGS_PLUGIN_LANGUAGE_TITLE: "Bahasa Plugin",
     SETTINGS_PLUGIN_LANGUAGE_DESC: "Pilih bahasa paparan untuk antara muka plugin ini. Memerlukan Obsidian dimulakan semula atau plugin dimuat semula untuk melaksanakan perubahan.",
+	SETTINGS_DIAGNOSTICS_TITLE: "Diagnostik Konfigurasi",
+	CONFLICT_DIRECT_SAME_PATH_FILE_DEFAULT: "Konflik: Fail ini ('{path}') juga terdapat dalam senarai Fail Baca Sahaja Ketat. Ia akan menjadi KETAT.",
+	CONFLICT_DIRECT_SAME_PATH_FILE_STRICT: "Konflik: Fail ini ('{path}') juga terdapat dalam senarai Fail Baca Sahaja Lalai. Ia akan menjadi KETAT mengikut keutamaan.",
+	CONFLICT_DIRECT_SAME_PATH_FOLDER_DEFAULT: "Konflik: Folder ini ('{path}') juga terdapat dalam senarai Folder Baca Sahaja Ketat. Semua nota di dalamnya akan menjadi KETAT.",
+	CONFLICT_DIRECT_SAME_PATH_FOLDER_STRICT: "Konflik: Folder ini ('{path}') juga terdapat dalam senarai Folder Baca Sahaja Lalai. Semua nota di dalamnya akan menjadi KETAT mengikut keutamaan.",
+	CONFLICT_DEFAULT_FILE_IN_STRICT_FOLDER: "Atasi: Fail ini ('{path}') berada dalam senarai Lalai, tetapi ia berada di dalam folder Ketat '{conflictingPath}'. Ia akan menjadi KETAT.",
+	CONFLICT_STRICT_FILE_IN_DEFAULT_FOLDER: "Info: Fail ini ('{path}') berada dalam senarai Ketat dan di dalam folder Lalai '{conflictingPath}'. Peraturan Ketat khusus fail diutamakan.",
+	CONFLICT_DEFAULT_FILE_IN_DEFAULT_FOLDER_REDUNDANT: "Lebihan: Fail ini ('{path}') sudah dilindungi oleh peraturan Folder Baca Sahaja Lalai untuk '{conflictingPath}'.",
+	CONFLICT_STRICT_FILE_IN_STRICT_FOLDER_REDUNDANT: "Lebihan: Fail ini ('{path}') sudah dilindungi oleh peraturan Folder Baca Sahaja Ketat untuk '{conflictingPath}'.",
+
 };

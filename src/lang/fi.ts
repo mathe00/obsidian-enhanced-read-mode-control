@@ -50,6 +50,9 @@ export default {
     SETTINGS_LIST_UI_EMPTY_FILES: 'Tiedostoja ei ole vielä lisätty.',
     SETTINGS_LIST_UI_EMPTY_FOLDERS: 'Kansioita ei ole vielä lisätty.',
     SETTINGS_LIST_UI_EMPTY_REGEX: 'Regex-kuvioita ei ole vielä lisätty.',
+	SETTINGS_LIST_UI_ALREADY_EXISTS_PATH: "Polku '{path}' on jo tässä luettelossa.",
+	SETTINGS_LIST_UI_ALREADY_EXISTS_REGEX: "Regex-malli '{path}' on jo tässä luettelossa.",
+	SETTINGS_LIST_UI_INVALID_PATH_OR_REGEX: "Virheellinen {itemType}: '{path}'. Tarkista muoto tai olemassaolo.",
 
     // Behavior Setting
     SETTINGS_FORCE_EDIT_UNMANAGED_TITLE: 'Pakota Muokkaustila Hallitsemattomille Muistiinpanoille',
@@ -78,6 +81,10 @@ export default {
     SETTINGS_NOTIFY_ON_MODE_CHANGE_DESC: 'Näytä lyhyt ilmoitus, kun lisäosa aktiivisesti muuttaa muistiinpanon näyttötilaa avattaessa. Tämä on BETA-ominaisuus.',
     SETTINGS_ENABLE_DEBUG_LOGGING_TITLE: 'Ota Vianetsintäloki Käyttöön',
     SETTINGS_ENABLE_DEBUG_LOGGING_DESC: 'Näytä yksityiskohtaiset lokit kehittäjäkonsolissa. Vaatii Obsidianin uudelleenkäynnistyksen tai lisäosan uudelleenlatauksen täyden vaikutuksen saavuttamiseksi.',
+	SETTINGS_ENABLE_CONFLICT_DETECTION_TITLE: "Ota käyttöön ristiriitojen tunnistus",
+	SETTINGS_ENABLE_CONFLICT_DETECTION_DESC: "Analysoi asetukset ristiriitaisten sääntöjen varalta (esim. sama polku oletus- ja tiukoissa luetteloissa). Ristiriidat korostetaan alla olevissa luetteloissa.",
+	SETTINGS_NOTIFY_ON_CONFLICT_TITLE: "Ilmoita määritysristiriidoista",
+	SETTINGS_NOTIFY_ON_CONFLICT_DESC: "Näytä ilmoitus, jos määritysristiriitoja havaitaan asetuksia avattaessa tai muutettaessa.",
 
     // Notifications (from main.ts)
     NOTICE_MODE_CHANGE_PREFIX: "'{fileName}' asetettu tilaan ",
@@ -87,6 +94,9 @@ export default {
     NOTICE_INVALID_STRICT_REGEX_PREFIX: "Enhanced Read Mode: Virheellinen tiukka regex-kuvio: ",
     NOTICE_INVALID_DEFAULT_REGEX_PREFIX: "Enhanced Read Mode: Virheellinen oletus regex-kuvio: ",
     NOTICE_NOTIFICATIONS_ENABLED: "Tilanvaihdosta ilmoittaminen käytössä.",
+	NOTICE_CONFLICTS_DETECTED_SUMMARY: "Havaittiin {count} määritysristiriitaa.",
+	NOTICE_CHECK_SETTINGS_FOR_DETAILS: "Katso lisätiedot laajennuksen asetuksista.",
+	NOTICE_CHECK_SETTINGS_FOR_DETAILS_INLINE: "Katso lisätiedot alla olevista luetteloista.",
 
     // Command Palette Command Names (from main.ts)
     COMMAND_TOGGLE_DEFAULT: "Enhanced Read Mode Control: Vaihda nykyisen muistiinpanon oletuslukutila",
@@ -107,4 +117,14 @@ export default {
     // Language Setting
     SETTINGS_PLUGIN_LANGUAGE_TITLE: "Lisäosan Kieli",
     SETTINGS_PLUGIN_LANGUAGE_DESC: "Valitse tämän lisäosan käyttöliittymän näyttökieli. Vaatii Obsidianin uudelleenkäynnistyksen tai lisäosan uudelleenlatauksen muutosten voimaantuloon.",
+	SETTINGS_DIAGNOSTICS_TITLE: "Määritysdiagnostiikka",
+	CONFLICT_DIRECT_SAME_PATH_FILE_DEFAULT: "Ristiriita: Tämä tiedosto ('{path}') on myös Tiukasti vain luku -tiedostojen luettelossa. Se on TIUKKA.",
+	CONFLICT_DIRECT_SAME_PATH_FILE_STRICT: "Ristiriita: Tämä tiedosto ('{path}') on myös Oletusarvoisesti vain luku -tiedostojen luettelossa. Se on TIUKKA prioriteetin mukaan.",
+	CONFLICT_DIRECT_SAME_PATH_FOLDER_DEFAULT: "Ristiriita: Tämä kansio ('{path}') on myös Tiukasti vain luku -kansioiden luettelossa. Kaikki sen sisällä olevat muistiinpanot ovat TIUKKOJA.",
+	CONFLICT_DIRECT_SAME_PATH_FOLDER_STRICT: "Ristiriita: Tämä kansio ('{path}') on myös Oletusarvoisesti vain luku -kansioiden luettelossa. Kaikki sen sisällä olevat muistiinpanot ovat TIUKKOJA prioriteetin mukaan.",
+	CONFLICT_DEFAULT_FILE_IN_STRICT_FOLDER: "Ohitus: Tämä tiedosto ('{path}') on oletusluettelossa, mutta se on Tiukka-kansion '{conflictingPath}' sisällä. Se on TIUKKA.",
+	CONFLICT_STRICT_FILE_IN_DEFAULT_FOLDER: "Info: Tämä tiedosto ('{path}') on Tiukka-luettelossa ja Oletus-kansion '{conflictingPath}' sisällä. Tiedostokohtainen Tiukka-sääntö on etusijalla.",
+	CONFLICT_DEFAULT_FILE_IN_DEFAULT_FOLDER_REDUNDANT: "Tarpeeton: Tämä tiedosto ('{path}') kuuluu jo Oletusarvoisesti vain luku -kansion säännön piiriin kohteelle '{conflictingPath}'.",
+	CONFLICT_STRICT_FILE_IN_STRICT_FOLDER_REDUNDANT: "Tarpeeton: Tämä tiedosto ('{path}') kuuluu jo Tiukasti vain luku -kansion säännön piiriin kohteelle '{conflictingPath}'.",
+
 };

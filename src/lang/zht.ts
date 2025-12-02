@@ -50,6 +50,9 @@ export default {
     SETTINGS_LIST_UI_EMPTY_FILES: '尚未新增任何檔案。',
     SETTINGS_LIST_UI_EMPTY_FOLDERS: '尚未新增任何資料夾。',
     SETTINGS_LIST_UI_EMPTY_REGEX: '尚未新增任何正規表示式。',
+	SETTINGS_LIST_UI_ALREADY_EXISTS_PATH: "路徑「{path}」已存在於此清單中。",
+	SETTINGS_LIST_UI_ALREADY_EXISTS_REGEX: "正規表示式模式「{path}」已存在於此清單中。",
+	SETTINGS_LIST_UI_INVALID_PATH_OR_REGEX: "無效的 {itemType}：「{path}」。請檢查格式或是否存在。",
 
     // Behavior Setting
     SETTINGS_FORCE_EDIT_UNMANAGED_TITLE: '強制編輯未管理筆記',
@@ -78,6 +81,10 @@ export default {
     SETTINGS_NOTIFY_ON_MODE_CHANGE_DESC: '當外掛程式在開啟筆記時主動變更其檢視模式時，顯示簡短通知。此為 BETA 功能。',
     SETTINGS_ENABLE_DEBUG_LOGGING_TITLE: '啟用除錯日誌',
     SETTINGS_ENABLE_DEBUG_LOGGING_DESC: '在開發者控制台中顯示詳細日誌。需要重新啟動 Obsidian 或重新載入外掛程式才能完全生效。',
+	SETTINGS_ENABLE_CONFLICT_DETECTION_TITLE: "啟用衝突偵測",
+	SETTINGS_ENABLE_CONFLICT_DETECTION_DESC: "分析設定以尋找衝突規則（例如，預設清單和嚴格清單中的相同路徑）。衝突將在下面的清單中反白顯示。",
+	SETTINGS_NOTIFY_ON_CONFLICT_TITLE: "設定衝突時通知",
+	SETTINGS_NOTIFY_ON_CONFLICT_DESC: "開啟或變更設定時偵測到設定衝突時顯示通知。",
 
     // Notifications (from main.ts)
     NOTICE_MODE_CHANGE_PREFIX: "'{fileName}' 已設為 ",
@@ -87,6 +94,9 @@ export default {
     NOTICE_INVALID_STRICT_REGEX_PREFIX: "增強閱讀模式控制：無效的嚴格正規表示式：",
     NOTICE_INVALID_DEFAULT_REGEX_PREFIX: "增強閱讀模式控制：無效的預設正規表示式：",
     NOTICE_NOTIFICATIONS_ENABLED: "模式變更通知已啟用。",
+	NOTICE_CONFLICTS_DETECTED_SUMMARY: "偵測到 {count} 個設定衝突。",
+	NOTICE_CHECK_SETTINGS_FOR_DETAILS: "有關詳細資訊，請檢查外掛程式設定。",
+	NOTICE_CHECK_SETTINGS_FOR_DETAILS_INLINE: "有關詳細資訊，請檢查以下清單。",
 
     // Command Palette Command Names (from main.ts)
     COMMAND_TOGGLE_DEFAULT: "增強閱讀模式控制：切換目前筆記的預設唯讀狀態",
@@ -107,4 +117,14 @@ export default {
     // Language Setting
     SETTINGS_PLUGIN_LANGUAGE_TITLE: "外掛程式語言",
     SETTINGS_PLUGIN_LANGUAGE_DESC: "選擇此外掛程式介面的顯示語言。需要重新啟動 Obsidian 或重新載入外掛程式以套用變更。",
+	SETTINGS_DIAGNOSTICS_TITLE: "設定診斷",
+	CONFLICT_DIRECT_SAME_PATH_FILE_DEFAULT: "衝突：此檔案（'{path}'）也存在於嚴格唯讀檔案清單中。它將是嚴格的。",
+	CONFLICT_DIRECT_SAME_PATH_FILE_STRICT: "衝突：此檔案（'{path}'）也存在於預設唯讀檔案清單中。根據優先順序，它將是嚴格的。",
+	CONFLICT_DIRECT_SAME_PATH_FOLDER_DEFAULT: "衝突：此資料夾（'{path}'）也存在於嚴格唯讀資料夾清單中。其中的所有筆記都將是嚴格的。",
+	CONFLICT_DIRECT_SAME_PATH_FOLDER_STRICT: "衝突：此資料夾（'{path}'）也存在於預設唯讀資料夾清單中。根據優先順序，其中的所有筆記都將是嚴格的。",
+	CONFLICT_DEFAULT_FILE_IN_STRICT_FOLDER: "覆寫：此檔案（'{path}'）位於預設清單中，但它位於嚴格資料夾「{conflictingPath}」內。它將是嚴格的。",
+	CONFLICT_STRICT_FILE_IN_DEFAULT_FOLDER: "資訊：此檔案（'{path}'）位於嚴格清單中，並且位於預設資料夾「{conflictingPath}」內。檔案特定的嚴格規則優先。",
+	CONFLICT_DEFAULT_FILE_IN_DEFAULT_FOLDER_REDUNDANT: "冗餘：此檔案（'{path}'）已被「{conflictingPath}」的預設唯讀資料夾規則覆蓋。",
+	CONFLICT_STRICT_FILE_IN_STRICT_FOLDER_REDUNDANT: "冗餘：此檔案（'{path}'）已被「{conflictingPath}」的嚴格唯讀資料夾規則覆蓋。",
+
 };

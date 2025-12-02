@@ -50,6 +50,9 @@ export default {
     SETTINGS_LIST_UI_EMPTY_FILES: 'Ba a ƙara fayiloli ba tukuna.',
     SETTINGS_LIST_UI_EMPTY_FOLDERS: 'Ba a ƙara manyan fayiloli ba tukuna.',
     SETTINGS_LIST_UI_EMPTY_REGEX: 'Ba a ƙara samfuran regex ba tukuna.',
+	SETTINGS_LIST_UI_ALREADY_EXISTS_PATH: "Hanyar '{path}' ta riga ta kasance a cikin wannan jeri.",
+	SETTINGS_LIST_UI_ALREADY_EXISTS_REGEX: "Tsarin Regex '{path}' ya riga ya kasance a cikin wannan jeri.",
+	SETTINGS_LIST_UI_INVALID_PATH_OR_REGEX: "{itemType} mara inganci: '{path}'. Da fatan za a duba tsari ko kasancewa.",
 
     // Behavior Setting
     SETTINGS_FORCE_EDIT_UNMANAGED_TITLE: 'Tilasta Yanayin Gyara akan Rubuce-rubucen da Ba a Sarrafa Ba',
@@ -78,6 +81,10 @@ export default {
     SETTINGS_NOTIFY_ON_MODE_CHANGE_DESC: 'Nuna ɗan gajeren sanarwa lokacin da plugin ke canza yanayin kallon rubutu lokacin buɗewa. Wannan fasalin BETA ne.',
     SETTINGS_ENABLE_DEBUG_LOGGING_TITLE: 'Kunna Rubutun Gyaran Kura-kurai',
     SETTINGS_ENABLE_DEBUG_LOGGING_DESC: 'Nuna cikakkun bayanai a cikin na\'urar wasan bidiyo ta masu haɓakawa. Yana buƙatar sake kunna Obsidian ko sake loda plugin don cikakken tasiri.',
+	SETTINGS_ENABLE_CONFLICT_DETECTION_TITLE: "Kunna Gano Rikici",
+	SETTINGS_ENABLE_CONFLICT_DETECTION_DESC: "Bincika saituna don dokoki masu rikici (misali, hanya ɗaya a cikin jerin asali da masu tsauri). Za a haskaka rikice-rikice a cikin jerin sunayen da ke ƙasa.",
+	SETTINGS_NOTIFY_ON_CONFLICT_TITLE: "Sanar da Rikicin Kanfigareshan",
+	SETTINGS_NOTIFY_ON_CONFLICT_DESC: "Nuna sanarwa idan an gano rikice-rikicen kanfigareshan lokacin da aka buɗe ko aka canza saituna.",
 
     // Notifications (from main.ts)
     NOTICE_MODE_CHANGE_PREFIX: "An saita '{fileName}' zuwa ",
@@ -87,6 +94,9 @@ export default {
     NOTICE_INVALID_STRICT_REGEX_PREFIX: "Enhanced Read Mode: Samfurin regex mai tsauri mara inganci: ",
     NOTICE_INVALID_DEFAULT_REGEX_PREFIX: "Enhanced Read Mode: Samfurin regex na asali mara inganci: ",
     NOTICE_NOTIFICATIONS_ENABLED: "An kunna sanarwar canjin yanayi.",
+	NOTICE_CONFLICTS_DETECTED_SUMMARY: "An gano rikice-rikicen kanfigareshan guda {count}.",
+	NOTICE_CHECK_SETTINGS_FOR_DETAILS: "Duba saitunan plugin don ƙarin bayani.",
+	NOTICE_CHECK_SETTINGS_FOR_DETAILS_INLINE: "Duba jerin sunayen da ke ƙasa don ƙarin bayani.",
 
     // Command Palette Command Names (from main.ts)
     COMMAND_TOGGLE_DEFAULT: "Enhanced Read Mode Control: Canja karatu kaɗai na asali don rubutun yanzu",
@@ -107,4 +117,14 @@ export default {
     // Language Setting
     SETTINGS_PLUGIN_LANGUAGE_TITLE: "Harshen Plugin",
     SETTINGS_PLUGIN_LANGUAGE_DESC: "Zaɓi harshen nuni don wannan keɓaɓɓen plugin. Yana buƙatar sake kunna Obsidian ko sake loda plugin don amfani da canje-canje.",
+	SETTINGS_DIAGNOSTICS_TITLE: "Binciken Kanfigareshan",
+	CONFLICT_DIRECT_SAME_PATH_FILE_DEFAULT: "Rikici: Wannan fayil ('{path}') yana kuma cikin jerin Fayilolin Karatu-Kadai Masu Tsauri. Zai zama MAI TSAURI.",
+	CONFLICT_DIRECT_SAME_PATH_FILE_STRICT: "Rikici: Wannan fayil ('{path}') yana kuma cikin jerin Fayilolin Karatu-Kadai na Asali. Zai zama MAI TSAURI kamar yadda aka fifita.",
+	CONFLICT_DIRECT_SAME_PATH_FOLDER_DEFAULT: "Rikici: Wannan babban fayil ('{path}') yana kuma cikin jerin Manyan Fayiloli na Karatu-Kadai Masu Tsauri. Duk rubutattun bayanai a ciki za su zama MASU TSAURI.",
+	CONFLICT_DIRECT_SAME_PATH_FOLDER_STRICT: "Rikici: Wannan babban fayil ('{path}') yana kuma cikin jerin Manyan Fayiloli na Karatu-Kadai na Asali. Duk rubutattun bayanai a ciki za su zama MASU TSAURI kamar yadda aka fifita.",
+	CONFLICT_DEFAULT_FILE_IN_STRICT_FOLDER: "Soke: Wannan fayil ('{path}') yana cikin jerin Asali, amma yana cikin babban fayil Mai Tsauri '{conflictingPath}'. Zai zama MAI TSAURI.",
+	CONFLICT_STRICT_FILE_IN_DEFAULT_FOLDER: "Bayani: Wannan fayil ('{path}') yana cikin jerin Masu Tsauri kuma yana cikin babban fayil na Asali '{conflictingPath}'. Dokar fayil Mai Tsauri ta musamman ce ke da fifiko.",
+	CONFLICT_DEFAULT_FILE_IN_DEFAULT_FOLDER_REDUNDANT: "Maimaita: Wannan fayil ('{path}') an riga an rufe shi da dokar Babban Fayil na Karatu-Kadai na Asali don '{conflictingPath}'.",
+	CONFLICT_STRICT_FILE_IN_STRICT_FOLDER_REDUNDANT: "Maimaita: Wannan fayil ('{path}') an riga an rufe shi da dokar Babban Fayil na Karatu-Kadai Mai Tsauri don '{conflictingPath}'.",
+
 };

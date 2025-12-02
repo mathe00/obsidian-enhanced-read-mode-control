@@ -27,6 +27,8 @@
     padding-left: 8px;     /* Added padding to de-stick from the left */
     visibility: visible !important;
     opacity: 1 !important;
+    display: flex; /* For icon alignment */
+    align-items: center; /* For icon alignment */
 }
 
 .ermc-empty-list-message {
@@ -54,4 +56,35 @@
 .setting-item.ermc-path-list-item .setting-item-control button:active {
     color: var(--text-error-hover); /* Slightly different red on active/click */
     background-color: var(--background-modifier-error-hover); /* Optional: subtle background on click */
+}
+
+/* Conflict Styling */
+.setting-item.ermc-path-list-item.ermc-conflict-item .setting-item-name {
+    color: var(--text-warning);
+}
+
+.ermc-conflict-icon {
+    color: var(--icon-color-warning); /* Obsidian's warning icon color */
+    margin-right: 6px; /* Space between icon and text */
+    vertical-align: middle; /* Align icon with text */
+}
+
+.ermc-diagnostics-section {
+    padding: 10px;
+    background-color: var(--background-secondary-alt);
+    border: 1px solid var(--background-modifier-border);
+    border-radius: var(--radius-m);
+    margin-bottom: 15px;
+}
+
+.ermc-diagnostics-section h4 {
+    margin-top: 0;
+    margin-bottom: 8px;
+    color: var(--text-normal);
+}
+
+.ermc-diagnostics-section p {
+    color: var(--text-muted);
+    font-size: var(--font-ui-small);
+    margin-bottom: 5px;
 }

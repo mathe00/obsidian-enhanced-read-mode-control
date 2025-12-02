@@ -50,6 +50,9 @@ export default {
     SETTINGS_LIST_UI_EMPTY_FILES: 'Belum ada file yang ditambahkan.',
     SETTINGS_LIST_UI_EMPTY_FOLDERS: 'Belum ada folder yang ditambahkan.',
     SETTINGS_LIST_UI_EMPTY_REGEX: 'Belum ada pola regex yang ditambahkan.',
+	SETTINGS_LIST_UI_ALREADY_EXISTS_PATH: "Path '{path}' sudah ada di daftar ini.",
+	SETTINGS_LIST_UI_ALREADY_EXISTS_REGEX: "Pola Regex '{path}' sudah ada di daftar ini.",
+	SETTINGS_LIST_UI_INVALID_PATH_OR_REGEX: "{itemType} tidak valid: '{path}'. Harap periksa format atau keberadaannya.",
 
     // Behavior Setting
     SETTINGS_FORCE_EDIT_UNMANAGED_TITLE: 'Paksa Mode Edit pada Catatan Tidak Terkelola',
@@ -78,6 +81,10 @@ export default {
     SETTINGS_NOTIFY_ON_MODE_CHANGE_DESC: 'Tampilkan notifikasi singkat saat plugin secara aktif mengubah mode tampilan catatan saat dibuka. Ini adalah fitur BETA.',
     SETTINGS_ENABLE_DEBUG_LOGGING_TITLE: 'Aktifkan Logging Debug',
     SETTINGS_ENABLE_DEBUG_LOGGING_DESC: 'Tampilkan log detail di konsol pengembang. Memerlukan restart Obsidian atau muat ulang plugin untuk efek penuh.',
+	SETTINGS_ENABLE_CONFLICT_DETECTION_TITLE: "Aktifkan Deteksi Konflik",
+	SETTINGS_ENABLE_CONFLICT_DETECTION_DESC: "Analisis pengaturan untuk aturan yang bertentangan (misalnya, path yang sama di daftar default dan ketat). Konflik akan disorot di daftar di bawah.",
+	SETTINGS_NOTIFY_ON_CONFLICT_TITLE: "Beri Tahu tentang Konflik Konfigurasi",
+	SETTINGS_NOTIFY_ON_CONFLICT_DESC: "Tampilkan pemberitahuan jika konflik konfigurasi terdeteksi saat pengaturan dibuka atau diubah.",
 
     // Notifications (from main.ts)
     NOTICE_MODE_CHANGE_PREFIX: "'{fileName}' diatur ke ",
@@ -87,6 +94,9 @@ export default {
     NOTICE_INVALID_STRICT_REGEX_PREFIX: "Enhanced Read Mode: Pola regex ketat tidak valid: ",
     NOTICE_INVALID_DEFAULT_REGEX_PREFIX: "Enhanced Read Mode: Pola regex default tidak valid: ",
     NOTICE_NOTIFICATIONS_ENABLED: "Notifikasi perubahan mode diaktifkan.",
+	NOTICE_CONFLICTS_DETECTED_SUMMARY: "{count} konflik konfigurasi terdeteksi.",
+	NOTICE_CHECK_SETTINGS_FOR_DETAILS: "Periksa pengaturan plugin untuk detail.",
+	NOTICE_CHECK_SETTINGS_FOR_DETAILS_INLINE: "Periksa daftar di bawah untuk detail.",
 
     // Command Palette Command Names (from main.ts)
     COMMAND_TOGGLE_DEFAULT: "Enhanced Read Mode Control: Alihkan baca saja default untuk catatan saat ini",
@@ -107,4 +117,14 @@ export default {
     // Language Setting
     SETTINGS_PLUGIN_LANGUAGE_TITLE: "Bahasa Plugin",
     SETTINGS_PLUGIN_LANGUAGE_DESC: "Pilih bahasa tampilan untuk antarmuka plugin ini. Memerlukan restart Obsidian atau muat ulang plugin untuk menerapkan perubahan.",
+	SETTINGS_DIAGNOSTICS_TITLE: "Diagnostik Konfigurasi",
+	CONFLICT_DIRECT_SAME_PATH_FILE_DEFAULT: "Konflik: File ini ('{path}') juga ada di daftar File Baca-Saja Ketat. Ini akan menjadi KETAT.",
+	CONFLICT_DIRECT_SAME_PATH_FILE_STRICT: "Konflik: File ini ('{path}') juga ada di daftar File Baca-Saja Default. Ini akan menjadi KETAT sesuai prioritas.",
+	CONFLICT_DIRECT_SAME_PATH_FOLDER_DEFAULT: "Konflik: Folder ini ('{path}') juga ada di daftar Folder Baca-Saja Ketat. Semua catatan di dalamnya akan menjadi KETAT.",
+	CONFLICT_DIRECT_SAME_PATH_FOLDER_STRICT: "Konflik: Folder ini ('{path}') juga ada di daftar Folder Baca-Saja Default. Semua catatan di dalamnya akan menjadi KETAT sesuai prioritas.",
+	CONFLICT_DEFAULT_FILE_IN_STRICT_FOLDER: "Timpa: File ini ('{path}') ada di daftar Default, tetapi berada di dalam folder Ketat '{conflictingPath}'. Ini akan menjadi KETAT.",
+	CONFLICT_STRICT_FILE_IN_DEFAULT_FOLDER: "Info: File ini ('{path}') ada di daftar Ketat dan di dalam folder Default '{conflictingPath}'. Aturan Ketat khusus file lebih diutamakan.",
+	CONFLICT_DEFAULT_FILE_IN_DEFAULT_FOLDER_REDUNDANT: "Redundan: File ini ('{path}') sudah dicakup oleh aturan Folder Baca-Saja Default untuk '{conflictingPath}'.",
+	CONFLICT_STRICT_FILE_IN_STRICT_FOLDER_REDUNDANT: "Redundan: File ini ('{path}') sudah dicakup oleh aturan Folder Baca-Saja Ketat untuk '{conflictingPath}'.",
+
 };

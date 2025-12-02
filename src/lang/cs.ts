@@ -50,6 +50,9 @@ export default {
     SETTINGS_LIST_UI_EMPTY_FILES: 'Zatím nebyly přidány žádné soubory.',
     SETTINGS_LIST_UI_EMPTY_FOLDERS: 'Zatím nebyly přidány žádné složky.',
     SETTINGS_LIST_UI_EMPTY_REGEX: 'Zatím nebyly přidány žádné regex vzory.',
+	SETTINGS_LIST_UI_ALREADY_EXISTS_PATH: "Cesta '{path}' již v tomto seznamu existuje.",
+	SETTINGS_LIST_UI_ALREADY_EXISTS_REGEX: "Vzor Regex '{path}' již v tomto seznamu existuje.",
+	SETTINGS_LIST_UI_INVALID_PATH_OR_REGEX: "Neplatný {itemType}: '{path}'. Zkontrolujte prosím formát nebo existenci.",
 
     // Behavior Setting
     SETTINGS_FORCE_EDIT_UNMANAGED_TITLE: 'Vynutit Režim Úprav u Nespravovaných Poznámek',
@@ -78,6 +81,10 @@ export default {
     SETTINGS_NOTIFY_ON_MODE_CHANGE_DESC: 'Zobrazit krátké upozornění, když plugin aktivně změní režim zobrazení poznámky při otevření. Toto je BETA funkce.',
     SETTINGS_ENABLE_DEBUG_LOGGING_TITLE: 'Povolit Ladicí Protokolování',
     SETTINGS_ENABLE_DEBUG_LOGGING_DESC: 'Zobrazit podrobné protokoly v konzoli pro vývojáře. Pro plný účinek vyžaduje restart Obsidianu nebo znovunačtení pluginu.',
+	SETTINGS_ENABLE_CONFLICT_DETECTION_TITLE: "Povolit detekci konfliktů",
+	SETTINGS_ENABLE_CONFLICT_DETECTION_DESC: "Analyzovat nastavení pro konfliktní pravidla (např. stejná cesta ve výchozím a striktním seznamu). Konflikty budou zvýrazněny v níže uvedených seznamech.",
+	SETTINGS_NOTIFY_ON_CONFLICT_TITLE: "Upozornit na konflikty konfigurace",
+	SETTINGS_NOTIFY_ON_CONFLICT_DESC: "Zobrazit upozornění, pokud jsou při otevření nebo změně nastavení zjištěny konflikty konfigurace.",
 
     // Notifications (from main.ts)
     NOTICE_MODE_CHANGE_PREFIX: "'{fileName}' nastaveno na ",
@@ -87,6 +94,9 @@ export default {
     NOTICE_INVALID_STRICT_REGEX_PREFIX: "Enhanced Read Mode: Neplatný přísný regex vzor: ",
     NOTICE_INVALID_DEFAULT_REGEX_PREFIX: "Enhanced Read Mode: Neplatný výchozí regex vzor: ",
     NOTICE_NOTIFICATIONS_ENABLED: "Upozornění na změnu režimu povolena.",
+	NOTICE_CONFLICTS_DETECTED_SUMMARY: "Bylo zjištěno {count} konflikt(ů) konfigurace.",
+	NOTICE_CHECK_SETTINGS_FOR_DETAILS: "Podrobnosti naleznete v nastavení pluginu.",
+	NOTICE_CHECK_SETTINGS_FOR_DETAILS_INLINE: "Podrobnosti naleznete v níže uvedených seznamech.",
 
     // Command Palette Command Names (from main.ts)
     COMMAND_TOGGLE_DEFAULT: "Enhanced Read Mode Control: Přepnout výchozí pouze pro čtení pro aktuální poznámku",
@@ -107,4 +117,14 @@ export default {
     // Language Setting
     SETTINGS_PLUGIN_LANGUAGE_TITLE: "Jazyk Pluginu",
     SETTINGS_PLUGIN_LANGUAGE_DESC: "Zvolte jazyk zobrazení pro rozhraní tohoto pluginu. Pro uplatnění změn vyžaduje restart Obsidianu nebo znovunačtení pluginu.",
+	SETTINGS_DIAGNOSTICS_TITLE: "Diagnostika konfigurace",
+	CONFLICT_DIRECT_SAME_PATH_FILE_DEFAULT: "Konflikt: Tento soubor ('{path}') je také v seznamu Soubory pouze pro čtení (striktní). Bude STRIKTNÍ.",
+	CONFLICT_DIRECT_SAME_PATH_FILE_STRICT: "Konflikt: Tento soubor ('{path}') je také v seznamu Soubory pouze pro čtení (výchozí). Bude STRIKTNÍ podle priority.",
+	CONFLICT_DIRECT_SAME_PATH_FOLDER_DEFAULT: "Konflikt: Tato složka ('{path}') je také v seznamu Složky pouze pro čtení (striktní). Všechny poznámky v ní budou STRIKTNÍ.",
+	CONFLICT_DIRECT_SAME_PATH_FOLDER_STRICT: "Konflikt: Tato složka ('{path}') je také v seznamu Složky pouze pro čtení (výchozí). Všechny poznámky v ní budou STRIKTNÍ podle priority.",
+	CONFLICT_DEFAULT_FILE_IN_STRICT_FOLDER: "Přepsání: Tento soubor ('{path}') je ve výchozím seznamu, ale je uvnitř striktní složky '{conflictingPath}'. Bude STRIKTNÍ.",
+	CONFLICT_STRICT_FILE_IN_DEFAULT_FOLDER: "Info: Tento soubor ('{path}') je ve striktním seznamu a uvnitř výchozí složky '{conflictingPath}'. Pravidlo pro striktní soubor má přednost.",
+	CONFLICT_DEFAULT_FILE_IN_DEFAULT_FOLDER_REDUNDANT: "Redundantní: Tento soubor ('{path}') je již pokryt pravidlem pro výchozí složku pouze pro čtení pro '{conflictingPath}'.",
+	CONFLICT_STRICT_FILE_IN_STRICT_FOLDER_REDUNDANT: "Redundantní: Tento soubor ('{path}') je již pokryt pravidlem pro striktní složku pouze pro čtení pro '{conflictingPath}'.",
+
 };

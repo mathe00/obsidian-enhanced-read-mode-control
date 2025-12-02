@@ -50,6 +50,9 @@ export default {
     SETTINGS_LIST_UI_EMPTY_FILES: 'अभी तक कोई फ़ाइल नहीं जोड़ी गई है।',
     SETTINGS_LIST_UI_EMPTY_FOLDERS: 'अभी तक कोई फ़ोल्डर नहीं जोड़ा गया है।',
     SETTINGS_LIST_UI_EMPTY_REGEX: 'अभी तक कोई Regex पैटर्न नहीं जोड़ा गया है।',
+	SETTINGS_LIST_UI_ALREADY_EXISTS_PATH: "पथ '{path}' इस सूची में पहले से मौजूद है।",
+	SETTINGS_LIST_UI_ALREADY_EXISTS_REGEX: "Regex पैटर्न '{path}' इस सूची में पहले से मौजूद है।",
+	SETTINGS_LIST_UI_INVALID_PATH_OR_REGEX: "अमान्य {itemType}: '{path}'। कृपया प्रारूप या अस्तित्व की जांच करें।",
 
     // Behavior Setting
     SETTINGS_FORCE_EDIT_UNMANAGED_TITLE: 'अप्रबंधित नोट्स पर संपादन मोड बाध्य करें',
@@ -78,6 +81,10 @@ export default {
     SETTINGS_NOTIFY_ON_MODE_CHANGE_DESC: 'जब प्लगइन किसी नोट के दृश्य मोड को खोलने पर सक्रिय रूप से बदलता है तो एक संक्षिप्त सूचना दिखाएं। यह एक बीटा सुविधा है।',
     SETTINGS_ENABLE_DEBUG_LOGGING_TITLE: 'डिबगिंग लॉग सक्षम करें',
     SETTINGS_ENABLE_DEBUG_LOGGING_DESC: 'डेवलपर कंसोल में विस्तृत लॉग दिखाएं। पूरी तरह से प्रभावी होने के लिए ऑब्सिडियन को पुनरारंभ करने या प्लगइन को पुनः लोड करने की आवश्यकता है।',
+	SETTINGS_ENABLE_CONFLICT_DETECTION_TITLE: "विरोध पहचान सक्षम करें",
+	SETTINGS_ENABLE_CONFLICT_DETECTION_DESC: "विरोधी नियमों के लिए सेटिंग्स का विश्लेषण करें (जैसे डिफ़ॉल्ट और स्ट्रिक्ट सूचियों में समान पथ)। विरोधों को नीचे दी गई सूचियों में हाइलाइट किया जाएगा।",
+	SETTINGS_NOTIFY_ON_CONFLICT_TITLE: "कॉन्फ़िगरेशन विरोधों पर सूचित करें",
+	SETTINGS_NOTIFY_ON_CONFLICT_DESC: "सेटिंग्स खोलने या बदलने पर कॉन्फ़िगरेशन विरोधों का पता चलने पर एक सूचना दिखाएं।",
 
     // Notifications (from main.ts)
     NOTICE_MODE_CHANGE_PREFIX: "'{fileName}' को ",
@@ -87,6 +94,9 @@ export default {
     NOTICE_INVALID_STRICT_REGEX_PREFIX: "एन्हांस्ड रीड मोड: अमान्य सख्त Regex पैटर्न: ",
     NOTICE_INVALID_DEFAULT_REGEX_PREFIX: "एन्हांस्ड रीड मोड: अमान्य डिफ़ॉल्ट Regex पैटर्न: ",
     NOTICE_NOTIFICATIONS_ENABLED: "मोड परिवर्तन सूचनाएं सक्षम की गईं।",
+	NOTICE_CONFLICTS_DETECTED_SUMMARY: "{count} कॉन्फ़िगरेशन विरोधों का पता चला।",
+	NOTICE_CHECK_SETTINGS_FOR_DETAILS: "विवरण के लिए प्लगइन सेटिंग्स जांचें।",
+	NOTICE_CHECK_SETTINGS_FOR_DETAILS_INLINE: "विवरण के लिए नीचे दी गई सूचियाँ देखें।",
 
     // Command Palette Command Names (from main.ts)
     COMMAND_TOGGLE_DEFAULT: "एन्हांस्ड रीड मोड कंट्रोल: वर्तमान नोट के लिए डिफ़ॉल्ट केवल-पढ़ने योग्य टॉगल करें",
@@ -107,4 +117,14 @@ export default {
     // Language Setting
     SETTINGS_PLUGIN_LANGUAGE_TITLE: "प्लगइन भाषा",
     SETTINGS_PLUGIN_LANGUAGE_DESC: "इस प्लगइन इंटरफ़ेस के लिए प्रदर्शन भाषा चुनें। परिवर्तनों को लागू करने के लिए ऑब्सिडियन को पुनरारंभ करने या प्लगइन को पुनः लोड करने की आवश्यकता है।",
+	SETTINGS_DIAGNOSTICS_TITLE: "कॉन्फ़िगरेशन निदान",
+	CONFLICT_DIRECT_SAME_PATH_FILE_DEFAULT: "विरोधाभास: यह फ़ाइल ('{path}') स्ट्रिक्ट रीड-ओनली फ़ाइल सूची में भी है। यह स्ट्रिक्ट होगी।",
+	CONFLICT_DIRECT_SAME_PATH_FILE_STRICT: "विरोधाभास: यह फ़ाइल ('{path}') डिफ़ॉल्ट रीड-ओनली फ़ाइल सूची में भी है। प्राथमिकता के अनुसार यह स्ट्रिक्ट होगी।",
+	CONFLICT_DIRECT_SAME_PATH_FOLDER_DEFAULT: "विरोधाभास: यह फ़ोल्डर ('{path}') स्ट्रिक्ट रीड-ओनली फ़ोल्डर सूची में भी है। इसके भीतर सभी नोट्स स्ट्रिक्ट होंगे।",
+	CONFLICT_DIRECT_SAME_PATH_FOLDER_STRICT: "विरोधाभास: यह फ़ोल्डर ('{path}') डिफ़ॉल्ट रीड-ओनली फ़ोल्डर सूची में भी है। प्राथमिकता के अनुसार इसके भीतर सभी नोट्स स्ट्रिक्ट होंगे।",
+	CONFLICT_DEFAULT_FILE_IN_STRICT_FOLDER: "ओवरराइड: यह फ़ाइल ('{path}') डिफ़ॉल्ट सूची में है, लेकिन यह स्ट्रिक्ट फ़ोल्डर '{conflictingPath}' के अंदर है। यह स्ट्रिक्ट होगी।",
+	CONFLICT_STRICT_FILE_IN_DEFAULT_FOLDER: "जानकारी: यह फ़ाइल ('{path}') स्ट्रिक्ट सूची में है और डिफ़ॉल्ट फ़ोल्डर '{conflictingPath}' के अंदर है। फ़ाइल-विशिष्ट स्ट्रिक्ट नियम को प्राथमिकता दी जाएगी।",
+	CONFLICT_DEFAULT_FILE_IN_DEFAULT_FOLDER_REDUNDANT: "अनावश्यक: यह फ़ाइल ('{path}') पहले से ही '{conflictingPath}' के लिए डिफ़ॉल्ट रीड-ओनली फ़ोल्डर नियम द्वारा कवर की गई है।",
+	CONFLICT_STRICT_FILE_IN_STRICT_FOLDER_REDUNDANT: "अनावश्यक: यह फ़ाइल ('{path}') पहले से ही '{conflictingPath}' के लिए स्ट्रिक्ट रीड-ओनली फ़ोल्डर नियम द्वारा कवर की गई है।",
+
 };

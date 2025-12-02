@@ -10,7 +10,7 @@ export default {
     SETTINGS_SECTION_EXACT_PATHS: 'Correspondance Exacte de Chemin',
     SETTINGS_SECTION_REGEX_BETA: 'Correspondance de Chemin par Regex (BÊTA)',
     SETTINGS_SECTION_BEHAVIOR: 'Comportement',
-    SETTINGS_SECTION_FEEDBACK_DEBUG: 'Retours & Débogage',
+    SETTINGS_SECTION_FEEDBACK_DEBUG: 'Retours, Débogage & Diagnostics',
 
     // Gestion de liste de chemins exacts
     SETTINGS_DEFAULT_FILES_EXACT_TITLE: 'Fichiers en Lecture Seule par Défaut (Chemins Exacts)',
@@ -49,6 +49,10 @@ export default {
     SETTINGS_LIST_UI_EMPTY_FILES: 'Aucun fichier ajouté pour le moment.',
     SETTINGS_LIST_UI_EMPTY_FOLDERS: 'Aucun dossier ajouté pour le moment.',
     SETTINGS_LIST_UI_EMPTY_REGEX: 'Aucun motif regex ajouté pour le moment.',
+    SETTINGS_LIST_UI_ALREADY_EXISTS_PATH: "Le chemin '{path}' existe déjà dans cette liste.",
+    SETTINGS_LIST_UI_ALREADY_EXISTS_REGEX: "Le motif Regex '{path}' existe déjà dans cette liste.",
+    SETTINGS_LIST_UI_INVALID_PATH_OR_REGEX: "{itemType} invalide : '{path}'. Veuillez vérifier le format ou l'existence.",
+
 
     // Paramètre de comportement
     SETTINGS_FORCE_EDIT_UNMANAGED_TITLE: 'Forcer Mode Édition sur Notes Non Gérées',
@@ -77,8 +81,12 @@ export default {
     SETTINGS_NOTIFY_ON_MODE_CHANGE_DESC: 'Afficher une brève notification lorsque le plugin change activement le mode de vue d\'une note à son ouverture. Ceci est une fonctionnalité BÊTA.',
     SETTINGS_ENABLE_DEBUG_LOGGING_TITLE: 'Activer le Journal de Débogage',
     SETTINGS_ENABLE_DEBUG_LOGGING_DESC: 'Afficher les journaux détaillés dans la console développeur. Nécessite un redémarrage d\'Obsidian ou un rechargement du plugin pour prendre pleinement effet.',
+    SETTINGS_ENABLE_CONFLICT_DETECTION_TITLE: 'Activer la Détection de Conflits',
+    SETTINGS_ENABLE_CONFLICT_DETECTION_DESC: 'Analyser les paramètres pour des règles conflictuelles (ex: même chemin dans les listes par défaut et strictes). Les conflits seront surlignés dans les listes ci-dessous.',
+    SETTINGS_NOTIFY_ON_CONFLICT_TITLE: 'Notifier en cas de Conflits de Configuration',
+    SETTINGS_NOTIFY_ON_CONFLICT_DESC: 'Afficher une notification si des conflits de configuration sont détectés lors de l\'ouverture ou de la modification des paramètres.',
 
-    // Notifications (depuis main.ts)
+    // Notifications (depuis main.ts et settings.ts)
     NOTICE_MODE_CHANGE_PREFIX: "'{fileName}' défini sur ", // ex: "'MaNote.md' défini sur "
     NOTICE_MODE_DEFAULT: "Lecture Seule par Défaut.",
     NOTICE_MODE_STRICT: "Lecture Seule Stricte.",
@@ -86,6 +94,9 @@ export default {
     NOTICE_INVALID_STRICT_REGEX_PREFIX: "Enhanced Read Mode : Motif regex strict invalide : ",
     NOTICE_INVALID_DEFAULT_REGEX_PREFIX: "Enhanced Read Mode : Motif regex par défaut invalide : ",
     NOTICE_NOTIFICATIONS_ENABLED: "Notifications de changement de mode activées.",
+    NOTICE_CONFLICTS_DETECTED_SUMMARY: "{count} conflit(s) de configuration détecté(s).",
+    NOTICE_CHECK_SETTINGS_FOR_DETAILS: "Vérifiez les paramètres du plugin pour les détails.",
+    NOTICE_CHECK_SETTINGS_FOR_DETAILS_INLINE: "Vérifiez les listes ci-dessous pour les détails.",
 
     // Noms des Commandes de la Palette (depuis main.ts)
     COMMAND_TOGGLE_DEFAULT: "Enhanced Read Mode Control : Basculer lecture seule par défaut pour la note actuelle",
@@ -106,4 +117,15 @@ export default {
     // Paramètre de Langue
     SETTINGS_PLUGIN_LANGUAGE_TITLE: "Langue du Plugin",
     SETTINGS_PLUGIN_LANGUAGE_DESC: "Choisissez la langue d'affichage pour l'interface de ce plugin. Nécessite un redémarrage d'Obsidian ou un rechargement du plugin pour appliquer les changements.",
+
+    // Messages de Conflit (pour tooltips)
+    SETTINGS_DIAGNOSTICS_TITLE: "Diagnostics de Configuration",
+    CONFLICT_DIRECT_SAME_PATH_FILE_DEFAULT: "Conflit : Ce fichier ('{path}') est aussi dans la liste des Fichiers Stricts. Il sera STRICT.",
+    CONFLICT_DIRECT_SAME_PATH_FILE_STRICT: "Conflit : Ce fichier ('{path}') est aussi dans la liste des Fichiers par Défaut. Il sera STRICT (priorité).",
+    CONFLICT_DIRECT_SAME_PATH_FOLDER_DEFAULT: "Conflit : Ce dossier ('{path}') est aussi dans la liste des Dossiers Stricts. Toutes les notes à l'intérieur seront STRICTES.",
+    CONFLICT_DIRECT_SAME_PATH_FOLDER_STRICT: "Conflit : Ce dossier ('{path}') est aussi dans la liste des Dossiers par Défaut. Toutes les notes à l'intérieur seront STRICTES (priorité).",
+    CONFLICT_DEFAULT_FILE_IN_STRICT_FOLDER: "Priorité : Ce fichier ('{path}') est dans une liste par Défaut, mais il est dans le dossier Strict '{conflictingPath}'. Il sera STRICT.",
+    CONFLICT_STRICT_FILE_IN_DEFAULT_FOLDER: "Info : Ce fichier ('{path}') est dans une liste Stricte et dans le dossier par Défaut '{conflictingPath}'. La règle Stricte du fichier a priorité.",
+    CONFLICT_DEFAULT_FILE_IN_DEFAULT_FOLDER_REDUNDANT: "Redondant : Ce fichier ('{path}') est déjà couvert par la règle du Dossier par Défaut pour '{conflictingPath}'.",
+    CONFLICT_STRICT_FILE_IN_STRICT_FOLDER_REDUNDANT: "Redondant : Ce fichier ('{path}') est déjà couvert par la règle du Dossier Strict pour '{conflictingPath}'.",
 };

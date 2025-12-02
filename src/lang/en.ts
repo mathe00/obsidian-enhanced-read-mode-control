@@ -10,7 +10,7 @@ export default {
     SETTINGS_SECTION_EXACT_PATHS: 'Exact Path Matching',
     SETTINGS_SECTION_REGEX_BETA: 'Regex Path Matching (BETA)',
     SETTINGS_SECTION_BEHAVIOR: 'Behavior',
-    SETTINGS_SECTION_FEEDBACK_DEBUG: 'Feedback & Debugging',
+    SETTINGS_SECTION_FEEDBACK_DEBUG: 'Feedback, Debugging & Diagnostics',
 
     // Exact Path List Management
     SETTINGS_DEFAULT_FILES_EXACT_TITLE: 'Default Read-Only Files (Exact Paths)',
@@ -49,6 +49,9 @@ export default {
     SETTINGS_LIST_UI_EMPTY_FILES: 'No files added yet.',
     SETTINGS_LIST_UI_EMPTY_FOLDERS: 'No folders added yet.',
     SETTINGS_LIST_UI_EMPTY_REGEX: 'No regex patterns added yet.',
+    SETTINGS_LIST_UI_ALREADY_EXISTS_PATH: "Path '{path}' already exists in this list.",
+    SETTINGS_LIST_UI_ALREADY_EXISTS_REGEX: "Regex pattern '{path}' already exists in this list.",
+    SETTINGS_LIST_UI_INVALID_PATH_OR_REGEX: "Invalid {itemType}: '{path}'. Please check the format or existence.",
 
     // Behavior Setting
     SETTINGS_FORCE_EDIT_UNMANAGED_TITLE: 'Force Edit Mode on Unmanaged Notes',
@@ -77,8 +80,13 @@ export default {
     SETTINGS_NOTIFY_ON_MODE_CHANGE_DESC: 'Show a brief notification when the plugin actively changes a note\'s view mode upon opening. This is a BETA feature.',
     SETTINGS_ENABLE_DEBUG_LOGGING_TITLE: 'Enable Debug Logging',
     SETTINGS_ENABLE_DEBUG_LOGGING_DESC: 'Show detailed logs in the developer console. Requires Obsidian restart or plugin reload to take full effect.',
+    SETTINGS_ENABLE_CONFLICT_DETECTION_TITLE: 'Enable Conflict Detection',
+    SETTINGS_ENABLE_CONFLICT_DETECTION_DESC: 'Analyze settings for conflicting rules (e.g., same path in default and strict lists). Conflicts will be highlighted in the lists below.',
+    SETTINGS_NOTIFY_ON_CONFLICT_TITLE: 'Notify on Configuration Conflicts',
+    SETTINGS_NOTIFY_ON_CONFLICT_DESC: 'Show a notification if configuration conflicts are detected when settings are opened or changed.',
 
-    // Notifications (from main.ts)
+
+    // Notifications (from main.ts and settings.ts)
     NOTICE_MODE_CHANGE_PREFIX: "'{fileName}' set to ", // e.g., "'MyNote.md' set to "
     NOTICE_MODE_DEFAULT: "Default Read-Only.",
     NOTICE_MODE_STRICT: "Strict Read-Only.",
@@ -86,6 +94,9 @@ export default {
     NOTICE_INVALID_STRICT_REGEX_PREFIX: "Enhanced Read Mode: Invalid strict regex pattern: ",
     NOTICE_INVALID_DEFAULT_REGEX_PREFIX: "Enhanced Read Mode: Invalid default regex pattern: ",
     NOTICE_NOTIFICATIONS_ENABLED: "Mode change notifications enabled.",
+    NOTICE_CONFLICTS_DETECTED_SUMMARY: "{count} configuration conflict(s) detected.",
+    NOTICE_CHECK_SETTINGS_FOR_DETAILS: "Check plugin settings for details.",
+    NOTICE_CHECK_SETTINGS_FOR_DETAILS_INLINE: "Check lists below for details.",
 
     // Command Palette Command Names (from main.ts)
     COMMAND_TOGGLE_DEFAULT: "Enhanced Read Mode Control: Toggle default read-only for current note",
@@ -106,4 +117,15 @@ export default {
     // Language Setting
     SETTINGS_PLUGIN_LANGUAGE_TITLE: "Plugin Language",
     SETTINGS_PLUGIN_LANGUAGE_DESC: "Choose the display language for this plugin. Requires Obsidian restart or plugin reload to apply changes.",
+
+    // Conflict Messages (for tooltips)
+    SETTINGS_DIAGNOSTICS_TITLE: "Configuration Diagnostics",
+    CONFLICT_DIRECT_SAME_PATH_FILE_DEFAULT: "Conflict: This file ('{path}') is also in the Strict Read-Only Files list. It will be STRICT.",
+    CONFLICT_DIRECT_SAME_PATH_FILE_STRICT: "Conflict: This file ('{path}') is also in the Default Read-Only Files list. It will be STRICT as per priority.",
+    CONFLICT_DIRECT_SAME_PATH_FOLDER_DEFAULT: "Conflict: This folder ('{path}') is also in the Strict Read-Only Folders list. All notes within will be STRICT.",
+    CONFLICT_DIRECT_SAME_PATH_FOLDER_STRICT: "Conflict: This folder ('{path}') is also in the Default Read-Only Folders list. All notes within will be STRICT as per priority.",
+    CONFLICT_DEFAULT_FILE_IN_STRICT_FOLDER: "Override: This file ('{path}') is in a Default list, but it's inside the Strict folder '{conflictingPath}'. It will be STRICT.",
+    CONFLICT_STRICT_FILE_IN_DEFAULT_FOLDER: "Info: This file ('{path}') is in a Strict list and inside the Default folder '{conflictingPath}'. The file-specific Strict rule takes precedence.",
+    CONFLICT_DEFAULT_FILE_IN_DEFAULT_FOLDER_REDUNDANT: "Redundant: This file ('{path}') is already covered by the Default Read-Only Folder rule for '{conflictingPath}'.",
+    CONFLICT_STRICT_FILE_IN_STRICT_FOLDER_REDUNDANT: "Redundant: This file ('{path}') is already covered by the Strict Read-Only Folder rule for '{conflictingPath}'.",
 };

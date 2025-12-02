@@ -50,6 +50,9 @@ export default {
     SETTINGS_LIST_UI_EMPTY_FILES: 'Δεν έχουν προστεθεί ακόμη αρχεία.',
     SETTINGS_LIST_UI_EMPTY_FOLDERS: 'Δεν έχουν προστεθεί ακόμη φάκελοι.',
     SETTINGS_LIST_UI_EMPTY_REGEX: 'Δεν έχουν προστεθεί ακόμη μοτίβα regex.',
+	SETTINGS_LIST_UI_ALREADY_EXISTS_PATH: "Η διαδρομή '{path}' υπάρχει ήδη σε αυτήν τη λίστα.",
+	SETTINGS_LIST_UI_ALREADY_EXISTS_REGEX: "Το μοτίβο Regex '{path}' υπάρχει ήδη σε αυτήν τη λίστα.",
+	SETTINGS_LIST_UI_INVALID_PATH_OR_REGEX: "Μη έγκυρο {itemType}: '{path}'. Ελέγξτε τη μορφή ή την ύπαρξη.",
 
     // Behavior Setting
     SETTINGS_FORCE_EDIT_UNMANAGED_TITLE: 'Εξαναγκασμός Λειτουργίας Επεξεργασίας σε Μη Διαχειριζόμενες Σημειώσεις',
@@ -78,6 +81,10 @@ export default {
     SETTINGS_NOTIFY_ON_MODE_CHANGE_DESC: 'Εμφάνιση σύντομης ειδοποίησης όταν το πρόσθετο αλλάζει ενεργά τη λειτουργία προβολής μιας σημείωσης κατά το άνοιγμα. Αυτή είναι μια λειτουργία BETA.',
     SETTINGS_ENABLE_DEBUG_LOGGING_TITLE: 'Ενεργοποίηση Καταγραφής Εκσφαλμάτωσης',
     SETTINGS_ENABLE_DEBUG_LOGGING_DESC: 'Εμφάνιση λεπτομερών αρχείων καταγραφής στην κονσόλα προγραμματιστή. Απαιτεί επανεκκίνηση του Obsidian ή επαναφόρτωση του πρόσθετου για πλήρη ισχύ.',
+	SETTINGS_ENABLE_CONFLICT_DETECTION_TITLE: "Ενεργοποίηση Ανίχνευσης Διενέξεων",
+	SETTINGS_ENABLE_CONFLICT_DETECTION_DESC: "Αναλύστε τις ρυθμίσεις για αντικρουόμενους κανόνες (π.χ. ίδια διαδρομή σε προεπιλεγμένες και αυστηρές λίστες). Οι διενέξεις θα επισημανθούν στις παρακάτω λίστες.",
+	SETTINGS_NOTIFY_ON_CONFLICT_TITLE: "Ειδοποίηση για Διενέξεις Διαμόρφωσης",
+	SETTINGS_NOTIFY_ON_CONFLICT_DESC: "Εμφάνιση ειδοποίησης εάν εντοπιστούν διενέξεις διαμόρφωσης κατά το άνοιγμα ή την αλλαγή των ρυθμίσεων.",
 
     // Notifications (from main.ts)
     NOTICE_MODE_CHANGE_PREFIX: "'{fileName}' ορίστηκε σε ",
@@ -87,6 +94,9 @@ export default {
     NOTICE_INVALID_STRICT_REGEX_PREFIX: "Enhanced Read Mode: Μη έγκυρο αυστηρό μοτίβο regex: ",
     NOTICE_INVALID_DEFAULT_REGEX_PREFIX: "Enhanced Read Mode: Μη έγκυρο προεπιλεγμένο μοτίβο regex: ",
     NOTICE_NOTIFICATIONS_ENABLED: "Οι ειδοποιήσεις αλλαγής λειτουργίας ενεργοποιήθηκαν.",
+	NOTICE_CONFLICTS_DETECTED_SUMMARY: "Εντοπίστηκαν {count} διενέξεις διαμόρφωσης.",
+	NOTICE_CHECK_SETTINGS_FOR_DETAILS: "Ελέγξτε τις ρυθμίσεις της προσθήκης για λεπτομέρειες.",
+	NOTICE_CHECK_SETTINGS_FOR_DETAILS_INLINE: "Ελέγξτε τις παρακάτω λίστες για λεπτομέρειες.",
 
     // Command Palette Command Names (from main.ts)
     COMMAND_TOGGLE_DEFAULT: "Enhanced Read Mode Control: Εναλλαγή προεπιλεγμένης λειτουργίας μόνο για ανάγνωση για την τρέχουσα σημείωση",
@@ -107,4 +117,14 @@ export default {
     // Language Setting
     SETTINGS_PLUGIN_LANGUAGE_TITLE: "Γλώσσα Πρόσθετου",
     SETTINGS_PLUGIN_LANGUAGE_DESC: "Επιλέξτε τη γλώσσα εμφάνισης για τη διεπαφή αυτού του πρόσθετου. Απαιτεί επανεκκίνηση του Obsidian ή επαναφόρτωση του πρόσθετου για την εφαρμογή των αλλαγών.",
+	SETTINGS_DIAGNOSTICS_TITLE: "Διαγνωστικά Διαμόρφωσης",
+	CONFLICT_DIRECT_SAME_PATH_FILE_DEFAULT: "Σύγκρουση: Αυτό το αρχείο ('{path}') βρίσκεται επίσης στη λίστα Αρχεία Αυστηρά Μόνο για Ανάγνωση. Θα είναι ΑΥΣΤΗΡΟ.",
+	CONFLICT_DIRECT_SAME_PATH_FILE_STRICT: "Σύγκρουση: Αυτό το αρχείο ('{path}') βρίσκεται επίσης στη λίστα Προεπιλεγμένα Αρχεία Μόνο για Ανάγνωση. Θα είναι ΑΥΣΤΗΡΟ βάσει προτεραιότητας.",
+	CONFLICT_DIRECT_SAME_PATH_FOLDER_DEFAULT: "Σύγκρουση: Αυτός ο φάκελος ('{path}') βρίσκεται επίσης στη λίστα Φάκελοι Αυστηρά Μόνο για Ανάγνωση. Όλες οι σημειώσεις εντός θα είναι ΑΥΣΤΗΡΕΣ.",
+	CONFLICT_DIRECT_SAME_PATH_FOLDER_STRICT: "Σύγκρουση: Αυτός ο φάκελος ('{path}') βρίσκεται επίσης στη λίστα Προεπιλεγμένοι Φάκελοι Μόνο για Ανάγνωση. Όλες οι σημειώσεις εντός θα είναι ΑΥΣΤΗΡΕΣ βάσει προτεραιότητας.",
+	CONFLICT_DEFAULT_FILE_IN_STRICT_FOLDER: "Παράκαμψη: Αυτό το αρχείο ('{path}') βρίσκεται σε μια προεπιλεγμένη λίστα, αλλά είναι εντός του φακέλου Αυστηρά '{conflictingPath}'. Θα είναι ΑΥΣΤΗΡΟ.",
+	CONFLICT_STRICT_FILE_IN_DEFAULT_FOLDER: "Πληροφορία: Αυτό το αρχείο ('{path}') βρίσκεται σε μια αυστηρή λίστα και εντός του προεπιλεγμένου φακέλου '{conflictingPath}'. Ο κανόνας αυστηρού αρχείου υπερισχύει.",
+	CONFLICT_DEFAULT_FILE_IN_DEFAULT_FOLDER_REDUNDANT: "Περιττό: Αυτό το αρχείο ('{path}') καλύπτεται ήδη από τον κανόνα Προεπιλεγμένου Φακέλου Μόνο για Ανάγνωση για το '{conflictingPath}'.",
+	CONFLICT_STRICT_FILE_IN_STRICT_FOLDER_REDUNDANT: "Περιττό: Αυτό το αρχείο ('{path}') καλύπτεται ήδη από τον κανόνα Αυστηρού Φακέλου Μόνο για Ανάγνωση για το '{conflictingPath}'.",
+
 };
