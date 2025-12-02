@@ -4,8 +4,37 @@
     border-color: var(--text-error) !important;
 }
 
+/* Style for input settings with Add buttons - move controls to left */
+.ermc-path-input-setting {
+    display: grid !important;
+    grid-template-columns: auto 2fr !important; /* Give more space to inputs */
+    grid-template-areas: "control info" !important;
+    align-items: center;
+    gap: 12px;
+}
+
+.ermc-path-input-setting .setting-item-control {
+    grid-area: control !important;
+    order: 1 !important;
+    margin: 0 !important;
+    flex-shrink: 0;
+}
+
 .ermc-path-input-setting .setting-item-info {
-    width: 100%; /* Allow input to take more space */
+    grid-area: info !important;
+    order: 2 !important;
+    margin: 0 !important;
+    flex-grow: 1;
+    width: 100% !important; /* Allow input to take more space */
+}
+
+/* Make input fields much wider within the info area */
+.ermc-path-input-setting .setting-item-info input,
+.ermc-path-input-setting .setting-item-info textarea {
+    width: 100% !important;
+    min-width: 300px !important;
+    max-width: none !important;
+    padding: 8px 12px !important; /* Add more padding for better appearance */
 }
 
 /* For our custom path list items, hide the default description area */
@@ -13,22 +42,64 @@
     display: none !important;
 }
 
+/* Distinctive styling for the entire setting item container with controls on left */
+.setting-item.ermc-path-list-item {
+    background-color: var(--background-primary-alt);
+    border: 1px solid var(--background-modifier-border-hover);
+    border-radius: var(--radius-m);
+    margin-bottom: 8px;
+    padding: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+    transition: all 0.15s ease-in-out;
+    display: grid !important;
+    grid-template-columns: auto 1fr !important;
+    grid-template-areas: "control info" !important;
+    align-items: center;
+    gap: 12px;
+}
+
+.setting-item.ermc-path-list-item .setting-item-control {
+    grid-area: control !important;
+    order: 1 !important;
+    margin: 0 !important;
+    flex-shrink: 0;
+}
+
+.setting-item.ermc-path-list-item .setting-item-info {
+    grid-area: info !important;
+    order: 2 !important;
+    margin: 0 !important;
+    flex-grow: 1;
+}
+
+/* Make input fields wider within controls */
+.setting-item.ermc-path-list-item .setting-item-control input,
+.setting-item.ermc-path-list-item .setting-item-control textarea {
+    width: 100% !important;
+    min-width: 200px !important;
+    max-width: none !important;
+}
+
 /* Ensure the name (our path) is visible and styled */
 .setting-item.ermc-path-list-item .setting-item-name {
     flex-grow: 1;
     word-break: break-all;
     color: var(--text-normal);
-    font-size: var(--font-ui-small);
+    font-size: var(--font-ui-medium);
+    font-weight: 600;
     display: block !important;
-    min-height: 1.2em;
-    line-height: 1.2em; /* Helps with vertical alignment */
-    padding-top: 0.5em;    /* Increased padding for better vertical centering */
-    padding-bottom: 0.5em; /* Increased padding for better vertical centering */
-    padding-left: 8px;     /* Added padding to de-stick from the left */
+    min-height: 1.4em;
+    line-height: 1.4em;
+    padding: 4px 8px;
     visibility: visible !important;
     opacity: 1 !important;
-    display: flex; /* For icon alignment */
-    align-items: center; /* For icon alignment */
+    display: flex;
+    align-items: center;
+    background-color: transparent; /* Remove individual background */
+    border: none; /* Remove individual border */
+    border-radius: 0; /* Remove individual border radius */
+    margin: 0; /* Remove individual margin */
+    box-shadow: none; /* Remove individual shadow */
 }
 
 .ermc-empty-list-message {
@@ -38,9 +109,13 @@
     color: var(--text-muted);
 }
 
-/* Hover effect for the entire setting item (row) */
+/* Enhanced hover effect for the entire container */
 .setting-item.ermc-path-list-item:hover {
     background-color: var(--background-modifier-hover);
+    border-color: var(--background-modifier-border-focus);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.12);
+    transform: translateY(-1px);
+    transition: all 0.15s ease-in-out;
 }
 
 /* Styling for the trash button in the list */
