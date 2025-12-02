@@ -1,165 +1,92 @@
 /* styles.css */
 
 .setting-item-control input.is-invalid {
-    border-color: var(--text-error) !important;
-}
-
-/* Style for input settings with Add buttons - move controls to left */
-.ermc-path-input-setting {
-    display: grid !important;
-    grid-template-columns: auto 2fr !important; /* Give more space to inputs */
-    grid-template-areas: "control info" !important;
-    align-items: center;
-    gap: 12px;
-}
-
-.ermc-path-input-setting .setting-item-control {
-    grid-area: control !important;
-    order: 1 !important;
-    margin: 0 !important;
-    flex-shrink: 0;
+	border-color: var(--text-error) !important;
 }
 
 .ermc-path-input-setting .setting-item-info {
-    grid-area: info !important;
-    order: 2 !important;
-    margin: 0 !important;
-    flex-grow: 1;
-    width: 100% !important; /* Allow input to take more space */
-}
-
-/* Make input fields much wider within the info area */
-.ermc-path-input-setting .setting-item-info input,
-.ermc-path-input-setting .setting-item-info textarea {
-    width: 100% !important;
-    min-width: 300px !important;
-    max-width: none !important;
-    padding: 8px 12px !important; /* Add more padding for better appearance */
+	width: 100%; /* Allow input to take more space */
 }
 
 /* For our custom path list items, hide the default description area */
 .setting-item.ermc-path-list-item .setting-item-description {
-    display: none !important;
-}
-
-/* Distinctive styling for the entire setting item container with controls on left */
-.setting-item.ermc-path-list-item {
-    background-color: var(--background-primary-alt);
-    border: 1px solid var(--background-modifier-border-hover);
-    border-radius: var(--radius-m);
-    margin-bottom: 8px;
-    padding: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
-    transition: all 0.15s ease-in-out;
-    display: grid !important;
-    grid-template-columns: auto 1fr !important;
-    grid-template-areas: "control info" !important;
-    align-items: center;
-    gap: 12px;
-}
-
-.setting-item.ermc-path-list-item .setting-item-control {
-    grid-area: control !important;
-    order: 1 !important;
-    margin: 0 !important;
-    flex-shrink: 0;
-}
-
-.setting-item.ermc-path-list-item .setting-item-info {
-    grid-area: info !important;
-    order: 2 !important;
-    margin: 0 !important;
-    flex-grow: 1;
-}
-
-/* Make input fields wider within controls */
-.setting-item.ermc-path-list-item .setting-item-control input,
-.setting-item.ermc-path-list-item .setting-item-control textarea {
-    width: 100% !important;
-    min-width: 200px !important;
-    max-width: none !important;
+	display: none !important;
 }
 
 /* Ensure the name (our path) is visible and styled */
 .setting-item.ermc-path-list-item .setting-item-name {
-    flex-grow: 1;
-    word-break: break-all;
-    color: var(--text-normal);
-    font-size: var(--font-ui-medium);
-    font-weight: 600;
-    display: block !important;
-    min-height: 1.4em;
-    line-height: 1.4em;
-    padding: 4px 8px;
-    visibility: visible !important;
-    opacity: 1 !important;
-    display: flex;
-    align-items: center;
-    background-color: transparent; /* Remove individual background */
-    border: none; /* Remove individual border */
-    border-radius: 0; /* Remove individual border radius */
-    margin: 0; /* Remove individual margin */
-    box-shadow: none; /* Remove individual shadow */
+	flex-grow: 1;
+	word-break: break-all;
+	color: var(--text-normal);
+	font-size: var(--font-ui-small);
+	display: block !important;
+	min-height: 1.2em;
+	line-height: 1.2em; /* Helps with vertical alignment */
+	padding-top: 0.5em; /* Increased padding for better vertical centering */
+	padding-bottom: 0.5em; /* Increased padding for better vertical centering */
+	padding-left: 8px; /* Added padding to de-stick from the left */
+	visibility: visible !important;
+	opacity: 1 !important;
+	display: flex; /* For icon alignment */
+	align-items: center; /* For icon alignment */
 }
 
 .ermc-empty-list-message {
-    margin-top: 0.5em;
-    margin-bottom: 1em;
-    font-style: italic;
-    color: var(--text-muted);
+	margin-top: 0.5em;
+	margin-bottom: 1em;
+	font-style: italic;
+	color: var(--text-muted);
 }
 
-/* Enhanced hover effect for the entire container */
+/* Hover effect for the entire setting item (row) */
 .setting-item.ermc-path-list-item:hover {
-    background-color: var(--background-modifier-hover);
-    border-color: var(--background-modifier-border-focus);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.12);
-    transform: translateY(-1px);
-    transition: all 0.15s ease-in-out;
+	background-color: var(--background-modifier-hover);
 }
 
 /* Styling for the trash button in the list */
 .setting-item.ermc-path-list-item .setting-item-control button {
-    color: var(--icon-color); /* Default icon color */
-    transition: color 0.1s ease-in-out; /* Smooth transition for color change */
+	color: var(--icon-color); /* Default icon color */
+	transition: color 0.1s ease-in-out; /* Smooth transition for color change */
 }
 
 .setting-item.ermc-path-list-item .setting-item-control button:hover {
-    color: var(--text-error); /* Red color on hover */
+	color: var(--text-error); /* Red color on hover */
 }
 
 .setting-item.ermc-path-list-item .setting-item-control button:active {
-    color: var(--text-error-hover); /* Slightly different red on active/click */
-    background-color: var(--background-modifier-error-hover); /* Optional: subtle background on click */
+	color: var(--text-error-hover); /* Slightly different red on active/click */
+	background-color: var(
+		--background-modifier-error-hover
+	); /* Optional: subtle background on click */
 }
 
 /* Conflict Styling */
 .setting-item.ermc-path-list-item.ermc-conflict-item .setting-item-name {
-    color: var(--text-warning);
+	color: var(--text-warning);
 }
 
 .ermc-conflict-icon {
-    color: var(--icon-color-warning); /* Obsidian's warning icon color */
-    margin-right: 6px; /* Space between icon and text */
-    vertical-align: middle; /* Align icon with text */
+	color: var(--icon-color-warning); /* Obsidian's warning icon color */
+	margin-right: 6px; /* Space between icon and text */
+	vertical-align: middle; /* Align icon with text */
 }
 
 .ermc-diagnostics-section {
-    padding: 10px;
-    background-color: var(--background-secondary-alt);
-    border: 1px solid var(--background-modifier-border);
-    border-radius: var(--radius-m);
-    margin-bottom: 15px;
+	padding: 10px;
+	background-color: var(--background-secondary-alt);
+	border: 1px solid var(--background-modifier-border);
+	border-radius: var(--radius-m);
+	margin-bottom: 15px;
 }
 
 .ermc-diagnostics-section h4 {
-    margin-top: 0;
-    margin-bottom: 8px;
-    color: var(--text-normal);
+	margin-top: 0;
+	margin-bottom: 8px;
+	color: var(--text-normal);
 }
 
 .ermc-diagnostics-section p {
-    color: var(--text-muted);
-    font-size: var(--font-ui-small);
-    margin-bottom: 5px;
+	color: var(--text-muted);
+	font-size: var(--font-ui-small);
+	margin-bottom: 5px;
 }
